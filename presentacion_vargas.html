@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encuesta Vargas — Región de Atacama</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/deck-nav.css" />
+  <style>
+    :root {
+      --signos-navy: #004a99;
+      --signos-purple: #8a56c3;
+      --signos-cyan: #29e3f1;
+      --signos-deep: #003671;
+      --dk: #1e2d44;
+      --surface: #fff;
+      --bg: linear-gradient(165deg, #e8f3fb 0%, #eef1f8 50%, #e4e9f2 100%);
+      --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
+      --radius: 10px;
+      --maxw: 920px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-reveal, .anim-item { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+      .slide-reveal:not(.is-visible) .hbar-fill:not(.cmp-a):not(.cmp-b),
+      .slide-reveal:not(.is-visible) .hbar-fill.cmp-a,
+      .slide-reveal:not(.is-visible) .hbar-fill.cmp-b { width: min(100%, calc(var(--w, 100) * 1%)) !important; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.52; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
+    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
+    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    .brand-bar a { display: inline-block; line-height: 0; }
+    nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .8rem; }
+    nav.toc a { padding: .2rem .55rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
+    nav.toc a:hover { background: rgba(41,227,241,.22); }
+    main { max-width: var(--maxw); margin: 0 auto; padding: .85rem .75rem 2.5rem; }
+    .cover-hero { position: relative; width: 100%; max-width: 900px; margin: 0 auto; aspect-ratio: 16/9; max-height: min(48vh,360px); min-height: 200px; border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; box-shadow: var(--shadow); scroll-margin-top: 6.5rem; }
+    .cover-bg { position: absolute; inset: 0; background-color: var(--signos-navy); background-position: center; background-size: contain; background-repeat: no-repeat; }
+    .slide { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: .75rem .9rem; margin-bottom: 1rem; scroll-margin-top: 6.5rem; max-width: 100%; overflow-x: hidden; }
+    .slide-reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+    .slide-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .slide-reveal.is-visible .anim-item { animation: fadeInUp .5s ease backwards; }
+    .slide-reveal.is-visible .anim-item:nth-child(1) { animation-delay: .05s; }
+    .slide-reveal.is-visible .anim-item:nth-child(2) { animation-delay: .1s; }
+    .slide-reveal.is-visible .anim-item:nth-child(3) { animation-delay: .15s; }
+    .slide-reveal.is-visible .anim-item:nth-child(4) { animation-delay: .2s; }
+    .slide-reveal.is-visible .anim-item:nth-child(5) { animation-delay: .25s; }
+    .slide-reveal.is-visible .anim-item:nth-child(n+6) { animation-delay: .3s; }
+    .slide-reveal.is-visible .qual-li:nth-child(1) { animation-delay: .03s; }
+    .slide-reveal.is-visible .qual-li:nth-child(2) { animation-delay: .07s; }
+    .slide-reveal.is-visible .qual-li:nth-child(3) { animation-delay: .11s; }
+    .slide-reveal.is-visible .qual-li:nth-child(4) { animation-delay: .15s; }
+    .slide-reveal.is-visible .qual-li:nth-child(5) { animation-delay: .19s; }
+    .slide-reveal.is-visible .qual-li:nth-child(n+6) { animation-delay: .23s; }
+    .slide-reveal.is-visible .hbar-row:nth-child(1) { animation-delay: .05s; }
+    .slide-reveal.is-visible .hbar-row:nth-child(2) { animation-delay: .1s; }
+    .slide-reveal.is-visible .hbar-row:nth-child(3) { animation-delay: .15s; }
+    .slide-reveal.is-visible .hbar-row:nth-child(4) { animation-delay: .2s; }
+    .slide-reveal.is-visible .hbar-row:nth-child(5) { animation-delay: .25s; }
+    .slide-reveal.is-visible .hbar-row:nth-child(n+6) { animation-delay: .3s; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .pill { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan)); padding: .12rem .45rem; border-radius: 999px; }
+    h2 { margin: .25rem 0 0; font-size: clamp(.95rem, 2.4vw, 1.12rem); line-height: 1.3; }
+    h3 { font-size: .95rem; color: var(--signos-deep); margin: 0 0 .5rem; }
+    h4 { margin: 0 0 .35rem; font-size: .88rem; color: var(--signos-purple); }
+    .lead { color: #4b5569; font-size: .84rem; margin: .5rem 0 0; }
+    .slide-body { display: grid; gap: .65rem; margin-top: .65rem; }
+    @media (min-width: 800px) { .slide-body:not(.one-col) { grid-template-columns: 1fr 1fr; } }
+    .one-col { grid-template-columns: 1fr; }
+    .panel { min-width: 0; }
+    .scroll-x { overflow-x: auto; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: .78rem; table-layout: fixed; }
+    .data-table th, .data-table td { border: 1px solid rgba(0,74,153,.12); padding: .28rem .38rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+    .data-table th { background: rgba(0,74,153,.1); font-weight: 700; }
+    .data-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .hbar-block { display: flex; flex-direction: column; gap: .35rem; }
+    .hbar-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.5fr) auto; gap: .35rem; align-items: center; }
+    .hbar-label { font-size: .75rem; min-width: 0; }
+    .hbar-track { height: 8px; border-radius: 999px; background: rgba(0,54,113,.1); overflow: hidden; }
+    .hbar-fill { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan)); width: min(100%, calc(var(--w, 0) * 1%)); min-width: 2px; transition: width .75s cubic-bezier(.2,.8,.2,1); }
+    .slide-reveal:not(.is-visible) .hbar-fill:not(.cmp-a):not(.cmp-b) { width: 2px !important; }
+    .slide-reveal:not(.is-visible) .hbar-fill.cmp-a, .slide-reveal:not(.is-visible) .hbar-fill.cmp-b { width: 2px !important; }
+    .hbar-pct { font-size: .72rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cmp-wrap { display: flex; flex-direction: column; gap: .6rem; margin-top: .5rem; }
+    .cmp-row { border: 1px solid rgba(0,74,153,.12); border-radius: 8px; padding: .45rem .5rem; background: rgba(255,255,255,.9); }
+    .cmp-label { font-weight: 600; font-size: .82rem; margin-bottom: .35rem; }
+    .cmp-bars { display: grid; grid-template-columns: auto 1fr auto; gap: .25rem .4rem; align-items: center; font-size: .72rem; }
+    .cmp-y { font-weight: 600; color: var(--signos-deep); opacity: .85; }
+    .cmp-track { height: 7px; border-radius: 999px; background: rgba(0,54,113,.08); overflow: hidden; }
+    .cmp-a { background: rgba(138,86,195,.85) !important; }
+    .cmp-b { background: rgba(41,227,241,.95) !important; }
+    .cmp-p { font-variant-numeric: tabular-nums; text-align: right; }
+    .narr-grid { display: grid; gap: .65rem; margin-top: .65rem; }
+    @media (min-width: 750px) { .narr-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    .narr-card { border: 1px solid rgba(138,86,195,.22); border-radius: var(--radius); padding: .65rem .75rem; background: linear-gradient(135deg, rgba(138,86,195,.06), rgba(41,227,241,.06)); }
+    .narr-card-title { line-height: 1.35; }
+    .narr-card-title mark.qual-hl { background: rgba(138,86,195,.28); }
+    mark.qual-hl {
+      background: linear-gradient(120deg, rgba(138,86,195,.34), rgba(41,227,241,.31));
+      color: inherit;
+      font-weight: 600;
+      padding: .08em .16em;
+      border-radius: 4px;
+    }
+    .qual-pct-chip {
+      display: inline-block;
+      margin-left: .3rem;
+      font-size: .72em;
+      font-weight: 700;
+      color: var(--signos-deep);
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(138,86,195,.42);
+      padding: .12em .45em;
+      border-radius: 999px;
+      vertical-align: middle;
+      letter-spacing: .02em;
+    }
+    .narr-card-body { font-size: .8rem; color: #3d475c; }
+    .narr-card-body .narr-prose { margin: 0; }
+    .qual-bullets { margin: 0; padding-left: 1.12rem; list-style-position: outside; }
+    .qual-bullets li {
+      margin: .4rem 0;
+      padding-left: .08rem;
+    }
+    .qual-bullets li::marker { color: var(--signos-purple); font-weight: 700; }
+    .narr-bullets li { font-size: .8rem; line-height: 1.46; }
+    .radar-wrap { margin-top: .65rem; display: flex; flex-direction: column; gap: .9rem; }
+    .radar-block { padding: .65rem; border-radius: var(--radius); border-left: 4px solid var(--signos-purple); background: rgba(0,74,153,.04); }
+    .radar-body .radar-p { margin: 0 0 .55rem; font-size: .8rem; }
+    .radar-body .radar-lead { margin: 0 0 .4rem !important; font-size: .8rem; font-weight: 600; color: var(--signos-deep); }
+    .radar-body .radar-bullets { margin: 0 0 .55rem; }
+    .radar-body mark.qual-hl { font-weight: 600; }
+    .radar-block h3 mark.qual-hl { background: rgba(0,74,153,.14); }
+    .slide-metodologia { border-top: 3px solid var(--signos-cyan); }
+    .slide-pulse-cta {
+      border-top: 3px solid var(--signos-purple);
+      background: linear-gradient(145deg, rgba(138,86,195,.08), rgba(41,227,241,.06));
+    }
+    .pulse-cta-actions { margin: .75rem 0 0; }
+    .pulse-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: .5rem .95rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .82rem;
+      text-decoration: none;
+      color: #fff !important;
+      background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan));
+      box-shadow: 0 4px 14px rgba(138,86,195,.32);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .pulse-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,74,153,.2); }
+    .pulse-btn:focus-visible { outline: 2px solid var(--signos-deep); outline-offset: 3px; }
+    footer { text-align: center; padding: 1.25rem .75rem; color: #6b7284; font-size: .78rem; }
+  </style>
+</head>
+<body class="has-deck-nav">
+  <div class="sticky-head">
+    <div class="brand-bar">
+      <a href="#portada"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
+    </div>
+    <nav class="toc" aria-label="Índice"><div class="inner"><strong style="margin-right:.35rem;color:var(--dk)">Ir a:</strong><a href="#portada">Portada</a><a href="#metodologia">Metodología</a><a href="#problemas">Problemas</a><a href="#gore">GORE</a><a href="#gobernador">Gobernador</a><a href="#atributos">Atributos</a><a href="#judicial">Judicial</a><a href="#buses">Buses</a><a href="#positivos">Ejes +</a><a href="#negativos">Ejes −</a><a href="#radar">Radar</a><a href="#pulse-ia">Pulse IA</a></div></nav>
+  </div>
+  <main>
+    
+<header class="cover-hero slide-reveal" id="portada" aria-label="Portada">
+  <div class="cover-bg" style="background-image:url('assets/cover-signos.png')"></div>
+</header>
+
+
+<section class="slide slide-metodologia slide-reveal" id="metodologia">
+  <span class="pill">Metodología</span>
+  <h2>Encuesta regional — Antecedentes</h2>
+  <p class="lead anim-item">856 encuestas telefonicas · Entre el 2 y 13 de mayo de 2026</p>
+</section>
+
+
+<section class="slide slide-reveal" id="problemas">
+  <span class="pill">Resultados</span>
+  <h2>Principales problemas de la región</h2>
+  <div class="slide-body">
+    <div class="panel"><div class="hbar-block"><div class="hbar-row anim-item"><span class="hbar-label">Delincuencia</span><div class="hbar-track"><span class="hbar-fill" style="--w:27.40;"></span></div><span class="hbar-pct">27,4%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Conectividad</span><div class="hbar-track"><span class="hbar-fill" style="--w:10.60;"></span></div><span class="hbar-pct">10,6%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Sequía</span><div class="hbar-track"><span class="hbar-fill" style="--w:8.90;"></span></div><span class="hbar-pct">8,9%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Salud</span><div class="hbar-track"><span class="hbar-fill" style="--w:8.70;"></span></div><span class="hbar-pct">8,7%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Educación</span><div class="hbar-track"><span class="hbar-fill" style="--w:7.20;"></span></div><span class="hbar-pct">7,2%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Calles en mal estado</span><div class="hbar-track"><span class="hbar-fill" style="--w:6.30;"></span></div><span class="hbar-pct">6,3%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Cesantía</span><div class="hbar-track"><span class="hbar-fill" style="--w:5.50;"></span></div><span class="hbar-pct">5,5%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Migración</span><div class="hbar-track"><span class="hbar-fill" style="--w:4.50;"></span></div><span class="hbar-pct">4,5%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Basura/falta de aseo</span><div class="hbar-track"><span class="hbar-fill" style="--w:3.80;"></span></div><span class="hbar-pct">3,8%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Conaminación</span><div class="hbar-track"><span class="hbar-fill" style="--w:3.10;"></span></div><span class="hbar-pct">3,1%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Sañal de teléfono</span><div class="hbar-track"><span class="hbar-fill" style="--w:3.10;"></span></div><span class="hbar-pct">3,1%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Socavones</span><div class="hbar-track"><span class="hbar-fill" style="--w:1.50;"></span></div><span class="hbar-pct">1,5%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Seguridad Vial</span><div class="hbar-track"><span class="hbar-fill" style="--w:1.20;"></span></div><span class="hbar-pct">1,2%</span></div><div class="hbar-row anim-item"><span class="hbar-label">Otros</span><div class="hbar-track"><span class="hbar-fill" style="--w:8.20;"></span></div><span class="hbar-pct">8,2%</span></div></div></div>
+    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Tema</th><th>%</th></tr></thead><tbody><tr><td>Delincuencia</td><td class='num'>27,4%</td></tr><tr><td>Conectividad</td><td class='num'>10,6%</td></tr><tr><td>Sequía</td><td class='num'>8,9%</td></tr><tr><td>Salud</td><td class='num'>8,7%</td></tr><tr><td>Educación</td><td class='num'>7,2%</td></tr><tr><td>Calles en mal estado</td><td class='num'>6,3%</td></tr><tr><td>Cesantía</td><td class='num'>5,5%</td></tr><tr><td>Migración</td><td class='num'>4,5%</td></tr><tr><td>Basura/falta de aseo</td><td class='num'>3,8%</td></tr><tr><td>Conaminación</td><td class='num'>3,1%</td></tr><tr><td>Sañal de teléfono</td><td class='num'>3,1%</td></tr><tr><td>Socavones</td><td class='num'>1,5%</td></tr><tr><td>Seguridad Vial</td><td class='num'>1,2%</td></tr><tr><td>Otros</td><td class='num'>8,2%</td></tr></tbody></table></div>
+  </div>
+</section>
+
+
+<section class="slide slide-reveal" id="gore">
+  <span class="pill">Evaluación</span>
+  <h2>Evaluación de la Gestión del Gobierno Regional de Atacama</h2>
+  <div class="slide-body one-col">
+    <table class="data-table anim-item"><thead><tr><th>Categoría de Evaluación</th><th>Histórico 2024 (%)</th><th>Mayo 2026 (%)</th></tr></thead><tbody><tr><td>a. Muy buena</td><td class="num">5,4</td><td class="num">4,2</td></tr><tr><td>b. Buena</td><td class="num">22,1</td><td class="num">16,3</td></tr><tr><td>c. Más o menos</td><td class="num">33,8</td><td class="num">32,5</td></tr><tr><td>d. Mala</td><td class="num">15,3</td><td class="num">22,8</td></tr><tr><td>e. Muy mala</td><td class="num">12,1</td><td class="num">18,1</td></tr><tr><td>No sabe / No responde</td><td class="num">11,3</td><td class="num">6,1</td></tr><tr><td><em>Total</em></td><td class="num">100,0</td><td class="num">100,0</td></tr></tbody></table>
+    <div class="cmp-wrap"><div class="cmp-row anim-item"><div class="cmp-label">a. Muy buena</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:5.40;"></span></div><span class="cmp-p">5,4%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:4.20;"></span></div><span class="cmp-p">4,2%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">b. Buena</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:22.10;"></span></div><span class="cmp-p">22,1%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:16.30;"></span></div><span class="cmp-p">16,3%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">c. Más o menos</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:33.80;"></span></div><span class="cmp-p">33,8%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:32.50;"></span></div><span class="cmp-p">32,5%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">d. Mala</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:15.30;"></span></div><span class="cmp-p">15,3%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:22.80;"></span></div><span class="cmp-p">22,8%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">e. Muy mala</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:12.10;"></span></div><span class="cmp-p">12,1%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:18.10;"></span></div><span class="cmp-p">18,1%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">No sabe / No responde</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:11.30;"></span></div><span class="cmp-p">11,3%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:6.10;"></span></div><span class="cmp-p">6,1%</span></div></div></div>
+  </div>
+</section>
+
+
+<section class="slide slide-reveal" id="gobernador">
+  <span class="pill">Evaluación</span>
+  <h2>Evaluación de la Gestión del Gobernador Regional Miguel Vargas Correa</h2>
+  <div class="slide-body one-col">
+    <table class="data-table anim-item"><thead><tr><th>Categoría de Evaluación</th><th>Histórico 2024 (%)</th><th>Mayo 2026 (%)</th></tr></thead><tbody><tr><td>a. Muy buena</td><td class="num">7,40</td><td class="num">5,10</td></tr><tr><td>b. Buena</td><td class="num">28,20</td><td class="num">19,80</td></tr><tr><td>c. Más o menos</td><td class="num">32,60</td><td class="num">28,40</td></tr><tr><td>d. Mala</td><td class="num">11,40</td><td class="num">21,50</td></tr><tr><td>e. Muy mala</td><td class="num">9,20</td><td class="num">19,20</td></tr><tr><td>No sabe / No responde</td><td class="num">11,20</td><td class="num">6,00</td></tr><tr><td><em>Total</em></td><td class="num">100,00</td><td class="num">100,00</td></tr></tbody></table>
+    <div class="cmp-wrap"><div class="cmp-row anim-item"><div class="cmp-label">a. Muy buena</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:7.40;"></span></div><span class="cmp-p">7,40%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:5.10;"></span></div><span class="cmp-p">5,10%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">b. Buena</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:28.20;"></span></div><span class="cmp-p">28,20%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:19.80;"></span></div><span class="cmp-p">19,80%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">c. Más o menos</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:32.60;"></span></div><span class="cmp-p">32,60%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:28.40;"></span></div><span class="cmp-p">28,40%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">d. Mala</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:11.40;"></span></div><span class="cmp-p">11,40%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:21.50;"></span></div><span class="cmp-p">21,50%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">e. Muy mala</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:9.20;"></span></div><span class="cmp-p">9,20%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:19.20;"></span></div><span class="cmp-p">19,20%</span></div></div><div class="cmp-row anim-item"><div class="cmp-label">No sabe / No responde</div><div class="cmp-bars"><span class="cmp-y">2024</span><div class="cmp-track"><span class="hbar-fill cmp-a" style="--w:11.20;"></span></div><span class="cmp-p">11,20%</span><span class="cmp-y">2026</span><div class="cmp-track"><span class="hbar-fill cmp-b" style="--w:6.00;"></span></div><span class="cmp-p">6,00%</span></div></div></div>
+  </div>
+</section>
+
+
+<section class="slide slide-reveal" id="atributos">
+  <span class="pill">Escala 1–7</span>
+  <h2>2. Profundo Arraigo Territorial e Identidad Regional — 25,4%</h2>
+  <p class="lead anim-item">Su trayectoria vital y profesional genera una fuerte identificación con el electorado local. Al haber nacido en Chañaral, crecido en Caldera, residido en Copiapó y trabajado históricamente como profesor de historia y geografía, además de desempeñarse en cargos públicos previos (Seremi e Intendente), se le percibe como un líder con un conocimiento íntimo de las necesidades específicas de las nueve comunas de la región.</p>
+  <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Dimensión</th><th>Nota</th></tr></thead><tbody><tr><td>Capacidad de Gestión</td><td class='num'>4,9</td></tr><tr><td>Liderazgo Político</td><td class='num'>4,3</td></tr><tr><td>Honestidad y Transparencia</td><td class='num'>3,4</td></tr></tbody></table></div>
+</section>
+
+
+<section class="slide slide-reveal" id="judicial">
+  <span class="pill">Percepción</span>
+  <h2>Credibilidad ante la situación judicial</h2>
+  <div class="slide-body">
+    <div class="panel"><div class="hbar-block"><div class="hbar-row anim-item"><span class="hbar-label">Nada</span><div class="hbar-track"><span class="hbar-fill" style="--w:23.00;"></span></div><span class="hbar-pct">23,0</span></div><div class="hbar-row anim-item"><span class="hbar-label">Muy poco</span><div class="hbar-track"><span class="hbar-fill" style="--w:18.40;"></span></div><span class="hbar-pct">18,4</span></div><div class="hbar-row anim-item"><span class="hbar-label">Algo</span><div class="hbar-track"><span class="hbar-fill" style="--w:18.20;"></span></div><span class="hbar-pct">18,2</span></div><div class="hbar-row anim-item"><span class="hbar-label">Poco</span><div class="hbar-track"><span class="hbar-fill" style="--w:18.10;"></span></div><span class="hbar-pct">18,1</span></div><div class="hbar-row anim-item"><span class="hbar-label">Un poco</span><div class="hbar-track"><span class="hbar-fill" style="--w:16.50;"></span></div><span class="hbar-pct">16,5</span></div><div class="hbar-row anim-item"><span class="hbar-label">Mucho</span><div class="hbar-track"><span class="hbar-fill" style="--w:5.80;"></span></div><span class="hbar-pct">5,8</span></div></div></div>
+    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Nivel</th><th>%</th></tr></thead><tbody><tr><td>Nivel de Credibilidad ante la Situación Judicial</td><td class='num'>Porcentaje (%)</td></tr><tr><td>Mucho</td><td class='num'>5,8</td></tr><tr><td>Algo</td><td class='num'>18,2</td></tr><tr><td>Un poco</td><td class='num'>16,5</td></tr><tr><td>Poco</td><td class='num'>18,1</td></tr><tr><td>Muy poco</td><td class='num'>18,4</td></tr><tr><td>Nada</td><td class='num'>23,0</td></tr><tr><td>Total</td><td class='num'>100,0</td></tr></tbody></table></div>
+  </div>
+</section>
+
+
+<section class="slide slide-reveal" id="buses">
+  <span class="pill">Infraestructura</span>
+  <h2>Se le reconoce el impulso político y la gestión de subsidios para la transformación tecnológica de la red de transporte público urbano, materializada en la flota de 121 buses eléctricos King Long de la &quot;Red Copiapó&quot;, un hito de vanguardia en electromovilidad para la región.</h2>
+  <div class="slide-body">
+    <div class="panel"><div class="hbar-block"><div class="hbar-row anim-item"><span class="hbar-label">Muy bueno</span><div class="hbar-track"><span class="hbar-fill" style="--w:41.60;"></span></div><span class="hbar-pct">41,6</span></div><div class="hbar-row anim-item"><span class="hbar-label">Bueno</span><div class="hbar-track"><span class="hbar-fill" style="--w:33.20;"></span></div><span class="hbar-pct">33,2</span></div><div class="hbar-row anim-item"><span class="hbar-label">Más o menos</span><div class="hbar-track"><span class="hbar-fill" style="--w:12.90;"></span></div><span class="hbar-pct">12,9</span></div><div class="hbar-row anim-item"><span class="hbar-label">Malo</span><div class="hbar-track"><span class="hbar-fill" style="--w:7.10;"></span></div><span class="hbar-pct">7,1</span></div><div class="hbar-row anim-item"><span class="hbar-label">Muy malo</span><div class="hbar-track"><span class="hbar-fill" style="--w:3.40;"></span></div><span class="hbar-pct">3,4</span></div><div class="hbar-row anim-item"><span class="hbar-label">No sabe / No responde</span><div class="hbar-track"><span class="hbar-fill" style="--w:1.80;"></span></div><span class="hbar-pct">1,8</span></div></div></div>
+    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Categoría</th><th>%</th></tr></thead><tbody><tr><td>Categoría de Evaluación</td><td class='num'>Porcentaje (%)</td></tr><tr><td>Muy bueno</td><td class='num'>41,6</td></tr><tr><td>Bueno</td><td class='num'>33,2</td></tr><tr><td>Más o menos</td><td class='num'>12,9</td></tr><tr><td>Malo</td><td class='num'>7,1</td></tr><tr><td>Muy malo</td><td class='num'>3,4</td></tr><tr><td>No sabe / No responde</td><td class='num'>1,8</td></tr><tr><td>Total</td><td class='num'>100,0</td></tr></tbody></table></div>
+  </div>
+</section>
+
+
+<section class="slide slide-reveal" id="positivos">
+  <span class="pill">Cualitativo</span>
+  <h2>Distribución de ejes temáticos — atributos positivos</h2>
+  <div class="narr-grid"><article class="narr-card anim-item"><h4 class="narr-card-title">1. Capacidad de Gestión Presupuestaria y Ejecución de Inversión <mark class="qual-hl">FNDR</mark> <span class='qual-pct-chip'>— 35,6%</span></h4><div class="narr-card-body"><p class="narr-prose">La ciudadanía y los actores locales valoran de manera prioritaria su experticia técnica para movilizar y priorizar fondos regionales hacia proyectos de gran envergadura social. Esto se refleja en la exitosa canalización de recursos del <mark class="qual-hl">Fondo Nacional de Desarrollo Regional</mark> (<mark class="qual-hl">FNDR</mark>) para obras de alto impacto, como el avance en la construcción del <mark class="qual-hl">Centro Oncológico Atacama</mark> y el financiamiento de infraestructura de seguridad pública, tales como la <mark class="qual-hl">Subcomisaría Pedro León Gallo</mark>.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">2. Profundo Arraigo Territorial e Identidad Regional <span class='qual-pct-chip'>— 25,4%</span></h4><div class="narr-card-body"><p class="narr-prose">Su trayectoria vital y profesional genera una fuerte identificación con el electorado local. Al haber nacido en <mark class="qual-hl">Chañaral</mark>, crecido en <mark class="qual-hl">Caldera</mark>, residido en <mark class="qual-hl">Copiapó</mark> y trabajado históricamente como profesor de historia y geografía, además de desempeñarse en cargos públicos previos (<mark class="qual-hl">Seremi</mark> e <mark class="qual-hl">Intendente</mark>), se le percibe como un líder con un conocimiento íntimo de las necesidades específicas de las nueve comunas de la región.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">3. Capacidad de Articulación de Alianzas Multiactores (<mark class="qual-hl">Plan Atacama</mark>) <span class='qual-pct-chip'>— 18,3%</span></h4><div class="narr-card-body"><p class="narr-prose">Se destaca su habilidad para convocar y coordinar esfuerzos entre el Gobierno Regional, ministerios centralizados, parlamentarios y el consorcio de universidades públicas para mitigar la crisis del sistema de educación mediante el <mark class="qual-hl">&quot;Plan Atacama&quot;</mark>. Esta facultad para sentar a la mesa a sectores diversos es vista como una fortaleza de gobernanza descentralizada.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">4. Enfoque en la Modernización del Transporte y la <mark class="qual-hl">Electromovilidad</mark> <span class='qual-pct-chip'>— 9,2%</span></h4><div class="narr-card-body"><p class="narr-prose">Se le reconoce el impulso político y la gestión de subsidios para la transformación tecnológica de la red de transporte público urbano, materializada en la flota de 121 buses eléctricos <mark class="qual-hl">King Long</mark> de la <mark class="qual-hl">&quot;Red Copiapó&quot;</mark>, un hito de vanguardia en <mark class="qual-hl">electromovilidad</mark> para la región.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">5. Respaldo a los Pequeños Sectores Productivos Locales <span class='qual-pct-chip'>— 7,1%</span></h4><div class="narr-card-body"><p class="narr-prose">Existe una valoración positiva hacia su constante compromiso de apoyo financiero y técnico, a través de programas del <mark class="qual-hl">GORE</mark>, destinados a la reactivación y fomento de la pequeña minería (pirquineros) y los pequeños agricultores de la provincia.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">6. Otros Atributos Menores Acumulados <span class='qual-pct-chip'>— 2,3%</span></h4><div class="narr-card-body"><p class="narr-prose">Menciones marginales relacionadas con la promoción del desarrollo científico regional (como el <mark class="qual-hl">Congreso Futuro 2026</mark> en <mark class="qual-hl">Atacama</mark>) y el fomento de la protección de la biodiversidad marina para potenciar el turismo sustentable de avistamiento de cetáceos.</p></div></article></div>
+</section>
+
+
+<section class="slide slide-reveal" id="negativos">
+  <span class="pill">Cualitativo</span>
+  <h2>Distribución de atributos negativos</h2>
+  <div class="narr-grid"><article class="narr-card anim-item"><h4 class="narr-card-title">1. Cuestionamientos Éticos y Judiciales de Carácter Personal <span class='qual-pct-chip'>— 36,7%</span></h4><div class="narr-card-body"><p class="narr-prose">La denuncia penal por abuso sexual presentada en su contra por una funcionaria pública del organismo regional constituye el principal factor de erosión de su imagen pública. A pesar de que la <mark class="qual-hl">Corte de Apelaciones de Copiapó</mark> rechazó la solicitud de desafuero , la querella activa del <mark class="qual-hl">SernamEG</mark> y el cuestionamiento ético directo en la esfera personal resienten gravemente su credibilidad ante la ciudadanía.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">2. Opacidad, Dudas de Probidad y <mark class="qual-hl">&quot;Caso Convenios&quot;</mark> <span class='qual-pct-chip'>— 22,3%</span></h4><div class="narr-card-body"><p class="narr-prose">El electorado penaliza las sospechas de corrupción e irregularidades administrativas en el traspaso directo de millonarios fondos a fundaciones sin competencias técnicas idóneas en la zona, destacando las investigaciones judiciales en curso sobre convenios asignados bajo su administración a entidades como la <mark class="qual-hl">Fundación Comprometidos</mark>, <mark class="qual-hl">Atacama Cultural</mark>, <mark class="qual-hl">Desierto Creativo</mark> o la <mark class="qual-hl">Corporación Ciahn</mark>.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">3. Limitada Fuerza Resolutiva ante la Crisis Escolar del <mark class="qual-hl">SLEP</mark> <span class='qual-pct-chip'>— 16,7%</span></h4><div class="narr-card-body"><p class="narr-prose">Existe un descontento por la persistencia del desplome de la educación pública bajo la administración del <mark class="qual-hl">Servicio Local de Educación Pública</mark> (<mark class="qual-hl">SLEP</mark>) <mark class="qual-hl">Atacama</mark>. Aunque el <mark class="qual-hl">GORE</mark> no tiene competencia directa sobre los colegios, una fracción relevante de la opinión pública le reprocha no ejercer un liderazgo político lo suficientemente firme para presionar al gobierno central por soluciones de fondo en infraestructura y ausentismo.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">4. Aislamiento Político y Distanciamiento del Bloque Oficialista <span class='qual-pct-chip'>— 11,2%</span></h4><div class="narr-card-body"><p class="narr-prose">Se critica su posición de orfandad orgánica. Tras su salida del <mark class="qual-hl">Partido Socialista</mark> en 2017 y la gravedad de las denuncias judiciales en su contra, las fuerzas tradicionales de la centroizquierda le han aplicado un distanciamiento político táctico que limita su viabilidad de proyección y debilita su capacidad de interlocución parlamentaria estable.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">5. Tensión y Resistencia ante Gremios Tradicionales Locales <span class='qual-pct-chip'>— 6,5%</span></h4><div class="narr-card-body"><p class="narr-prose">Su gestión ha enfrentado un flanco crítico debido al malestar y las sucesivas protestas de los sindicatos de choferes de taxis colectivos de <mark class="qual-hl">Copiapó</mark>, quienes acusan una falta de mesas de mitigación y perciben la masiva implementación de buses eléctricos como una amenaza directa a su fuente laboral y de subsistencia.</p></div></article><article class="narr-card anim-item"><h4 class="narr-card-title">6. Otros Atributos Negativos Acumulados <span class='qual-pct-chip'>— 3,5%</span></h4><div class="narr-card-body"><p class="narr-prose">Cuestionamientos menores que aluden a un perfil excesivamente centralizado en la capital regional (<mark class="qual-hl">Copiapó</mark>), en desmedro de un despliegue equilibrado en comunas más apartadas, sumado a las dificultades para solucionar problemas estructurales de urbanización en asentamientos informales debido a las restricciones normativas del cargo.</p></div></article></div>
+</section>
+
+
+<section class="slide slide-reveal" id="radar">
+  <span class="pill">Radar Social</span>
+  <h2>Análisis cualitativo</h2>
+  <div class="radar-wrap"><div class="radar-block anim-item"><h3>1. Atributos: mantiene fortalezas que todavía pueden explotarse políticamente</h3><div class="radar-body"><p class="radar-p">Pese al deterioro de imagen, sigue existiendo una percepción relativamente instalada de que <mark class="qual-hl">Miguel Vargas</mark> conserva capacidades técnicas y experiencia de gestión pública que lo diferencian de otros liderazgos regionales. La opinión pública y distintos actores locales continúan asociándolo a un perfil de <mark class="qual-hl">“gestor”</mark>, especialmente en materias de infraestructura, inversión pública y articulación institucional.</p>
+<p class="radar-lead">Entre los atributos más reconocidos aparecen:</p>
+<ul class="qual-bullets radar-bullets"><li class="qual-li anim-item">Capacidad para destrabar recursos y ejecutar proyectos complejos.</li><li class="qual-li anim-item">Conocimiento profundo del territorio y de las problemáticas regionales.</li><li class="qual-li anim-item">Experiencia administrativa acumulada en distintos cargos públicos.</li><li class="qual-li anim-item">Habilidad para coordinar actores públicos, académicos y sociales.</li></ul>
+<p class="radar-p">Además, algunos proyectos emblemáticos —como los buses eléctricos de <mark class="qual-hl">Copiapó</mark>, el avance del Centro Oncológico y obras comunitarias— siguen funcionando como evidencia concreta de gestión y modernización regional.</p>
+<p class="radar-p">La idea fuerza predominante es que, aunque su liderazgo político está debilitado, aún mantiene atributos técnicos y territoriales que pueden seguir siendo explotados comunicacionalmente, sobre todo vinculados a obras visibles, capacidad de gestión y cercanía regional.</p></div></div><div class="radar-block anim-item"><h3>2. Tema judicial: fuerte daño reputacional, pero potencialmente reversible con gestión y conducción política</h3><div class="radar-body"><p class="radar-p">El principal factor de desgaste actual es el impacto reputacional derivado de las investigaciones judiciales y de la denuncia por abuso sexual, que afectaron severamente la percepción de honestidad, transparencia y credibilidad.</p>
+<p class="radar-lead">La evaluación cualitativa muestra que:</p>
+<ul class="qual-bullets radar-bullets"><li class="qual-li anim-item">Existe una baja confianza pública respecto de su versión de los hechos.</li><li class="qual-li anim-item">El caso generó aislamiento político y pérdida de respaldo del oficialismo.</li><li class="qual-li anim-item">Parte importante de la ciudadanía asocia su figura a cuestionamientos éticos y probidad.</li></ul>
+<p class="radar-p">Sin embargo, también aparece un elemento relevante: judicialmente no hubo desafuero, lo que permite sostener una narrativa de defensa y cuestionamiento a la solidez de las acusaciones.</p>
+<p class="radar-lead">Desde una mirada cualitativa, la percepción negativa no parece completamente consolidada ni irreversible. El informe sugiere implícitamente que una estrategia sostenida basada en:</p>
+<ul class="qual-bullets radar-bullets"><li class="qual-li anim-item">gestión visible,</li><li class="qual-li anim-item">resultados concretos,</li><li class="qual-li anim-item">mayor transparencia,</li><li class="qual-li anim-item">control comunicacional,</li><li class="qual-li anim-item">y foco en obras de impacto ciudadano</li></ul>
+<p class="radar-p">podría ayudar a contener el deterioro reputacional y recuperar parcialmente legitimidad pública.</p>
+<p class="radar-p">La conclusión predominante es que hoy existe una baja credibilidad política y ética, pero todavía hay espacio para revertir parcialmente ese escenario mediante conducción, resultados y manejo político más ordenado.</p></div></div><div class="radar-block anim-item"><h3>3. Proyecciones: sigue teniendo opciones, aunque más limitadas y condicionadas</h3><div class="radar-body"><p class="radar-p">El informe concluye que <mark class="qual-hl">Miguel Vargas</mark> enfrenta un escenario político complejo, pero no completamente cerrado.</p>
+<p class="radar-lead">Por un lado:</p>
+<ul class="qual-bullets radar-bullets"><li class="qual-li anim-item">mantiene capital político territorial,</li><li class="qual-li anim-item">experiencia de gestión,</li><li class="qual-li anim-item">redes regionales,</li><li class="qual-li anim-item">y una imagen aún vinculada a obras e inversión pública.</li></ul>
+<p class="radar-p">Además, su reelección reciente demuestra que todavía conserva una base electoral relevante en <mark class="qual-hl">Atacama</mark>.</p>
+<p class="radar-lead">No obstante, sus proyecciones aparecen fuertemente condicionadas por:</p>
+<ul class="qual-bullets radar-bullets"><li class="qual-li anim-item">el desgaste reputacional,</li><li class="qual-li anim-item">la fractura con sectores oficialistas,</li><li class="qual-li anim-item">y la persistencia del tema judicial.</li></ul>
+<p class="radar-p">El escenario más probable que describe el análisis no es una expansión política nacional inmediata, sino una transición hacia roles técnicos, asesorías o espacios institucionales vinculados a gestión pública y desarrollo regional, donde sus capacidades administrativas siguen siendo valoradas.</p>
+<p class="radar-lead">Aun así, el documento deja abierta la posibilidad de reconstrucción política si logra:</p>
+<ul class="qual-bullets radar-bullets"><li class="qual-li anim-item">cerrar adecuadamente los flancos judiciales,</li><li class="qual-li anim-item">recuperar credibilidad,</li><li class="qual-li anim-item">y reposicionar su figura desde la gestión más que desde la confrontación política.</li></ul>
+<p class="radar-p">La percepción general es que sigue teniendo opciones futuras, aunque hoy esas opciones dependen directamente de su capacidad para recomponer confianza pública y ordenar su situación política y reputacional.</p></div></div></div>
+</section>
+
+
+<section class="slide slide-reveal slide-pulse-cta" id="pulse-ia">
+  <span class="pill">Comunicación e IA</span>
+  <h2>Programa comunicacional automatizado · Atacama Pulse AI</h2>
+  <p class="lead anim-item">Complemento estratégico a este informe: plataforma de <strong>inteligencia social</strong> hiperlocal, interacción comunitaria asistida por IA y crecimiento orgánico multi-red (sin foco exclusivo en pauta).</p>
+  <p class="anim-item" style="font-size:.8rem;color:#3d475c;margin:.45rem 0 0;">Incluye validación respecto de algoritmos, arquitectura por módulos (radar, grupos, interacción, viral, growth, mapa de influencia), proyección de alcance regional y gestión de riesgos.</p>
+  <p class="anim-item pulse-cta-actions">
+    <a class="pulse-btn" href="presentacion_atacama_pulse_ia.html">Abrir presentación Atacama Pulse AI (4 láminas)</a>
+  </p>
+</section>
+
+  </main>
+  <footer>Documento fuente: encuesta vargas.docx · Presentación web estática. Complemento: <a href="presentacion_atacama_pulse_ia.html">Atacama Pulse AI</a>.</footer>
+  <script>
+(function() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    document.querySelectorAll('.slide-reveal').forEach(function(el) { el.classList.add('is-visible'); });
+    return;
+  }
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+  document.querySelectorAll('.slide-reveal').forEach(function(el) { io.observe(el); });
+})();
+  </script>
+  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
+    <a class="deck-nav-link deck-nav-prev" href="presentacion_encuesta.html">← Anterior</a>
+    <a class="deck-nav-link deck-nav-hub" href="index.html#deck-catalogo">Índice</a>
+    <a class="deck-nav-link deck-nav-next" href="presentacion_atacama_pulse_ia.html">Siguiente →</a>
+  </nav>
+</body>
+</html>

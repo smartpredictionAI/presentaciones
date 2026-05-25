@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SMARTAGRO — Monitoreo Mosca de la Fruta con IA · Región de Atacama</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/deck-nav.css" />
+  <style>
+    :root {
+      --signos-navy: #004a99;
+      --signos-purple: #8a56c3;
+      --signos-cyan: #29e3f1;
+      --signos-deep: #003671;
+      --dk: #1e2d44;
+      --agro: #1e6b47;
+      --surface: #fff;
+      --bg: linear-gradient(165deg, #e8f3fb 0%, #eef5f0 48%, #e4e9f2 100%);
+      --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
+      --radius: 10px;
+      --maxw: 920px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-reveal, .anim-item, .cover-glow, .quote-highlight { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.52; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
+    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
+    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .76rem; }
+    nav.toc a { padding: .2rem .5rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
+    nav.toc a:hover { background: rgba(41,227,241,.28); }
+    main { max-width: var(--maxw); margin: 0 auto; padding: .85rem .75rem 2.25rem; }
+
+    .cover-lamina {
+      position: relative;
+      min-height: min(74vh, 540px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+      background: linear-gradient(135deg, #0d3d2e 0%, var(--signos-deep) 35%, var(--signos-navy) 72%, #1e2f4e 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.2rem;
+    }
+    .cover-glow {
+      position: absolute;
+      width: 150%;
+      height: 65%;
+      top: -25%;
+      left: -22%;
+      background: radial-gradient(ellipse, rgba(41,227,241,.28) 0%, transparent 58%);
+      pointer-events: none;
+      animation: glowDrift 9s ease-in-out infinite alternate;
+    }
+    @keyframes glowDrift {
+      from { transform: translate(-2%, 0) rotate(-1deg); opacity: .75; }
+      to { transform: translate(5%, 3%) rotate(1deg); opacity: 1; }
+    }
+    .cover-chip {
+      position: relative;
+      z-index: 1;
+      font-family: "Montserrat", sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.35);
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      animation: titleIn .85s ease .1s both;
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 38rem; }
+    .cover-lamina h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.15rem, 3.9vw, 1.85rem);
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 .65rem;
+      line-height: 1.22;
+      text-shadow: 0 3px 22px rgba(0,0,0,.3);
+      animation: titleIn .9s ease .2s both;
+    }
+    @keyframes titleIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .cover-sub {
+      color: rgba(255,255,255,.93);
+      font-size: clamp(.92rem, 2.6vw, 1.05rem);
+      font-weight: 600;
+      margin: 0 0 .35rem;
+      animation: titleIn .85s ease .38s both;
+    }
+    .cover-region {
+      color: rgba(255,255,255,.82);
+      font-size: .86rem;
+      margin: 0;
+      animation: titleIn .8s ease .52s both;
+    }
+    .cover-badges {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .38rem;
+      justify-content: center;
+      animation: titleIn .75s ease .68s both;
+    }
+    .cover-badges span {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--signos-deep);
+      background: rgba(255,255,255,.93);
+      padding: .25rem .5rem;
+      border-radius: 999px;
+    }
+
+    .slide {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: .85rem 1rem;
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+      border-left: 3px solid transparent;
+    }
+    .slide-reveal { opacity: 0; transform: translateY(18px); transition: opacity .58s ease, transform .58s cubic-bezier(.2,.7,.2,1); }
+    .slide-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .slide-reveal.is-visible .anim-item { animation: fadeInUp .5s ease backwards; }
+    .slide-reveal.is-visible .anim-item:nth-child(1) { animation-delay: .04s; }
+    .slide-reveal.is-visible .anim-item:nth-child(2) { animation-delay: .09s; }
+    .slide-reveal.is-visible .anim-item:nth-child(3) { animation-delay: .14s; }
+    .slide-reveal.is-visible .anim-item:nth-child(4) { animation-delay: .19s; }
+    .slide-reveal.is-visible .anim-item:nth-child(5) { animation-delay: .24s; }
+    .slide-reveal.is-visible .anim-item:nth-child(6) { animation-delay: .29s; }
+    .slide-reveal.is-visible .anim-item:nth-child(n+7) { animation-delay: .34s; }
+    .slide-reveal.is-visible .smart-list-stagger > li:nth-child(1) { animation: fadeInUp .45s ease .05s backwards; }
+    .slide-reveal.is-visible .smart-list-stagger > li:nth-child(2) { animation: fadeInUp .45s ease .1s backwards; }
+    .slide-reveal.is-visible .smart-list-stagger > li:nth-child(3) { animation: fadeInUp .45s ease .14s backwards; }
+    .slide-reveal.is-visible .smart-list-stagger > li:nth-child(4) { animation: fadeInUp .45s ease .18s backwards; }
+    .slide-reveal.is-visible .smart-list-stagger > li:nth-child(5) { animation: fadeInUp .45s ease .22s backwards; }
+    .slide-reveal.is-visible .smart-list-stagger > li:nth-child(n+6) { animation: fadeInUp .45s ease .28s backwards; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pill { display: inline-block; font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan)); padding: .12rem .45rem; border-radius: 999px; }
+    h2 { margin: .2rem 0 0; font-size: clamp(.98rem, 2.5vw, 1.14rem); line-height: 1.28; color: var(--signos-deep); }
+    .lead { color: #4b5569; font-size: .83rem; margin: .42rem 0 0; }
+    .muted { font-size: .78rem; color: #596273; margin: .35rem 0 0; }
+
+    .smart-list {
+      margin: .55rem 0 0;
+      padding-left: 1.2rem;
+      font-size: .8rem;
+      color: #3d475c;
+    }
+    .smart-list li { margin: .32rem 0; animation: fadeInUp .48s ease backwards; }
+    .smart-list.sub { list-style-type: circle; margin-top: .15rem; }
+    .cols-2 {
+      display: grid;
+      gap: .85rem;
+      margin-top: .6rem;
+    }
+    @media (min-width: 640px) { .cols-2 { grid-template-columns: 1fr 1fr; } }
+
+    .panel {
+      padding: .6rem .7rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0,74,153,.14);
+      background: linear-gradient(160deg, rgba(138,86,195,.06), rgba(41,227,241,.05));
+      font-size: .8rem;
+    }
+    .panel h3 { margin: 0 0 .4rem; font-size: .88rem; color: var(--agro); }
+
+    .tech-grid {
+      display: grid;
+      gap: .4rem;
+      margin-top: .55rem;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+    .tech-card {
+      font-size: .72rem;
+      padding: .45rem .5rem;
+      border-radius: 8px;
+      background: rgba(0,74,153,.06);
+      border-left: 3px solid var(--signos-cyan);
+      font-weight: 600;
+      color: var(--signos-deep);
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-top: .55rem;
+    }
+    .stat {
+      flex: 1 1 140px;
+      text-align: center;
+      padding: .55rem .45rem;
+      border-radius: 8px;
+      background: rgba(30,107,71,.09);
+      border: 1px solid rgba(30,107,71,.2);
+      animation: fadeInUp .5s ease backwards;
+    }
+    .stat strong { display: block; font-size: 1.05rem; color: var(--agro); letter-spacing: .02em; }
+    .stat span { font-size: .72rem; color: #3d475c; }
+
+    .flow-split {
+      display: grid;
+      gap: .75rem;
+      margin-top: .6rem;
+    }
+    @media (min-width: 680px) { .flow-split { grid-template-columns: 1fr 1fr; } }
+    .flow-box {
+      border-radius: 8px;
+      padding: .65rem .75rem;
+      border: 1px solid rgba(138,86,195,.22);
+      background: rgba(255,255,255,.92);
+      font-size: .78rem;
+    }
+    .flow-box h3 { margin: 0 0 .4rem; font-size: .9rem; color: var(--signos-purple); }
+
+    .benefit-grid {
+      display: grid;
+      gap: .5rem;
+      margin-top: .55rem;
+    }
+    @media (min-width: 660px) { .benefit-grid { grid-template-columns: repeat(3, 1fr); } }
+    .benefit-box {
+      font-size: .76rem;
+      padding: .55rem .6rem;
+      border-radius: 8px;
+      background: rgba(0,74,153,.045);
+      border-top: 3px solid var(--signos-purple);
+    }
+    .benefit-box h4 { margin: 0 0 .35rem; font-size: .76rem; text-transform: uppercase; letter-spacing: .05em; color: var(--signos-deep); }
+
+    blockquote.quote-highlight {
+      margin: .85rem 0 0;
+      padding: .75rem .85rem;
+      border-radius: var(--radius);
+      font-size: .82rem;
+      font-weight: 600;
+      font-style: normal;
+      line-height: 1.48;
+      color: var(--signos-deep);
+      background: linear-gradient(120deg, rgba(138,86,195,.14), rgba(41,227,241,.14));
+      border: 1px solid rgba(138,86,195,.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-highlight::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(41,227,241,.22) 50%, transparent 62%);
+      transform: translateX(-100%);
+      animation: shimmer 7s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 82% { transform: translateX(-100%); }
+      92% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+    blockquote.quote-highlight p { margin: 0; position: relative; z-index: 1; }
+
+    .kpi-mini { margin-top: .55rem; }
+    .kpi-mini ul { margin: .35rem 0 0; padding-left: 1.1rem; font-size: .78rem; }
+
+    .infographic-slide { border-left-color: rgba(41,227,241,.85); }
+    .figure-infographic-wrap {
+      margin-top: .6rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      padding: .35rem;
+      background: rgba(0,74,153,.04);
+      border: 1px solid rgba(0,74,153,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
+    }
+    .figure-infographic-wrap img {
+      display: block;
+      width: 100%;
+      min-width: 520px;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+    }
+    @media (min-width: 700px) {
+      .figure-infographic-wrap img { min-width: 0; }
+    }
+    .infographic-caption {
+      margin-top: .55rem;
+      font-size: .76rem;
+      color: #5a6579;
+      line-height: 1.45;
+    }
+
+    footer {
+      text-align: center;
+      padding: .9rem .75rem 1.4rem;
+      color: #6b7284;
+      font-size: .74rem;
+    }
+    mark.hl { background: linear-gradient(120deg, rgba(138,86,195,.35), rgba(41,227,241,.28)); font-weight: 600; padding: .06em .12em; border-radius: 3px; }
+  </style>
+</head>
+<body class="has-deck-nav">
+  <div class="sticky-head">
+    <div class="brand-bar">
+      <a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
+    </div>
+    <nav class="toc" aria-label="Índice">
+      <div class="inner">
+        <strong style="margin-right:.32rem;color:var(--dk)">Láminas:</strong>
+        <a href="#smartagro1">Título</a>
+        <a href="#smartagro2">Contexto</a>
+        <a href="#smartagro3">Problemas</a>
+        <a href="#smartagro4">Solución</a>
+        <a href="#smartagro5">Sistema</a>
+        <a href="#smartagro6">Beneficios</a>
+        <a href="#smartagro-diagram">Diagrama</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <header class="cover-lamina slide-reveal" id="smartagro1">
+      <div class="cover-glow" aria-hidden="true"></div>
+      <div class="cover-chip">Fitosanidad · Edge AI · IoT regional</div>
+      <div class="cover-content">
+        <h1>SMARTAGRO: Monitoreo de la Mosca de la Fruta con IA</h1>
+        <p class="cover-sub">Programa de Monitoreo Inteligente de Mosca de la Fruta</p>
+        <p class="cover-region">Región de Atacama</p>
+        <div class="cover-badges">
+          <span>STM32N6</span>
+          <span>LoRaWAN</span>
+          <span>Visión computacional</span>
+          <span>500 trampas Jackson</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="slide slide-reveal" id="smartagro2" style="border-left-color:rgba(30,107,71,.65)">
+      <span class="pill anim-item">Territorio</span>
+      <h2 class="anim-item">Contexto territorial · Región de Atacama</h2>
+      <p class="lead anim-item">Zona agrícola estratégica para exportación y producción intensiva del norte — condiciones muy favorables para despliegue <mark class="hl">IoT/LPWAN</mark> tipo LoRaWAN.</p>
+      <div class="stat-row anim-item">
+        <div class="stat"><strong>~100 km²</strong><span>Monitoreo referencial (~10.000 ha)</span></div>
+      </div>
+      <div class="panel anim-item" style="margin-top:.6rem;">
+        <h3>Cobertura y valles productivos</h3>
+        <ul class="smart-list smart-list-stagger">
+          <li><strong>Principales zonas:</strong> Valle de Copiapó · Valle del Huasco</li>
+          <li><strong>Rol regional:</strong> uva de mesa para exportación, agricultura intensiva del norte</li>
+        </ul>
+        <p class="muted">Condiciones recomendadas para LoRaWAN: valles extensos, <mark class="hl">baja densidad urbana</mark>, buena línea de vista territorial.</p>
+      </div>
+    </section>
+
+    <section class="slide slide-reveal" id="smartagro3">
+      <span class="pill anim-item">Problemática</span>
+      <h2 class="anim-item">Mosca de la fruta y limitaciones actuales</h2>
+      <div class="cols-2">
+        <article class="panel anim-item">
+          <h3>Amenaza fitosanitaria</h3>
+          <ul class="smart-list smart-list-stagger">
+            <li>Riesgo crítico para la sanidad agrícola chilena y <strong>cadena exportadora</strong></li>
+            <li>Riesgo de restricciones comerciales internacionales</li>
+            <li>Costos muy altos en campañas de erradicación reactivas</li>
+          </ul>
+        </article>
+        <article class="panel anim-item">
+          <h3>Limitaciones del monitoreo de hoy</h3>
+          <ul class="smart-list smart-list-stagger">
+            <li>Revisión manual de trampas</li>
+            <li>Baja densidad espacial de observación</li>
+            <li>Respuesta lenta ante focos · cobertura acotada</li>
+            <li>Alto costo operativo en terreno</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide slide-reveal" id="smartagro4">
+      <span class="pill anim-item">Propuesta</span>
+      <h2 class="anim-item">Red inteligente de vigilancia fitosanitaria</h2>
+      <p class="lead anim-item">Infraestructura regional escalable para detección y conteo <strong>automático</strong>, con comunicación eficiente hacia una plataforma central.</p>
+      <div class="stat-row anim-item">
+        <div class="stat"><strong>500</strong><span>Trampas Jackson inteligentes</span></div>
+        <div class="stat"><strong>24/7</strong><span>Monitoreo autónomo</span></div>
+        <div class="stat"><strong>~10 k ha</strong><span>Cobertura objetivo regional</span></div>
+      </div>
+      <h3 style="margin:.75rem 0 .2rem;font-size:.88rem;color:var(--signos-deep);" class="anim-item">Stack tecnológico principal</h3>
+      <div class="tech-grid anim-item">
+        <div class="tech-card">IA Edge · STM32N6</div>
+        <div class="tech-card">Visión computacional</div>
+        <div class="tech-card">LoRaWAN largo alcance</div>
+        <div class="tech-card">Solar autónomo</div>
+        <div class="tech-card">Plataforma cloud</div>
+      </div>
+    </section>
+
+    <section class="slide slide-reveal" id="smartagro5">
+      <span class="pill anim-item">Operación</span>
+      <h2 class="anim-item">Funcionamiento integrado · Borde vs central</h2>
+      <div class="flow-split">
+        <article class="flow-box anim-item">
+          <h3>En cada trampa</h3>
+          <ul class="smart-list smart-list-stagger">
+            <li>Captura periódica de imágenes</li>
+            <li><mark class="hl">Detección y clasificación de mosca por IA local</mark></li>
+            <li>Conteo en dispositivo (edge)</li>
+            <li>Eventos sintéticos transmitidos por LoRaWAN</li>
+          </ul>
+        </article>
+        <article class="flow-box anim-item">
+          <h3>Plataforma central</h3>
+          <ul class="smart-list smart-list-stagger">
+            <li>Recepción de alertas <strong>casi en tiempo real</strong></li>
+            <li>Mapas de calor y <strong>GIS</strong> regional</li>
+            <li>Dashboard ejecutivo · historial y trazabilidad</li>
+            <li><mark class="hl">Informes automatizados</mark> por periodo/evento</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide slide-reveal" id="smartagro6" style="border-left-color:rgba(138,86,195,.85)">
+      <span class="pill anim-item">Valor</span>
+      <h2 class="anim-item">Beneficios y resultado esperado</h2>
+      <div class="benefit-grid">
+        <div class="benefit-box anim-item">
+          <h4>Operacionales</h4>
+          <ul class="smart-list smart-list-stagger">
+            <li>Detección temprana de brotes</li>
+            <li>Mayor cobertura territorial homogénea</li>
+            <li>Tiempos de reacción acortados</li>
+            <li>CAPEX/OPEX operativo más contenido vs. modelo manual disperso</li>
+          </ul>
+        </div>
+        <div class="benefit-box anim-item">
+          <h4>Tecnológicos</h4>
+          <ul class="smart-list smart-list-stagger">
+            <li><mark class="hl">IA distribuida en terreno</mark></li>
+            <li>Bajo consumo y operación solar</li>
+            <li>Escalabilidad dentro de la región (y modelo replicable)</li>
+          </ul>
+        </div>
+        <div class="benefit-box anim-item">
+          <h4>Estratégicos</h4>
+          <ul class="smart-list smart-list-stagger">
+            <li>Fortalecimiento fitosanitario institucional y de productores</li>
+            <li>Resguardo reputacional exportador</li>
+            <li>Agenda <strong>smart agro</strong> 4.0 transferible</li>
+          </ul>
+        </div>
+      </div>
+      <blockquote class="quote-highlight anim-item">
+        <p>«Infraestructura regional inteligente de vigilancia fitosanitaria basada en <strong>IA Edge + LoRaWAN</strong>: monitoreo continuo, alertas tempranas, cobertura masiva, gestión guiada por datos y mayor resiliencia agrícola.»</p>
+      </blockquote>
+      <div class="kpi-mini anim-item">
+        <strong style="font-size:.78rem;color:var(--signos-deep);">Impacto esperado (síntesis)</strong>
+        <ul class="smart-list smart-list-stagger">
+          <li>Continuidad en captura vs. muestros esporádicos</li>
+          <li>Estandarización de evidencia objetiva para decisiones sanitarias</li>
+          <li>Base exportable conceptualmente otras regiones con valles elongados</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide slide-reveal infographic-slide" id="smartagro-diagram">
+      <span class="pill anim-item">Esquema general</span>
+      <h2 class="anim-item">Sistema de trampas Jackson inteligentes · IA Edge + LoRaWAN</h2>
+      <p class="lead anim-item">Diagrama técnico de referencia: nodo en campo, red LoRaWAN, plataforma cloud y visualización regional.</p>
+      <figure class="anim-item" style="margin:0;">
+        <div class="figure-infographic-wrap">
+          <img
+            src="assets/smartagro-infografia-jackson-lorawan.png"
+            alt="Infografía del sistema SMARTAGRO: trampa Jackson con panel solar, cámara, STM32N6 y LoRaWAN; despliegue en campo hasta gateway; flujo desde captura e IA Edge hasta plataforma cloud y mapas de calor en dashboard."
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption class="infographic-caption">
+          Cobertura referencial diseño: ~10.000 ha, 500 nodos trampas inteligentes, gateways LoRaWAN (25–40), monitoreo 24/7 y energía solar autónoma. En vista móvil puede desplazarse la imagen horizontalmente para ver el detalle completo.
+        </figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer>SMARTAGRO · Monitoreo Mosca de la Fruta · Región de Atacama — Presentación ejecutiva · SIGNOS branding.</footer>
+
+  <script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) {
+    document.querySelectorAll(".slide-reveal").forEach(function (el) { el.classList.add("is-visible"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-visible");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -7% 0px" });
+  document.querySelectorAll(".slide-reveal").forEach(function (el) { io.observe(el); });
+})();
+  </script>
+  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
+    <a class="deck-nav-link deck-nav-prev" href="presentacion_atacama_pulse_ia.html">← Anterior</a>
+    <a class="deck-nav-link deck-nav-hub" href="index.html#deck-catalogo">Índice</a>
+    <a class="deck-nav-link deck-nav-next" href="presentacion_cooperacion_atacama_pais_vasco.html">Siguiente →</a>
+  </nav>
+</body>
+</html>

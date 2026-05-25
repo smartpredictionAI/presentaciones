@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Programa Comunicacional Automatizado IA — Atacama Pulse AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/deck-nav.css" />
+  <style>
+    :root {
+      --signos-navy: #004a99;
+      --signos-purple: #8a56c3;
+      --signos-cyan: #29e3f1;
+      --signos-deep: #003671;
+      --dk: #1e2d44;
+      --surface: #fff;
+      --bg: linear-gradient(165deg, #e8f3fb 0%, #eef1f8 50%, #e4e9f2 100%);
+      --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
+      --radius: 10px;
+      --maxw: 920px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-reveal, .anim-item, .cover-glow { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.5; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
+    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
+    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .78rem; }
+    nav.toc a { padding: .2rem .55rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
+    nav.toc a:hover { background: rgba(41,227,241,.22); }
+    main { max-width: var(--maxw); margin: 0 auto; padding: .85rem .75rem 2.5rem; }
+
+    /* Slide 1 — title lamina */
+    .cover-lamina {
+      position: relative;
+      min-height: min(72vh, 520px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+      background: linear-gradient(135deg, var(--signos-deep) 0%, var(--signos-navy) 40%, #1a4d8c 70%, #2a1f4e 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.25rem;
+    }
+    .cover-glow {
+      position: absolute;
+      width: 140%;
+      height: 60%;
+      top: -20%;
+      left: -20%;
+      background: radial-gradient(ellipse, rgba(41,227,241,.25) 0%, transparent 55%);
+      pointer-events: none;
+      animation: glowDrift 8s ease-in-out infinite alternate;
+    }
+    @keyframes glowDrift {
+      from { transform: translate(-2%, 0) scale(1); opacity: .8; }
+      to { transform: translate(4%, 2%) scale(1.05); opacity: 1; }
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 36rem; }
+    .cover-lamina h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.35rem, 4.2vw, 2rem);
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 .75rem;
+      line-height: 1.2;
+      text-shadow: 0 2px 24px rgba(0,0,0,.25);
+      animation: titleIn .9s ease .15s both;
+    }
+    @keyframes titleIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .cover-product {
+      display: inline-block;
+      font-size: clamp(1rem, 2.8vw, 1.35rem);
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--signos-cyan), #8af5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: .5rem;
+      animation: titleIn .85s ease .35s both;
+    }
+    .cover-tagline {
+      color: rgba(255,255,255,.88);
+      font-size: .88rem;
+      margin: 0;
+      animation: titleIn .8s ease .55s both;
+    }
+    .cover-badges { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; animation: titleIn .75s ease .75s both; }
+    .cover-badges span {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--signos-deep);
+      background: rgba(255,255,255,.92);
+      padding: .25rem .5rem;
+      border-radius: 999px;
+    }
+
+    .slide {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: .85rem 1rem;
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+    }
+    .slide-reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .slide-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .slide-reveal.is-visible .anim-item { animation: fadeInUp .48s ease backwards; }
+    .slide-reveal.is-visible .anim-item:nth-child(1) { animation-delay: .04s; }
+    .slide-reveal.is-visible .anim-item:nth-child(2) { animation-delay: .08s; }
+    .slide-reveal.is-visible .anim-item:nth-child(3) { animation-delay: .12s; }
+    .slide-reveal.is-visible .anim-item:nth-child(4) { animation-delay: .16s; }
+    .slide-reveal.is-visible .anim-item:nth-child(5) { animation-delay: .2s; }
+    .slide-reveal.is-visible .anim-item:nth-child(6) { animation-delay: .24s; }
+    .slide-reveal.is-visible .anim-item:nth-child(n+7) { animation-delay: .28s; }
+    .slide-reveal.is-visible .mod-card:nth-child(1) { animation-delay: .03s; }
+    .slide-reveal.is-visible .mod-card:nth-child(2) { animation-delay: .06s; }
+    .slide-reveal.is-visible .mod-card:nth-child(3) { animation-delay: .09s; }
+    .slide-reveal.is-visible .mod-card:nth-child(4) { animation-delay: .12s; }
+    .slide-reveal.is-visible .mod-card:nth-child(5) { animation-delay: .15s; }
+    .slide-reveal.is-visible .mod-card:nth-child(6) { animation-delay: .18s; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pill { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan)); padding: .12rem .45rem; border-radius: 999px; }
+    h2 { margin: .2rem 0 0; font-size: clamp(1rem, 2.5vw, 1.15rem); line-height: 1.28; color: var(--signos-deep); }
+    .lead { color: #4b5569; font-size: .83rem; margin: .45rem 0 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin: .6rem 0 0; }
+    .chip {
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .25rem .5rem;
+      border-radius: 8px;
+      background: rgba(0,74,153,.08);
+      border: 1px solid rgba(138,86,195,.2);
+    }
+    .two-col { display: grid; gap: .75rem; margin-top: .65rem; }
+    @media (min-width: 720px) { .two-col { grid-template-columns: 1fr 1fr; } }
+    .mini-list { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .8rem; color: #3d475c; }
+    .mini-list li { margin: .28rem 0; }
+    .val-grid { display: grid; gap: .45rem; margin-top: .55rem; }
+    @media (min-width: 640px) { .val-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .val-grid { grid-template-columns: repeat(3, 1fr); } }
+    .val-card {
+      font-size: .76rem;
+      padding: .5rem .55rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0,74,153,.12);
+      background: linear-gradient(135deg, rgba(138,86,195,.07), rgba(41,227,241,.06));
+    }
+    .val-card strong { display: block; color: var(--signos-purple); font-size: .78rem; margin-bottom: .2rem; }
+    .mod-grid { display: grid; gap: .4rem; margin-top: .55rem; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .mod-card {
+      font-size: .72rem;
+      padding: .45rem .5rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,.95);
+      border-left: 3px solid var(--signos-cyan);
+      box-shadow: 0 2px 8px rgba(0,54,113,.06);
+    }
+    .mod-card b { color: var(--signos-deep); font-size: .74rem; }
+    .growth-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; font-size: .78rem; margin: .5rem 0; }
+    @media (min-width: 560px) { .growth-row { grid-template-columns: repeat(3, 1fr); } }
+    .growth-cell {
+      text-align: center;
+      padding: .55rem .4rem;
+      border-radius: 8px;
+      background: rgba(0,74,153,.07);
+      border: 1px solid rgba(0,74,153,.1);
+    }
+    .growth-cell em { display: block; font-style: normal; font-weight: 700; color: var(--signos-purple); font-size: .85rem; }
+    .risk-block { font-size: .77rem; margin-top: .5rem; padding: .5rem; border-radius: 8px; background: rgba(180,80,80,.06); border: 1px solid rgba(180,80,80,.15); }
+    .risk-block strong { color: #8b2c2c; }
+    .conclusion {
+      margin-top: .55rem;
+      padding: .55rem .65rem;
+      border-radius: 8px;
+      font-size: .8rem;
+      background: linear-gradient(90deg, rgba(138,86,195,.1), rgba(41,227,241,.12));
+      border: 1px solid rgba(138,86,195,.25);
+    }
+    footer { text-align: center; padding: 1rem; color: #6b7284; font-size: .75rem; }
+    mark.hl { background: linear-gradient(120deg, rgba(138,86,195,.3), rgba(41,227,241,.28)); font-weight: 600; padding: .06em .12em; border-radius: 3px; }
+  </style>
+</head>
+<body class="has-deck-nav">
+  <div class="sticky-head">
+    <div class="brand-bar">
+      <a href="#lamina1" style="display:inline-block;line-height:0"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
+    </div>
+    <nav class="toc" aria-label="Índice">
+      <div class="inner">
+        <strong style="margin-right:.35rem;color:var(--dk)">Láminas:</strong>
+        <a href="#lamina1">1 · Título</a>
+        <a href="#lamina2">2 · Plataforma</a>
+        <a href="#lamina3">3 · Lógica y módulos</a>
+        <a href="#lamina4">4 · Proyección y cierre</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Lámina 1 -->
+    <header class="cover-lamina slide-reveal" id="lamina1" aria-label="Portada">
+      <div class="cover-glow" aria-hidden="true"></div>
+      <div class="cover-content">
+        <p class="cover-product">Atacama Pulse AI</p>
+        <h1>Programa Comunicacional<br />Automatizado IA</h1>
+        <p class="cover-tagline">Plataforma operativa de <mark class="hl">inteligencia social</mark> y crecimiento orgánico hiperlocal — ya desplegada para acelerar posicionamiento digital sin depender de pauta pagada.</p>
+        <div class="cover-badges">
+          <span>Radar social</span>
+          <span>IA contextual</span>
+          <span>Multi-red</span>
+          <span>Región Atacama</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Lámina 2 -->
+    <section class="slide slide-reveal" id="lamina2">
+      <span class="pill anim-item">Descripción</span>
+      <h2 class="anim-item">Atacama Pulse AI — qué hace la plataforma</h2>
+      <p class="lead anim-item">Consolida <mark class="hl">investigación de audiencias</mark>, detección de grupos y líderes, interacción asistida y <mark class="hl">reutilización multi-red</mark> en un solo flujo para generar alcance masivo con control de riesgo.</p>
+      <div class="chips anim-item">
+        <span class="chip">TikTok</span>
+        <span class="chip">Instagram</span>
+        <span class="chip">Facebook</span>
+        <span class="chip">WhatsApp Communities</span>
+        <span class="chip">Telegram</span>
+      </div>
+      <div class="two-col">
+        <div class="anim-item">
+          <p style="font-size:.8rem;margin:.55rem 0 0;color:#3d475c"><strong style="color:var(--signos-deep)">Motor central:</strong> análisis semántico, automatización social acotada, tendencias en tiempo real y generación dinámica de piezas y comentarios alineados al territorio.</p>
+        </div>
+        <div class="anim-item">
+          <p style="font-size:.8rem;margin:.55rem 0 0;color:#3d475c"><strong style="color:var(--signos-deep)">Objetivos medidos:</strong></p>
+          <ul class="mini-list">
+            <li>Alcance regional sostenido</li>
+            <li>Percepción de cercanía y autoridad temática</li>
+            <li>Comunidad activa alrededor de la marca o figura</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lámina 3 -->
+    <section class="slide slide-reveal" id="lamina3">
+      <span class="pill anim-item">Viabilidad y arquitectura</span>
+      <h2 class="anim-item">Por qué encaja con los algoritmos · Cómo opera el sistema</h2>
+      <p class="lead anim-item">La lógica replica <mark class="hl">comportamientos que las redes ya premian</mark>: velocidad en hilos virales, grupos Facebook, distribución por interés en TikTok, reciclaje de formato y hueco competitivo regional.</p>
+      <div class="val-grid">
+        <div class="val-card anim-item"><strong>1 · Interacción temprana</strong>Oportunidades en contenido regional acelerando; sugerencias de comentarios, duetos, stitches y réplicas tácticas.</div>
+        <div class="val-card anim-item"><strong>2 · Comunidades</strong>Los grupos superan páginas en alcance orgánico; secuencia: aportar valor → recién después posicionar.</div>
+        <div class="val-card anim-item"><strong>3 · TikTok por interés</strong>Cuentas pequeñas pueden explotar formato; dueto, stitch, hooks y tendencias tempranas.</div>
+        <div class="val-card anim-item"><strong>4 · Contenido reutilizado</strong>Un mismo eje adaptado a Reel, Story, TikTok, clip Facebook y Shorts sin duplicar producción.</div>
+        <div class="val-card anim-item" style="grid-column:1/-1;"><strong>5 · Hiperlocal</strong>Menos contenido profesional optimizado en Atacama → más fácil dominar hashtags, conversaciones y posicionamiento rápido.</div>
+      </div>
+      <h3 style="margin-top:.85rem;font-size:.9rem;color:var(--signos-deep)" class="anim-item">Seis módulos integrados</h3>
+      <div class="mod-grid">
+        <div class="mod-card"><b>Radar Social IA</b> Hashtags, grupos, voceros y tendencias; tono y emociones que disparan engagement.</div>
+        <div class="mod-card"><b>Descubrimiento de grupos</b> Clasificación por engagement, afinidad, toxicidad y potencial viral.</div>
+        <div class="mod-card"><b>IA de interacción</b> Comentarios y DM contextuales; anti-spam, tono humano imperfecto.</div>
+        <div class="mod-card"><b>Motor viral</b> Derivados automáticos: formatos por red, hooks y hashtags locales.</div>
+        <div class="mod-card"><b>Growth Engine</b> Cuotas diarias de acciones, follows y rutas anti–shadowban.</div>
+        <div class="mod-card"><b>Mapa de influencia</b> Quién mueve debate, viraliza y articula comunidades regionales.</div>
+      </div>
+    </section>
+
+    <!-- Lámina 4 -->
+    <section class="slide slide-reveal" id="lamina4">
+      <span class="pill anim-item">Proyección y gobernanza</span>
+      <h2 class="anim-item">Crecimiento esperado · Ventaja · Riesgos · Conclusión</h2>
+      <p class="lead anim-item">Escenario moderado bien ejecutado para una región como <mark class="hl">Atacama</mark> (uso disciplinado de la plataforma).</p>
+      <div class="growth-row anim-item">
+        <div class="growth-cell"><em>Mes 3</em><span>≈ 5K–15K<br />alcance mensual</span></div>
+        <div class="growth-cell"><em>Mes 6</em><span>≈ 25K–60K<br />alcance mensual</span></div>
+        <div class="growth-cell"><em>Mes 12</em><span>≈ 80K–180K<br />alcance regional acumulado</span></div>
+      </div>
+      <p class="anim-item" style="font-size:.79rem;color:#3d475c;margin:0 0 .45rem;"><strong>Ventaja real:</strong> no es solo “publicar más”, sino <mark class="hl">escalar relaciones comunitarias con IA</mark> — entrar, conversar, detectar líderes y convertir interacción en distribución orgánica.</p>
+      <div class="risk-block anim-item">
+        <strong>Riesgos controlados:</strong> shadowban (ritmo humano, límites, variación); percepción artificial (tono imperfecto, datos reales); dependencia de plataformas (priorizar analítica, recomendación y asistencia sobre automatización agresiva).
+      </div>
+      <div class="conclusion anim-item">
+        <strong style="color:var(--signos-deep)">Conclusión:</strong> la propuesta combina crecimiento comunitario, automatización inteligente y foco hiperregional. El activo más valioso es <mark class="hl">detectar conversaciones, insertarse con criterio y escalar vínculos reales</mark> — vía capaz de acelerar presencia en regiones medianas sin inversión publicitaria directa.
+      </div>
+    </section>
+  </main>
+
+  <footer>Atacama Pulse AI · Programa comunicacional automatizado (IA) · Documento de presentación resumido.</footer>
+
+  <script>
+(function() {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    document.querySelectorAll('.slide-reveal').forEach(function(el) { el.classList.add('is-visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.slide-reveal').forEach(function(el) { io.observe(el); });
+})();
+  </script>
+  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
+    <a class="deck-nav-link deck-nav-prev" href="presentacion_vargas.html">← Anterior</a>
+    <a class="deck-nav-link deck-nav-hub" href="index.html#deck-catalogo">Índice</a>
+    <a class="deck-nav-link deck-nav-next" href="presentacion_smartagro_mosca.html">Siguiente →</a>
+  </nav>
+</body>
+</html>

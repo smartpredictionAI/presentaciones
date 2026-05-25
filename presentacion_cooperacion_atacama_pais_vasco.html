@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cooperación Chile–País Vasco · Desarrollo Región de Atacama</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/deck-nav.css" />
+  <style>
+    :root {
+      --signos-navy: #004a99;
+      --signos-purple: #8a56c3;
+      --signos-cyan: #29e3f1;
+      --signos-deep: #003671;
+      --basque-green: #0d5c3f;
+      --dk: #1e2d44;
+      --surface: #fff;
+      --bg: linear-gradient(165deg, #eaf2fb 0%, #f4f8f6 42%, #e8ecf4 100%);
+      --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
+      --radius: 10px;
+      --maxw: 920px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-reveal, .anim-item, .cover-glow { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.52; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
+    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
+    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .74rem; }
+    nav.toc a { padding: .2rem .48rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
+    nav.toc a:hover { background: rgba(41,227,241,.26); }
+    main { max-width: var(--maxw); margin: 0 auto; padding: .85rem .75rem 2.2rem; }
+
+    .cover-lamina {
+      position: relative;
+      min-height: min(76vh, 560px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+      background: linear-gradient(135deg, var(--signos-deep) 0%, var(--basque-green) 45%, var(--signos-navy) 85%, #1a2740 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.15rem;
+    }
+    .cover-glow {
+      position: absolute;
+      width: 150%;
+      height: 65%;
+      top: -28%;
+      left: -28%;
+      background: radial-gradient(ellipse, rgba(41,227,241,.26) 0%, transparent 55%);
+      animation: glowDrift 9s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes glowDrift {
+      from { transform: translate(0,0); opacity: .75; }
+      to { transform: translate(8%, 4%); opacity: .95; }
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 40rem; }
+    .cover-lamina h1 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.12rem, 3.8vw, 1.82rem);
+      color: #fff;
+      line-height: 1.22;
+      margin: 0 0 .75rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,.28);
+      animation: titleIn .9s ease .12s both;
+    }
+    @keyframes titleIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .cover-line {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.38);
+      padding: .28rem .65rem;
+      border-radius: 999px;
+      margin-bottom: .9rem;
+      animation: titleIn .85s ease .05s both;
+    }
+    .cover-badges { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; margin-top: 1.1rem; animation: titleIn .8s ease .45s both; }
+    .cover-badges span {
+      font-size: .61rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.93);
+      color: var(--signos-deep);
+      padding: .22rem .48rem;
+      border-radius: 999px;
+    }
+
+    .slide {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: .85rem 1rem;
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+      border-left: 3px solid transparent;
+    }
+    .slide-reveal { opacity: 0; transform: translateY(18px); transition: opacity .56s ease, transform .56s cubic-bezier(.2,.7,.2,1); }
+    .slide-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .slide-reveal.is-visible .anim-item { animation: fadeInUp .48s ease backwards; }
+    .slide-reveal.is-visible .anim-item:nth-child(1) { animation-delay: .04s; }
+    .slide-reveal.is-visible .anim-item:nth-child(2) { animation-delay: .09s; }
+    .slide-reveal.is-visible .anim-item:nth-child(3) { animation-delay: .14s; }
+    .slide-reveal.is-visible .anim-item:nth-child(4) { animation-delay: .19s; }
+    .slide-reveal.is-visible .anim-item:nth-child(5) { animation-delay: .24s; }
+    .slide-reveal.is-visible .anim-item:nth-child(n+6) { animation-delay: .3s; }
+    .slide-reveal.is-visible .bp-list > li:nth-child(1) { animation: fadeInUp .44s ease .06s backwards; }
+    .slide-reveal.is-visible .bp-list > li:nth-child(2) { animation: fadeInUp .44s ease .1s backwards; }
+    .slide-reveal.is-visible .bp-list > li:nth-child(3) { animation: fadeInUp .44s ease .14s backwards; }
+    .slide-reveal.is-visible .bp-list > li:nth-child(4) { animation: fadeInUp .44s ease .18s backwards; }
+    .slide-reveal.is-visible .bp-list > li:nth-child(5) { animation: fadeInUp .44s ease .22s backwards; }
+    .slide-reveal.is-visible .bp-list > li:nth-child(n+6) { animation: fadeInUp .44s ease .28s backwards; }
+    .slide-reveal.is-visible .area-grid .area-card:nth-child(1) { animation-delay: .04s; }
+    .slide-reveal.is-visible .area-grid .area-card:nth-child(2) { animation-delay: .1s; }
+    .slide-reveal.is-visible .area-grid .area-card:nth-child(3) { animation-delay: .16s; }
+    .slide-reveal.is-visible .area-grid .area-card:nth-child(4) { animation-delay: .22s; }
+    .slide-reveal.is-visible .area-grid .area-card:nth-child(5) { animation-delay: .28s; }
+    .slide-reveal.is-visible .area-grid .area-card:nth-child(6) { animation-delay: .34s; }
+    .slide-reveal.is-visible .stages-wrap .stage-card:nth-child(1) { animation-delay: .05s; }
+    .slide-reveal.is-visible .stages-wrap .stage-card:nth-child(2) { animation-delay: .11s; }
+    .slide-reveal.is-visible .stages-wrap .stage-card:nth-child(3) { animation-delay: .17s; }
+    .slide-reveal.is-visible .stages-wrap .stage-card:nth-child(4) { animation-delay: .23s; }
+    .slide-reveal.is-visible .stages-wrap .stage-card:nth-child(5) { animation-delay: .29s; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(11px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: .59rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan));
+      padding: .11rem .42rem;
+      border-radius: 999px;
+    }
+    h2 { margin: .18rem 0 0; font-size: clamp(.96rem, 2.45vw, 1.12rem); line-height: 1.28; color: var(--signos-deep); }
+    h3 { font-size: .86rem; color: var(--basque-green); margin: .55rem 0 .35rem; }
+    .lead { color: #4b5569; font-size: .82rem; margin: .42rem 0 0; }
+    mark.hl {
+      background: linear-gradient(120deg, rgba(138,86,195,.34), rgba(41,227,241,.3));
+      font-weight: 600;
+      padding: .06em .14em;
+      border-radius: 4px;
+      color: inherit;
+    }
+    .bp-list {
+      margin: .5rem 0 0;
+      padding-left: 1.15rem;
+      font-size: .8rem;
+      color: #3d475c;
+    }
+    .bp-list li { margin: .3rem 0; }
+    .bp-list.tight li { margin: .22rem 0; }
+
+    .subgrid {
+      display: grid;
+      gap: .5rem;
+      margin-top: .55rem;
+    }
+    @media (min-width: 640px) { .subgrid.two { grid-template-columns: 1fr 1fr; } }
+
+    .area-grid {
+      display: grid;
+      gap: .45rem;
+      margin-top: .55rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .area-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .area-grid { grid-template-columns: repeat(3, 1fr); } }
+    .area-card {
+      border-radius: 8px;
+      padding: .5rem .58rem;
+      border: 1px solid rgba(0,74,153,.13);
+      background: linear-gradient(155deg, rgba(138,86,195,.07), rgba(13,92,63,.06));
+      font-size: .74rem;
+    }
+    .slide-reveal.is-visible .area-card {
+      animation: fadeInUp .48s ease backwards;
+    }
+    .area-card h4 {
+      margin: 0 0 .32rem;
+      font-size: .76rem;
+      color: var(--signos-deep);
+      font-weight: 700;
+    }
+
+    .stages-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+      margin-top: .55rem;
+    }
+    .stage-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .55rem .65rem;
+      align-items: start;
+      padding: .55rem .65rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--signos-cyan);
+      background: rgba(0,74,153,.045);
+      font-size: .77rem;
+    }
+    .slide-reveal.is-visible .stage-card {
+      animation: fadeInUp .48s ease backwards;
+    }
+    .stage-num {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: .85rem;
+      color: var(--signos-purple);
+      line-height: 1;
+    }
+
+    .resultado-box {
+      margin-top: .65rem;
+      padding: .75rem .85rem;
+      border-radius: var(--radius);
+      background: linear-gradient(120deg, rgba(138,86,195,.13), rgba(13,92,63,.09));
+      border: 1px solid rgba(138,86,195,.35);
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--signos-deep);
+      line-height: 1.45;
+    }
+    .resultado-list { margin: .45rem 0 0; padding-left: 1.1rem; font-size: .79rem; font-weight: 400; color: #3d475c; }
+    .resultado-list li { margin: .28rem 0; }
+    footer {
+      text-align: center;
+      padding: .9rem .75rem 1.35rem;
+      color: #6b7284;
+      font-size: .73rem;
+    }
+  </style>
+</head>
+<body class="has-deck-nav">
+  <div class="sticky-head">
+    <div class="brand-bar">
+      <a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
+    </div>
+    <nav class="toc" aria-label="Índice">
+      <div class="inner">
+        <strong style="margin-right:.3rem;color:var(--dk)">Láminas:</strong>
+        <a href="#lam1">Título</a>
+        <a href="#lam2">Chile–España</a>
+        <a href="#lam3">País Vasco</a>
+        <a href="#lam4">Áreas</a>
+        <a href="#lam5">Estrategia</a>
+        <a href="#lam6">Resultado</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <header class="cover-lamina slide-reveal" id="lam1">
+      <div class="cover-glow" aria-hidden="true"></div>
+      <div class="cover-content">
+        <span class="cover-line">Cooperación internacional · Innovación regional</span>
+        <h1>Cooperación Chile–País Vasco para el Desarrollo de la <mark class="hl" style="background:rgba(255,255,255,.22);color:#fff;">Región de Atacama</mark></h1>
+        <div class="cover-badges">
+          <span>Transferencia tecnológica</span>
+          <span>Redes europeas</span>
+          <span>Fortalecimiento productivo</span>
+          <span>Pilotos regionales</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="slide slide-reveal" id="lam2" style="border-left-color:rgba(0,74,153,.7)">
+      <span class="pill anim-item">Antecedentes</span>
+      <h2 class="anim-item">1. Experiencia de cooperación Chile – España</h2>
+      <p class="lead anim-item">Marco de <mark class="hl">transferencia tecnológica</mark> entre regiones europeas y territorios productivos chilenos, con foco en innovación, digitalización y desarrollo regional.</p>
+      <ul class="bp-list anim-item">
+        <li>Cooperación en <mark class="hl">innovación, digitalización y desarrollo regional</mark>.</li>
+        <li>Participación de instituciones españolas en programas de <mark class="hl">fortalecimiento productivo</mark>.</li>
+      </ul>
+      <h3 class="anim-item">Experiencias previas temáticas</h3>
+      <ul class="bp-list tight anim-item">
+        <li>Minería sostenible</li>
+        <li>Energías renovables</li>
+        <li>Economía circular</li>
+        <li>Innovación para pymes</li>
+        <li>Formación técnica especializada</li>
+      </ul>
+      <p class="lead anim-item" style="margin-top:.65rem;"><mark class="hl">Integración de Chile</mark> en redes europeas de innovación y cooperación internacional.</p>
+    </section>
+
+    <section class="slide slide-reveal" id="lam3" style="border-left-color:rgba(13,92,63,.85)">
+      <span class="pill anim-item">Aliado estratégico</span>
+      <h2 class="anim-item">2. Ventajas de la cooperación con el País Vasco</h2>
+      <p class="lead anim-item">Fortalezas del <mark class="hl">modelo vasco</mark> trasladables a un territorio abierto como Atacama: ecosistema industrial-tecnológico maduro y cultura de asociación público-privada-universidades.</p>
+      <div class="subgrid two anim-item">
+        <div>
+          <h3>Capacidades sectoriales destacadas</h3>
+          <ul class="bp-list tight">
+            <li>Minería inteligente y automatización</li>
+            <li>Manufactura avanzada</li>
+            <li><mark class="hl">Hidrógeno verde</mark></li>
+            <li>Desalación y gestión hídrica</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Articulación institucional</h3>
+          <ul class="bp-list tight">
+            <li>Modelo de gobierno regional + <mark class="hl">universidades + centros tecnológicos + empresas</mark></li>
+            <li><mark class="hl">Transferencia tecnológica veloz</mark> hacia territorios regionales</li>
+            <li>Reconversión productiva y desarrollo territorial resiliente</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lead anim-item" style="margin-top:.55rem;">Acceso amplificado a <mark class="hl">financiamiento y redes europeas de innovación</mark>.</p>
+      <h3 class="anim-item">Vínculos y redes de referencia</h3>
+      <ul class="bp-list tight anim-item">
+        <li><mark class="hl">Enterprise Europe Network (EEN)</mark></li>
+        <li>Innobasque</li>
+        <li>SPRI</li>
+      </ul>
+    </section>
+
+    <section class="slide slide-reveal" id="lam4">
+      <span class="pill anim-item">Priorización</span>
+      <h2 class="anim-item">3. Áreas de cooperación prioritarias para Atacama</h2>
+      <p class="lead anim-item">Seis vectores donde la oferta vasco-europea se alinea con brechas típicas del norte grande chileno.</p>
+      <div class="area-grid">
+        <article class="area-card">
+          <h4>A · Minería inteligente y sustentable</h4>
+          <ul class="bp-list tight" style="margin-top:.25rem">
+            <li>Automatización minera · sensores e <mark class="hl">IA</mark> para monitoreo</li>
+            <li>Seguridad industrial avanzada · robótica en faenas</li>
+            <li>Gestión ambiental minera</li>
+          </ul>
+        </article>
+        <article class="area-card">
+          <h4>B · Gestión hídrica y desalación</h4>
+          <ul class="bp-list tight" style="margin-top:.25rem">
+            <li>Reutilización de aguas · desalación <mark class="hl">energéticamente eficiente</mark></li>
+            <li>Monitoreo hídrico inteligente · economía circular del agua</li>
+          </ul>
+        </article>
+        <article class="area-card">
+          <h4>C · Energías renovables e hidrógeno verde</h4>
+          <ul class="bp-list tight" style="margin-top:.25rem">
+            <li>Integración solar-fotovoltaica y sistemas híbridos</li>
+            <li>Producción de hidrógeno verde · almacenamiento</li>
+          </ul>
+        </article>
+        <article class="area-card">
+          <h4>D · Agricultura tecnológica y control sanitario</h4>
+          <ul class="bp-list tight" style="margin-top:.25rem">
+            <li>Agricultura de precisión · plagas (<mark class="hl">smart monitoring</mark>)</li>
+            <li>Sensores IoT en cultivos · trazabilidad exportadora</li>
+          </ul>
+        </article>
+        <article class="area-card">
+          <h4>E · Digitalización y pymes regionales</h4>
+          <ul class="bp-list tight" style="margin-top:.25rem">
+            <li>Transformación digital · <mark class="hl">ciberseguridad industrial</mark></li>
+            <li>Plataformas SaaS · capacitación tecnológica</li>
+          </ul>
+        </article>
+        <article class="area-card">
+          <h4>F · Formación técnica y capital humano</h4>
+          <ul class="bp-list tight" style="margin-top:.25rem">
+            <li>Convenios universidad–empresa · <mark class="hl">formación dual</mark></li>
+            <li>Intercambio técnico-profesional · tecnologías 4.0</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide slide-reveal" id="lam5" style="border-left-color:rgba(138,86,195,.85)">
+      <span class="pill anim-item">Ruta de trabajo</span>
+      <h2 class="anim-item">4. Estrategia de cooperación para Atacama</h2>
+      <p class="lead anim-item">Secuencia progresiva: conocimiento del territorio → gobernanza binacional → <mark class="hl">financiamiento internacional</mark> → pilotos → escalamiento e integración a redes UE.</p>
+      <div class="stages-wrap">
+        <div class="stage-card">
+          <span class="stage-num">1</span>
+          <div>
+            <strong>Identificación territorial</strong>
+            <ul class="bp-list tight">
+              <li>Levantamiento de brechas tecnológicas y priorización de sectores.</li>
+              <li><mark class="hl">Definición de proyectos piloto.</mark></li>
+            </ul>
+          </div>
+        </div>
+        <div class="stage-card">
+          <span class="stage-num">2</span>
+          <div>
+            <strong>Articulación institucional</strong>
+            <ul class="bp-list tight">
+              <li>GORE Atacama, universidades, <mark class="hl">CORFO</mark>, empresas, instituciones vascas.</li>
+              <li>Mesa binacional técnica.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="stage-card">
+          <span class="stage-num">3</span>
+          <div>
+            <strong>Acceso a financiamiento internacional</strong>
+            <ul class="bp-list tight">
+              <li>ADELANTE II, programas <mark class="hl">eLankidetza</mark>, Eureka, Iberoeka, fondos europeos de innovación.</li>
+              <li>Cofinanciamiento para pilotos regionales.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="stage-card">
+          <span class="stage-num">4</span>
+          <div>
+            <strong>Implementación de proyectos piloto</strong>
+            <ul class="bp-list tight">
+              <li>Minería, agricultura, energía y agua.</li>
+              <li><mark class="hl">Instalación de capacidades permanentes</mark> en la región.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="stage-card">
+          <span class="stage-num">5</span>
+          <div>
+            <strong>Escalamiento regional</strong>
+            <ul class="bp-list tight">
+              <li>Transferencia a pymes · formación de <mark class="hl">clusters</mark>.</li>
+              <li>Internacionalización empresarial e integración a redes europeas de innovación.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide-reveal" id="lam6" style="border-left-color:rgba(41,227,241,.85)">
+      <span class="pill anim-item">Visión</span>
+      <h2 class="anim-item">Resultado esperado para Atacama</h2>
+      <div class="resultado-box anim-item">
+        Mayor acceso a recursos externos, modernización productiva y posicionamiento del territorio como <mark class="hl">polo innovador del norte</mark>.
+        <ul class="resultado-list bp-list tight">
+          <li>Mayor acceso a <mark class="hl">financiamiento internacional</mark></li>
+          <li>Modernización productiva e incorporación de tecnologías avanzadas</li>
+          <li><mark class="hl">Diversificación económica</mark> y fortalecimiento de pymes</li>
+          <li>Capital humano especializado (formación técnica y 4.0)</li>
+          <li>Atacama reconocida como polo de innovación <mark class="hl">minera y energética del norte de Chile</mark></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>Cooperación Chile–País Vasco · Desarrollo Región de Atacama — Presentación ejecutiva.</footer>
+
+  <script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) {
+    document.querySelectorAll(".slide-reveal").forEach(function (el) { el.classList.add("is-visible"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-visible");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -7% 0px" });
+  document.querySelectorAll(".slide-reveal").forEach(function (el) { io.observe(el); });
+})();
+  </script>
+  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
+    <a class="deck-nav-link deck-nav-prev" href="presentacion_smartagro_mosca.html">← Anterior</a>
+    <a class="deck-nav-link deck-nav-hub" href="index.html#deck-catalogo">Índice</a>
+    <a class="deck-nav-link deck-nav-next" href="index.html#deck-catalogo">Siguiente →</a>
+  </nav>
+</body>
+</html>

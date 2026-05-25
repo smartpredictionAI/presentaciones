@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/deck-nav.css" />
   <style>
     :root {
       --signos-navy: #004a99;
@@ -305,7 +306,7 @@
     }
   </style>
 </head>
-<body>
+<body class="has-deck-nav">
   <div class="sticky-head">
     <div class="brand-bar">
       <a href="#portada" aria-label="SIGNOS analytics — inicio">
@@ -316,6 +317,17 @@
       <div class="inner">
         <span style="font-weight:700;margin-right:0.35rem;color:var(--dk)">Ir a:</span>
         <a href="#portada">Portada</a><a href="#metodologia">Metodología</a><a href="#bloque-regional">Regional</a><a href="#p1">P1</a><a href="#p2">P2</a><a href="#p3">P3</a><a href="#p4">P4</a><a href="#p5">P5</a><a href="#p6">P6</a><a href="#p7">P7</a><a href="#p8">P8</a><a href="#p9">P9</a><a href="#p15">P15</a><a href="#p16">P16</a><a href="#p17">P17</a><a href="#p10">P10</a><a href="#p11">P11</a><a href="#p12">P12</a><a href="#p13">P13</a><a href="#p14">P14</a>
+      </div>
+    </nav>
+    <nav id="deck-catalogo" class="deck-catalog" aria-label="Todas las presentaciones SIGNOS">
+      <div class="deck-catalog-inner">
+        <span class="deck-catalog-title">Presentaciones:</span>
+        <a href="index.html" aria-current="page">Encuesta nacional</a>
+        <a href="presentacion_encuesta.html">Encuesta nacional (archivo)</a>
+        <a href="presentacion_vargas.html">Atacama · Vargas</a>
+        <a href="presentacion_atacama_pulse_ia.html">Atacama Pulse AI</a>
+        <a href="presentacion_smartagro_mosca.html">SMARTAGRO</a>
+        <a href="presentacion_cooperacion_atacama_pais_vasco.html">Cooperación Chile–País Vasco</a>
       </div>
     </nav>
   </div>
@@ -1369,5 +1381,10 @@
     ]
   }
 ]</script>
+  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
+    <a class="deck-nav-link deck-nav-prev" href="presentacion_cooperacion_atacama_pais_vasco.html">← Anterior</a>
+    <a class="deck-nav-link deck-nav-hub" href="#deck-catalogo">Índice</a>
+    <a class="deck-nav-link deck-nav-next" href="presentacion_encuesta.html">Siguiente →</a>
+  </nav>
 </body>
 </html>

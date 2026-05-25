@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/deck-nav.css" />
   <style>
     :root {
       --signos-navy: #004a99;
@@ -305,7 +306,7 @@
     }
   </style>
 </head>
-<body>
+<body class="has-deck-nav">
   <div class="sticky-head">
     <div class="brand-bar">
       <a href="#portada" aria-label="SIGNOS analytics — inicio">
@@ -1369,5 +1370,10 @@
     ]
   }
 ]</script>
+  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
+    <a class="deck-nav-link deck-nav-prev" href="index.html">← Anterior</a>
+    <a class="deck-nav-link deck-nav-hub" href="index.html#deck-catalogo">Índice</a>
+    <a class="deck-nav-link deck-nav-next" href="presentacion_vargas.html">Siguiente →</a>
+  </nav>
 </body>
 </html>
