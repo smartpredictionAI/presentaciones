@@ -1,744 +1,522 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartGore Atacama — Programa NemoClaw</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/deck-nav.css" />
-<!-- Static deck from smartgore_atacama_nemoclaw.html; companion tabbed prototype: references/smartgore_atacama_nemoclaw.jsx -->
-<style>
-  :root {
-    --navy: #0A1628;
-    --navy-mid: #122040;
-    --blue: #1B4F8A;
-    --cyan: #0FBBCC;
-    --cyan-dim: #0D99A8;
-    --gold: #E8A020;
-    --gold-dim: #B87A10;
-    --white: #F4F7FC;
-    --muted: #8FA3C0;
-    --card-bg: #122040;
-    --card-border: rgba(15,187,204,0.18);
-    --text: #D6E4F7;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--navy);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-  .cover {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #060E1E 0%, #0A1628 45%, #0D2845 100%);
-    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-    padding: 80px 10vw;
-    position: relative; overflow: hidden;
-  }
-  .cover::before {
-    content: '';
-    position: absolute; top: -120px; right: -80px;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(15,187,204,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cover::after {
-    content: '';
-    position: absolute; bottom: -80px; left: 30%;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cover-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--cyan); margin-bottom: 24px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .cover-label::before { content: ''; display: inline-block; width: 40px; height: 1px; background: var(--cyan); }
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(38px, 6vw, 72px);
-    font-weight: 800; line-height: 1.05;
-    color: #fff; margin-bottom: 10px;
-  }
-  h1 span { color: var(--cyan); }
-  .cover-sub {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(18px, 3vw, 30px);
-    font-weight: 400; color: var(--gold);
-    margin-bottom: 32px;
-  }
-  .cover-desc {
-    max-width: 560px; font-size: 15px; color: var(--muted);
-    line-height: 1.8; margin-bottom: 48px;
-  }
-  .cover-meta {
-    display: flex; gap: 40px; flex-wrap: wrap;
-  }
-  .cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
-  .cover-meta-item .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-  .cover-meta-item .value { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; color: #fff; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartGore Atacama — Programa NemoClaw · SIGNOS analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/deck-nav.css" />
+  <style>
+    :root {
+      --signos-navy: #004a99;
+      --signos-purple: #8a56c3;
+      --signos-cyan: #29e3f1;
+      --signos-deep: #003671;
+      --dk: #1e2d44;
+      --surface: #fff;
+      --bg: linear-gradient(165deg, #e8f3fb 0%, #eef1f8 50%, #e4e9f2 100%);
+      --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
+      --radius: 10px;
+      --maxw: 920px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-reveal, .anim-item, .cover-glow { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.5; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
+    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
+    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .78rem; }
+    nav.toc a { padding: .2rem .55rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
+    nav.toc a:hover { background: rgba(41,227,241,.22); }
+    main { max-width: var(--maxw); margin: 0 auto; padding: .85rem .75rem 2.5rem; }
 
-  .section {
-    padding: 80px 10vw;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .section:nth-child(even) { background: rgba(18,32,64,0.4); }
+    .cover-lamina {
+      position: relative;
+      min-height: min(72vh, 520px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+      background: linear-gradient(135deg, var(--signos-deep) 0%, var(--signos-navy) 40%, #1a4d8c 70%, #2a1f4e 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.25rem;
+    }
+    .cover-glow {
+      position: absolute;
+      width: 140%;
+      height: 60%;
+      top: -20%;
+      left: -20%;
+      background: radial-gradient(ellipse, rgba(41,227,241,.25) 0%, transparent 55%);
+      pointer-events: none;
+      animation: glowDrift 8s ease-in-out infinite alternate;
+    }
+    @keyframes glowDrift {
+      from { transform: translate(-2%, 0) scale(1); opacity: .8; }
+      to { transform: translate(4%, 2%) scale(1.05); opacity: 1; }
+    }
+    .cover-content { position: relative; z-index: 1; max-width: 38rem; }
+    .cover-lamina h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.35rem, 4.2vw, 2rem);
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 .75rem;
+      line-height: 1.2;
+      text-shadow: 0 2px 24px rgba(0,0,0,.25);
+      animation: titleIn .9s ease .15s both;
+    }
+    @keyframes titleIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .cover-product {
+      display: inline-block;
+      font-size: clamp(1rem, 2.8vw, 1.35rem);
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--signos-cyan), #8af5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: .5rem;
+      animation: titleIn .85s ease .35s both;
+    }
+    .cover-tagline {
+      color: rgba(255,255,255,.88);
+      font-size: .88rem;
+      margin: 0;
+      animation: titleIn .8s ease .55s both;
+    }
+    .cover-badges { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; animation: titleIn .75s ease .75s both; }
+    .cover-badges span {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--signos-deep);
+      background: rgba(255,255,255,.92);
+      padding: .25rem .5rem;
+      border-radius: 999px;
+    }
 
-  .sec-tag {
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--cyan); margin-bottom: 12px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .sec-num {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--cyan); color: var(--navy);
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 800;
-  }
-  h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(24px, 4vw, 40px); font-weight: 700;
-    color: #fff; line-height: 1.15; margin-bottom: 16px;
-  }
-  h2 em { color: var(--cyan); font-style: normal; }
-  h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px; font-weight: 600; color: #fff;
-    margin-bottom: 10px; line-height: 1.3;
-  }
-  .lead {
-    font-size: 17px; color: var(--muted); max-width: 700px;
-    margin-bottom: 48px; line-height: 1.8;
-  }
-  p { color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
+    .slide {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: .85rem 1rem;
+      margin-bottom: 1rem;
+      scroll-margin-top: 5.5rem;
+    }
+    .slide-reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .slide-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .slide-reveal.is-visible .anim-item { animation: fadeInUp .48s ease backwards; }
+    .slide-reveal.is-visible .anim-item:nth-child(1) { animation-delay: .04s; }
+    .slide-reveal.is-visible .anim-item:nth-child(2) { animation-delay: .08s; }
+    .slide-reveal.is-visible .anim-item:nth-child(3) { animation-delay: .12s; }
+    .slide-reveal.is-visible .anim-item:nth-child(4) { animation-delay: .16s; }
+    .slide-reveal.is-visible .anim-item:nth-child(5) { animation-delay: .2s; }
+    .slide-reveal.is-visible .anim-item:nth-child(6) { animation-delay: .24s; }
+    .slide-reveal.is-visible .anim-item:nth-child(n+7) { animation-delay: .28s; }
+    .slide-reveal.is-visible .mod-card:nth-child(1) { animation-delay: .03s; }
+    .slide-reveal.is-visible .mod-card:nth-child(2) { animation-delay: .06s; }
+    .slide-reveal.is-visible .mod-card:nth-child(3) { animation-delay: .09s; }
+    .slide-reveal.is-visible .mod-card:nth-child(4) { animation-delay: .12s; }
+    .slide-reveal.is-visible .mod-card:nth-child(5) { animation-delay: .15s; }
+    .slide-reveal.is-visible .mod-card:nth-child(6) { animation-delay: .18s; }
+    .slide-reveal.is-visible .mod-card:nth-child(7) { animation-delay: .21s; }
+    .slide-reveal.is-visible .mod-card:nth-child(8) { animation-delay: .24s; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .pill { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan)); padding: .12rem .45rem; border-radius: 999px; }
+    h2 { margin: .2rem 0 0; font-size: clamp(1rem, 2.5vw, 1.15rem); line-height: 1.28; color: var(--signos-deep); }
+    h3 { margin: .75rem 0 .35rem; font-size: .9rem; color: var(--signos-deep); }
+    .lead { color: #4b5569; font-size: .83rem; margin: .45rem 0 0; }
+    .mini-list { margin: .45rem 0 0; padding-left: 1.1rem; font-size: .8rem; color: #3d475c; }
+    .mini-list li { margin: .26rem 0; }
+    .mini-list.condensed li { margin: .14rem 0; }
+    .two-col { display: grid; gap: .75rem; margin-top: .65rem; }
+    @media (min-width: 720px) { .two-col { grid-template-columns: 1fr 1fr; } }
+    .three-col { display: grid; gap: .65rem; margin-top: .55rem; }
+    @media (min-width: 640px) { .three-col { grid-template-columns: repeat(3, 1fr); } }
+    .val-grid { display: grid; gap: .45rem; margin-top: .55rem; }
+    @media (min-width: 640px) { .val-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .val-grid.kpi-row { grid-template-columns: repeat(4, 1fr); } }
+    .val-card {
+      font-size: .76rem;
+      padding: .5rem .55rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0,74,153,.12);
+      background: linear-gradient(135deg, rgba(138,86,195,.07), rgba(41,227,241,.06));
+    }
+    .val-card strong { display: block; color: var(--signos-purple); font-size: .78rem; margin-bottom: .2rem; }
+    .val-card .big-stat {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--signos-deep);
+      line-height: 1;
+      margin-bottom: .2rem;
+    }
+    .mod-grid { display: grid; gap: .4rem; margin-top: .55rem; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); }
+    .mod-card {
+      font-size: .71rem;
+      padding: .45rem .5rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,.95);
+      border-left: 3px solid var(--signos-cyan);
+      box-shadow: 0 2px 8px rgba(0,54,113,.06);
+    }
+    .mod-card .mod-num { font-size: .58rem; font-weight: 700; color: var(--signos-purple); letter-spacing: .04em; margin-bottom: .15rem; }
+    .mod-card b { display: block; color: var(--signos-deep); font-size: .72rem; line-height: 1.22; margin-bottom: .2rem; }
+    .growth-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; font-size: .78rem; margin: .5rem 0; }
+    @media (min-width: 560px) { .growth-row { grid-template-columns: repeat(3, 1fr); } }
+    .growth-cell {
+      text-align: center;
+      padding: .55rem .4rem;
+      border-radius: 8px;
+      background: rgba(0,74,153,.07);
+      border: 1px solid rgba(0,74,153,.1);
+    }
+    .growth-cell em { display: block; font-style: normal; font-weight: 700; color: var(--signos-purple); font-size: .85rem; }
+    .risk-block { font-size: .77rem; margin-top: .5rem; padding: .5rem; border-radius: 8px; background: rgba(180,80,80,.06); border: 1px solid rgba(180,80,80,.15); }
+    .risk-block strong { color: #8b2c2c; }
+    .risk-block ul { margin: .35rem 0 0; padding-left: 1rem; color: #3d475c; }
+    .conclusion {
+      margin-top: .55rem;
+      padding: .55rem .65rem;
+      border-radius: 8px;
+      font-size: .8rem;
+      background: linear-gradient(90deg, rgba(138,86,195,.1), rgba(41,227,241,.12));
+      border: 1px solid rgba(138,86,195,.25);
+    }
+    .quote-strip {
+      margin: .6rem 0 0;
+      padding: .5rem .65rem;
+      border-left: 3px solid #c9a227;
+      border-radius: 0 8px 8px 0;
+      font-size: .78rem;
+      font-style: italic;
+      color: #3d475c;
+      background: rgba(232,163,38,.09);
+    }
+    .quote-strip cite { display: block; margin-top: .35rem; font-size: .7rem; font-style: normal; color: #6b7284; letter-spacing: .02em; }
+    mark.hl { background: linear-gradient(120deg, rgba(138,86,195,.3), rgba(41,227,241,.28)); font-weight: 600; padding: .06em .12em; border-radius: 3px; }
+    .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: .45rem; }
+    .muted-note { font-size: .72rem; color: #6b7284; margin: .35rem 0 0; }
 
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 14px;
-    padding: 24px 28px;
-  }
-  .card-accent-cyan { border-left: 3px solid var(--cyan); border-top: none; border-right: none; border-bottom: none; background: rgba(15,187,204,0.06); border-radius: 0 12px 12px 0; padding-left: 24px; }
-  .card-accent-gold { border-left: 3px solid var(--gold); background: rgba(232,160,32,0.06); border-top: none; border-right: none; border-bottom: none; border-radius: 0 12px 12px 0; padding-left: 24px; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .74rem;
+      table-layout: auto;
+      min-width: 520px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid rgba(68,84,106,.14);
+      padding: .26rem .32rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .data-table th {
+      background: rgba(0,74,153,.1);
+      font-weight: 700;
+      font-size: .68rem;
+    }
+    .data-table td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .data-table.tight th, .data-table.tight td { font-size: .67rem; padding: .22rem .28rem; }
+    .phase-line { font-size: .72rem; font-weight: 700; color: var(--signos-deep); margin: .65rem 0 .2rem; display: flex; align-items: center; gap: .35rem; flex-wrap: wrap; }
+    .badge-phase { font-size: .58rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: .1rem .4rem; border-radius: 999px; background: rgba(138,86,195,.15); color: var(--signos-purple); }
 
-  .stat-big {
-    font-family: 'Syne', sans-serif;
-    font-size: 52px; font-weight: 800; line-height: 1;
-    color: var(--cyan); margin-bottom: 4px;
-  }
-  .stat-label { font-size: 13px; color: var(--muted); line-height: 1.5; }
-
-  .badge {
-    display: inline-block; font-size: 11px; font-weight: 500;
-    padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;
-  }
-  .badge-cyan { background: rgba(15,187,204,0.15); color: var(--cyan); }
-  .badge-gold { background: rgba(232,160,32,0.15); color: var(--gold); }
-  .badge-green { background: rgba(34,197,120,0.15); color: #22c578; }
-  .badge-red { background: rgba(220,60,60,0.15); color: #dc7070; }
-
-  .module-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
-  }
-  .module-card {
-    background: rgba(18,32,64,0.8);
-    border: 1px solid rgba(15,187,204,0.12);
-    border-radius: 12px;
-    padding: 20px;
-    transition: border-color 0.2s;
-  }
-  .module-card:hover { border-color: rgba(15,187,204,0.35); }
-  .module-num {
-    font-family: 'Syne', sans-serif; font-size: 11px;
-    font-weight: 700; color: var(--cyan); margin-bottom: 8px; letter-spacing: 1px;
-  }
-  .module-card h4 {
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
-    color: #fff; line-height: 1.4; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .module-card p { font-size: 12px; color: var(--muted); margin: 0; }
-
-  .timeline { position: relative; }
-  .timeline::before {
-    content: '';
-    position: absolute; left: 28px; top: 0; bottom: 0;
-    width: 2px; background: linear-gradient(to bottom, var(--cyan), var(--gold), var(--cyan));
-  }
-  .phase {
-    position: relative; padding-left: 72px; margin-bottom: 48px;
-  }
-  .phase-dot {
-    position: absolute; left: 18px; top: 4px;
-    width: 22px; height: 22px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 800;
-    z-index: 1;
-  }
-  .phase-dot-1 { background: var(--cyan); color: var(--navy); }
-  .phase-dot-2 { background: var(--gold); color: var(--navy); }
-  .phase-dot-3 { background: #22c578; color: var(--navy); }
-  .phase-header {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
-  }
-  .phase-period {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
-  }
-
-  .activity-list { list-style: none; margin-top: 16px; }
-  .activity-list li {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 13px; color: var(--muted); margin-bottom: 8px; line-height: 1.5;
-  }
-  .activity-list li::before {
-    content: '→'; color: var(--cyan); flex-shrink: 0; margin-top: 1px;
-  }
-
-  .budget-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
-  .budget-table th {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 2px; color: var(--muted);
-    padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08);
-    text-align: left;
-  }
-  .budget-table td {
-    padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
-    font-size: 14px; color: var(--text); vertical-align: top;
-  }
-  .budget-table tr:last-child td { border-bottom: none; }
-  .budget-table .cat { color: #fff; font-weight: 500; }
-  .budget-table .amount { font-family: 'Syne', sans-serif; font-weight: 600; color: var(--cyan); white-space: nowrap; }
-  .budget-table .total-row td { background: rgba(15,187,204,0.08); font-weight: 600; color: #fff; }
-  .budget-table .total-row .amount { color: var(--gold); font-size: 16px; }
-  .budget-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  .advantage-icon {
-    width: 44px; height: 44px; border-radius: 10px;
-    background: rgba(15,187,204,0.12); border: 1px solid rgba(15,187,204,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; margin-bottom: 16px; flex-shrink: 0;
-  }
-
-  .kpi-bar {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
-  }
-  .kpi-bar-label { font-size: 13px; color: var(--muted); min-width: 160px; }
-  .kpi-bar-track {
-    flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;
-  }
-  .kpi-bar-fill { height: 100%; border-radius: 3px; background: var(--cyan); }
-  .kpi-bar-fill.gold { background: var(--gold); }
-  .kpi-bar-val { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; color: #fff; min-width: 36px; text-align: right; }
-
-  .risk-row {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .risk-row:last-child { border-bottom: none; }
-  .risk-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; white-space: nowrap; margin-top: 2px; }
-  .risk-high { background: rgba(220,60,60,0.2); color: #dc7070; }
-  .risk-med { background: rgba(232,160,32,0.2); color: var(--gold); }
-  .risk-low { background: rgba(34,197,120,0.2); color: #22c578; }
-
-  .quote-box {
-    border-left: 3px solid var(--gold);
-    padding: 20px 24px;
-    background: rgba(232,160,32,0.06);
-    border-radius: 0 12px 12px 0;
-    margin: 32px 0;
-  }
-  .quote-box p { font-size: 16px; color: var(--text); font-style: italic; margin: 0; }
-  .quote-box cite { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); font-style: normal; letter-spacing: 1px; }
-
-  .footer {
-    background: #060E1E;
-    padding: 48px 10vw;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
-    gap: 24px;
-  }
-  .footer-logo {
-    font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff;
-  }
-  .footer-logo span { color: var(--cyan); }
-  .footer p { font-size: 12px; color: var(--muted); margin: 0; }
-
-  @media (max-width: 640px) {
-    .cover, .section { padding: 60px 6vw; }
-    .timeline::before { left: 16px; }
-    .phase { padding-left: 48px; }
-    .phase-dot { left: 6px; }
-    .budget-table th:nth-child(3), .budget-table td:nth-child(3) { display: none; }
-  }
-</style>
+    footer { text-align: center; padding: 1rem; color: #6b7284; font-size: .75rem; }
+  </style>
 </head>
 <body class="has-deck-nav">
-
-<!-- COVER -->
-<section class="cover">
-  <div class="cover-label">Propuesta de Programa · Gobierno Regional de Atacama</div>
-  <h1>Smart<span>Gore</span><br>Atacama</h1>
-  <div class="cover-sub">Programa NemoClaw de Inteligencia Artificial</div>
-  <p class="cover-desc">Un programa integral de 6 meses para transformar la gestión pública regional mediante Inteligencia Artificial Generativa, pasando de la digitalización a la <strong style="color:#fff">inteligización</strong>.</p>
-  <div class="cover-meta">
-    <div class="cover-meta-item">
-      <span class="label">Región</span>
-      <span class="value">Atacama · Región III</span>
+  <div class="sticky-head">
+    <div class="brand-bar">
+      <a href="#lamina1" style="display:inline-block;line-height:0"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
     </div>
-    <div class="cover-meta-item">
-      <span class="label">Duración</span>
-      <span class="value">6 meses</span>
-    </div>
-    <div class="cover-meta-item">
-      <span class="label">Módulos</span>
-      <span class="value">8 módulos SmartGore</span>
-    </div>
-    <div class="cover-meta-item">
-      <span class="label">Plataforma</span>
-      <span class="value">NemoClaw IAGen</span>
-    </div>
-  </div>
-</section>
-
-<!-- SECCIÓN 1: EL DESAFÍO -->
-<section class="section">
-  <div class="sec-tag"><span class="sec-num">1</span> El Desafío</div>
-  <h2>El estado actual de la <em>gestión regional</em></h2>
-  <p class="lead">El Gobierno Regional de Atacama enfrenta los mismos desafíos estructurales que afectan a toda la administración pública chilena, amplificados por la extensión territorial y las demandas de una región minera en pleno desarrollo.</p>
-
-  <div class="grid-2" style="margin-bottom:40px">
-    <div class="card card-accent-cyan">
-      <h3>Burocracia y tiempos de respuesta</h3>
-      <p>Los procesos de fondos concursables, rendiciones financieras, transparencia y atención ciudadana dependen de flujos de trabajo manuales y documentación en papel o planillas, generando cuellos de botella y errores.</p>
-      <p>Los funcionarios dedican entre <strong style="color:#fff">15 y 36 horas semanales</strong> a tareas administrativas susceptibles de ser aceleradas con IA (CENIA/SOFOFA, 2024).</p>
-    </div>
-    <div class="card card-accent-gold">
-      <h3>Déficit de capacidad técnica</h3>
-      <p>El talento disponible en la región es limitado para implementar tecnologías avanzadas de forma autónoma. Los especialistas en políticas públicas y gestión regional tienen una oportunidad de aceleración del <strong style="color:#fff">84%</strong> con IAGen, la más alta de todos los empleos analizados en Chile.</p>
-    </div>
+    <nav class="toc" aria-label="Índice">
+      <div class="inner">
+        <strong style="margin-right:.35rem;color:var(--dk)">Láminas:</strong>
+        <a href="#lamina1">1 · Portada</a>
+        <a href="#lamina2">2 · Desafío</a>
+        <a href="#lamina3">3 · NemoClaw</a>
+        <a href="#lamina4">4 · Plan · Fases 1–2</a>
+        <a href="#lamina5">5 · Fase 3 y cronograma</a>
+        <a href="#lamina6">6 · Presupuesto</a>
+      </div>
+    </nav>
   </div>
 
-  <div class="quote-box">
-    <p>"El 80% de los trabajadores del sector público están en empleos con oportunidades de aceleración con IAGen mayores a 0.3, y los especialistas en gestión de políticas públicas presentan el mayor índice de aceleración posible: 0.84."</p>
-    <cite>— Estudio IAGen CENIA / SOFOFA Capital Humano, Diciembre 2024</cite>
-  </div>
-
-  <div class="grid-4" style="margin-top:40px">
-    <div class="card">
-      <div class="stat-big">84%</div>
-      <div class="stat-label">Tareas de especialistas en políticas públicas acelerables con IAGen</div>
-    </div>
-    <div class="card">
-      <div class="stat-big">0.71</div>
-      <div class="stat-label">Índice de aceleración para especialistas y asesores de gestión pública</div>
-    </div>
-    <div class="card">
-      <div class="stat-big">US$1,1B</div>
-      <div class="stat-label">Valor IA anual identificado en empleos del sector público chileno</div>
-    </div>
-    <div class="card">
-      <div class="stat-big">12%</div>
-      <div class="stat-label">Del PIB chileno afecto a oportunidades de aceleración con IAGen</div>
-    </div>
-  </div>
-
-  <div style="margin-top:48px">
-    <h3 style="margin-bottom:20px">Tareas críticas del GORE Atacama que pueden ser aceleradas</h3>
-    <div class="kpi-bar"><span class="kpi-bar-label">Gestión documental</span><div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:90%"></div></div><span class="kpi-bar-val">90%</span></div>
-    <div class="kpi-bar"><span class="kpi-bar-label">Análisis de postulaciones</span><div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:85%"></div></div><span class="kpi-bar-val">85%</span></div>
-    <div class="kpi-bar"><span class="kpi-bar-label">Rendiciones financieras</span><div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:80%"></div></div><span class="kpi-bar-val">80%</span></div>
-    <div class="kpi-bar"><span class="kpi-bar-label">Respuestas OIRs y OIRS</span><div class="kpi-bar-track"><div class="kpi-bar-fill gold" style="width:75%"></div></div><span class="kpi-bar-val">75%</span></div>
-    <div class="kpi-bar"><span class="kpi-bar-label">Monitoreo proyectos FNDR</span><div class="kpi-bar-track"><div class="kpi-bar-fill gold" style="width:68%"></div></div><span class="kpi-bar-val">68%</span></div>
-    <div class="kpi-bar"><span class="kpi-bar-label">Coordinación territorial</span><div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:52%; background: #8FA3C0"></div></div><span class="kpi-bar-val">52%</span></div>
-  </div>
-</section>
-
-<!-- SECCIÓN 2: VENTAJAS DE NEMOCLAW -->
-<section class="section">
-  <div class="sec-tag"><span class="sec-num">2</span> La Solución</div>
-  <h2>¿Por qué <em>NemoClaw</em>?</h2>
-  <p class="lead">NemoClaw es una plataforma de IA Generativa diseñada específicamente para la gestión pública regional, construida sobre los estándares del ecosistema SmartGore 4.0. No es una herramienta genérica: es una solución que entiende el lenguaje, los procesos y las obligaciones legales del Estado chileno.</p>
-
-  <div class="module-grid" style="margin-bottom:48px">
-    <div class="module-card">
-      <div class="module-num">MÓDULO 01</div>
-      <h4>IA para Fondos Concursables</h4>
-      <p>Revisión documental automática, scoring inteligente y reducción de tiempos de evaluación.</p>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MÓDULO 02</div>
-      <h4>IA para Atención Ciudadana y OIRS</h4>
-      <p>Chatbot 24/7, clasificación automática y guía de trámites para mejor experiencia ciudadana.</p>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MÓDULO 03</div>
-      <h4>IA para Transparencia y Ley del Lobby</h4>
-      <p>Gestión inteligente de solicitudes, seguimiento de plazos y respuestas automáticas.</p>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MÓDULO 04</div>
-      <h4>IA para Rendiciones Financieras</h4>
-      <p>Lectura automática de documentos, validación de gastos y alertas de inconsistencias.</p>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MÓDULO 05</div>
-      <h4>IA Formuladora de Proyectos</h4>
-      <p>Generación asistida de proyectos regionales con coherencia técnica y presupuestaria.</p>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MÓDULO 06</div>
-      <h4>IA para Monitoreo Territorial</h4>
-      <p>Integración satelital, detección temprana de riesgos y analítica en tiempo real.</p>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MÓDULO 07</div>
-      <h4>IA para Seguimiento FNDR</h4>
-      <p>Monitoreo de hitos, alertas de retraso y dashboards automáticos para mayor trazabilidad.</p>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MÓDULO 08</div>
-      <h4>IA para Auditoría y Riesgos</h4>
-      <p>Detección de anomalías, análisis de convenios y matrices de riesgo automatizadas.</p>
-    </div>
-  </div>
-
-  <h3 style="margin-bottom:28px">Ventajas diferenciales de NemoClaw para el GORE Atacama</h3>
-  <div class="grid-2">
-    <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-      <div class="advantage-icon">🏛️</div>
-      <div>
-        <h3>Entrenado en normativa chilena</h3>
-        <p>NemoClaw incorpora el marco legal de la Ley de Transparencia, Ley del Lobby, Estatuto Administrativo, normativas SUBDERE y el reglamento de fondos FNDR, evitando respuestas genéricas que no apliquen al contexto jurídico regional.</p>
-      </div>
-    </div>
-    <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-      <div class="advantage-icon">🔒</div>
-      <div>
-        <h3>Soberanía y seguridad de datos</h3>
-        <p>Infraestructura cloud soberana en Chile con cumplimiento de la Ley N°19.628 de protección de datos y los estándares de ciberseguridad del CSIRT de Gobierno. Los datos del GORE Atacama nunca salen de servidores nacionales.</p>
-      </div>
-    </div>
-    <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-      <div class="advantage-icon">🔗</div>
-      <div>
-        <h3>Integración con sistemas existentes</h3>
-        <p>Conectores nativos con SIGFE, ChileCompra, SUBDERE, Mercado Público, Sistema de Información para la Gestión de Fondos del Estado (SIGFE) y plataformas municipales de la región, sin necesidad de reemplazar infraestructura.</p>
-      </div>
-    </div>
-    <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-      <div class="advantage-icon">📈</div>
-      <div>
-        <h3>Modelo de co-desarrollo regional</h3>
-        <p>A diferencia de soluciones off-the-shelf, NemoClaw incluye talleres de co-diseño con funcionarios del GORE para adaptar cada módulo a los procesos específicos de Atacama, generando capacidad instalada y apropiación interna.</p>
-      </div>
-    </div>
-    <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-      <div class="advantage-icon">🎓</div>
-      <div>
-        <h3>Capacitación continua certificada</h3>
-        <p>Programa de upskilling basado en los hallazgos del estudio CENIA/SOFOFA, enfocado en las tareas de mayor oportunidad de aceleración. Certificaciones reconocidas por SENCE y la Universidad de Atacama.</p>
-      </div>
-    </div>
-    <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-      <div class="advantage-icon">⚡</div>
-      <div>
-        <h3>Resultados desde el primer mes</h3>
-        <p>La estrategia de implementación prioriza "ganancias rápidas": módulos con alto valor IA y fácil implementación (Fondos Concursables y Rendiciones) se activan en la semana 4, generando retorno demostrable antes del cierre del primer bimestre.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECCIÓN 3: PLAN DE IMPLEMENTACIÓN -->
-<section class="section">
-  <div class="sec-tag"><span class="sec-num">3</span> Plan de Implementación</div>
-  <h2>Hoja de ruta <em>progresiva</em> — 6 meses</h2>
-  <p class="lead">El plan sigue la lógica del Cuadro de Estrategias del estudio CENIA/SOFOFA: comenzar con ganancias rápidas (alta oportunidad + fácil implementación), avanzar a ganancias difíciles (alta oportunidad + mayor complejidad), y consolidar con transferencia de capacidades.</p>
-
-  <div class="timeline">
-
-    <!-- FASE 1 -->
-    <div class="phase">
-      <div class="phase-dot phase-dot-1">1</div>
-      <div class="phase-header">
-        <h3>Fase 1 — Diagnóstico, Piloto y Ganancias Rápidas</h3>
-        <span class="phase-period">Mes 1 – Mes 2</span>
-        <span class="badge badge-cyan">Ganancias rápidas</span>
-      </div>
-      <div class="grid-2">
-        <div class="card" style="padding:20px">
-          <h4 style="font-size:13px; color:var(--cyan); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px">Diagnóstico y Configuración</h4>
-          <ul class="activity-list">
-            <li>Mapeo de procesos críticos del GORE Atacama con metodología de tareas (modelo Workhelix adaptado al sector público regional).</li>
-            <li>Levantamiento de sistemas existentes (SIGFE, plataformas internas, bases de datos) para diseño de conectores NemoClaw.</li>
-            <li>Identificación de funcionarios clave y equipos piloto por área (mínimo 3 áreas priorizadas).</li>
-            <li>Instalación de infraestructura cloud soberana y configuración inicial de NemoClaw para Atacama.</li>
-          </ul>
-        </div>
-        <div class="card" style="padding:20px">
-          <h4 style="font-size:13px; color:var(--gold); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px">Capacitación Inicial + Módulos Piloto</h4>
-          <ul class="activity-list">
-            <li><strong style="color:#fff">Semana 3–4:</strong> Taller intensivo "Fundamentos de IA para la Gestión Pública" (16 horas, 30 funcionarios). Certificación SENCE.</li>
-            <li>Activación de <strong style="color:#fff">Módulo 1 (Fondos Concursables)</strong>: scoring automático de postulaciones y revisión documental.</li>
-            <li>Activación de <strong style="color:#fff">Módulo 4 (Rendiciones Financieras)</strong>: lectura automática y detección de inconsistencias.</li>
-            <li>Medición de línea base: tiempos de proceso, errores detectados, horas funcionario antes/después.</li>
-          </ul>
+  <main>
+    <header class="cover-lamina slide-reveal" id="lamina1" aria-label="Portada">
+      <div class="cover-glow" aria-hidden="true"></div>
+      <div class="cover-content">
+        <p class="cover-product">SmartGore · NemoClaw IAGen</p>
+        <h1>Programa integral de IA<br />para el GORE Atacama</h1>
+        <p class="cover-tagline"><mark class="hl">Inteligencia generativa aplicada</mark> al servicio público regional: fondos concursables, ciudadanía OIRS, transparencia y trazabilidad FNDR, en una hoja de ruta de seis meses.</p>
+        <div class="cover-badges">
+          <span>GORE Atacama</span>
+          <span>6 meses</span>
+          <span>8 módulos</span>
+          <span>Cloud soberana</span>
         </div>
       </div>
-      <div class="card card-accent-cyan" style="margin-top:16px; padding:16px 20px">
-        <strong style="color:#fff; font-size:13px">🎯 Hito de la Fase 1:</strong>
-        <span style="font-size:13px; color:var(--muted)"> Reducción demostrada del 40% en tiempo de procesamiento de fondos concursables y primeras 30 personas capacitadas y certificadas.</span>
-      </div>
-    </div>
+    </header>
 
-    <!-- FASE 2 -->
-    <div class="phase">
-      <div class="phase-dot phase-dot-2">2</div>
-      <div class="phase-header">
-        <h3>Fase 2 — Expansión, Co-desarrollo y Escala</h3>
-        <span class="phase-period">Mes 3 – Mes 4</span>
-        <span class="badge badge-gold">Ganancias difíciles</span>
+    <section class="slide slide-reveal" id="lamina2">
+      <span class="pill anim-item">Diagnóstico</span>
+      <h2 class="anim-item">El desafío: gestión regional bajo tensión temporal y de capacidades</h2>
+      <p class="lead anim-item">Los mismos cuellos de botella administrativos del Estado se amplían en territorios extendidos como Atacama, con alta demanda de fondos públicos y poca disponibilidad de talento especializado.</p>
+      <div class="two-col">
+        <div class="val-card anim-item"><strong>Burocracia y tiempos</strong>Rendiciones, concursos, transparencia y atención ciudadana siguen muy dependientes de papel y tablas que generan demoras y errores. Los funcionarios dedican entre 15 y 36 horas semanales a tareas administrativas acelerables con IA (referencia CENIA/SOFOFA, 2024).</div>
+        <div class="val-card anim-item"><strong>Déficit técnico</strong>Implementar IA sin apoyo especializado es lento en regiones medianas; los especialistas en políticas públicas muestran el mayor índice de <mark class="hl">oportunidad de aceleración con IAGen</mark> entre los empleos analizados en Chile.</div>
       </div>
-      <div class="grid-2">
-        <div class="card" style="padding:20px">
-          <h4 style="font-size:13px; color:var(--cyan); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px">Activación de 4 Módulos Adicionales</h4>
-          <ul class="activity-list">
-            <li><strong style="color:#fff">Módulo 2 (Atención Ciudadana / OIRS):</strong> despliegue del chatbot institucional 24/7, integración con plataforma OIRS del GORE.</li>
-            <li><strong style="color:#fff">Módulo 3 (Transparencia / Lobby):</strong> configuración de flujos automáticos de respuesta y seguimiento de plazos legales.</li>
-            <li><strong style="color:#fff">Módulo 7 (FNDR):</strong> dashboard de seguimiento de proyectos con alertas inteligentes de retraso.</li>
-            <li><strong style="color:#fff">Módulo 8 (Auditoría):</strong> matrices de riesgo automatizadas para convenios y transferencias.</li>
-          </ul>
-        </div>
-        <div class="card" style="padding:20px">
-          <h4 style="font-size:13px; color:var(--gold); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px">Co-desarrollo con Funcionarios</h4>
-          <ul class="activity-list">
-            <li><strong style="color:#fff">Semana 9–10:</strong> "Hackathon Público" de 3 días: equipos de funcionarios identifican casos de uso específicos de Atacama y co-diseñan flujos con el equipo técnico NemoClaw.</li>
-            <li>Taller avanzado: "Prompt Engineering para el Servicio Público" (8 horas, 50 funcionarios).</li>
-            <li>Taller técnico: integración de datos geoespaciales de la Región de Atacama en Módulo 6.</li>
-            <li>Formación de 5 "Embajadores IA" internos que replicarán la capacitación a sus unidades.</li>
-          </ul>
-        </div>
+      <blockquote class="quote-strip anim-item">
+        «El 80% de los trabajadores del sector público está en empleos con aceleración IAGen mayor a 0,3; los especialistas en gestión de políticas públicas alcanzan 0,84 en el mismo índice.»
+        <cite>— Estudio IAGen CENIA / SOFOFA Capital Humano, dic. 2024</cite>
+      </blockquote>
+      <div class="val-grid kpi-row">
+        <div class="val-card anim-item"><span class="big-stat">84%</span>tareas intensivas que admite automatización/asistencia (políticas públicas)</div>
+        <div class="val-card anim-item"><span class="big-stat">0,71</span>índice de aceleración · especialistas y asesores de gestión</div>
+        <div class="val-card anim-item"><span class="big-stat">US$1,1B</span>valor IA anual en empleos del sector público (referencial estudio)</div>
+        <div class="val-card anim-item"><span class="big-stat">12%</span>del PIB con oportunidad de aceleración IAGen (referencial estudio)</div>
       </div>
-      <div class="card card-accent-gold" style="margin-top:16px; padding:16px 20px">
-        <strong style="color:#fff; font-size:13px">🎯 Hito de la Fase 2:</strong>
-        <span style="font-size:13px; color:var(--muted)"> 6 módulos activos, 80 funcionarios capacitados, chatbot ciudadano procesando el 60% de consultas OIRS sin intervención humana, y 5 embajadores IA certificados.</span>
+      <h3 class="anim-item">Tareas críticas del GORE con alto potencial de apoyo IA</h3>
+      <div class="three-col anim-item">
+        <ul class="mini-list condensed"><li>Gestión documental · ~90%</li><li>Postulaciones y scoring · ~85%</li><li>Rendiciones financieras · ~80%</li></ul>
+        <ul class="mini-list condensed"><li>Respuesta OIRS / OIR · ~75%</li><li>Seguimiento FNDR · ~68%</li></ul>
+        <ul class="mini-list condensed"><li>Coordinación territorial · ~52%</li></ul>
       </div>
-    </div>
+    </section>
 
-    <!-- FASE 3 -->
-    <div class="phase">
-      <div class="phase-dot phase-dot-3">3</div>
-      <div class="phase-header">
-        <h3>Fase 3 — Consolidación, Escala y Sostenibilidad</h3>
-        <span class="phase-period">Mes 5 – Mes 6</span>
-        <span class="badge badge-green">Consolidación</span>
+    <section class="slide slide-reveal" id="lamina3">
+      <span class="pill anim-item">Solución</span>
+      <h2 class="anim-item">NemoClaw sobre SmartGore 4.0</h2>
+      <p class="lead anim-item">Plataforma de IA generativa orientada a la gestión pública regional: entrenada en marco legal chileno, integrada a flujos FNDR y compra pública, con <mark class="hl">co-diseño</mark> con equipos del GORE.</p>
+      <div class="mod-grid">
+        <div class="mod-card"><span class="mod-num">M01</span><b>Fondos concursables</b>Revisión documental, scoring y acortar ciclos de evaluación.</div>
+        <div class="mod-card"><span class="mod-num">M02</span><b>Atención ciudadana / OIRS</b>Chatbot 24/7, clasificación y guía de trámites.</div>
+        <div class="mod-card"><span class="mod-num">M03</span><b>Transparencia · Lobby</b>Flujo de solicitudes, plazos y respuesta asistida.</div>
+        <div class="mod-card"><span class="mod-num">M04</span><b>Rendiciones financieras</b>Lectura de comprobantes, validación y alertas.</div>
+        <div class="mod-card"><span class="mod-num">M05</span><b>Formuladora de proyectos</b>Borradores coherentes técnico–presupuestarios.</div>
+        <div class="mod-card"><span class="mod-num">M06</span><b>Monitoreo territorial</b>Analítica geoespacial y alertas de riesgos.</div>
+        <div class="mod-card"><span class="mod-num">M07</span><b>FNDR en vivo</b>Hitos, retrasos y tableros automáticos.</div>
+        <div class="mod-card"><span class="mod-num">M08</span><b>Auditoría · Riesgos</b>Anomalías en convenios y matrices de cumplimiento.</div>
       </div>
-      <div class="grid-2">
-        <div class="card" style="padding:20px">
-          <h4 style="font-size:13px; color:var(--cyan); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px">Despliegue Completo y Optimización</h4>
-          <ul class="activity-list">
-            <li><strong style="color:#fff">Módulo 5 (Formuladora de Proyectos):</strong> activación del asistente IA para formulación de proyectos FNDR y otros concursos regionales.</li>
-            <li><strong style="color:#fff">Módulo 6 (Monitoreo Territorial):</strong> integración de sensores y satélites para monitoreo agrícola, hídrico y ambiental en la región.</li>
-            <li>Optimización basada en datos de uso real: ajuste de modelos, prompts y flujos según retroalimentación de funcionarios.</li>
-            <li>Integración con SUBDERE y Ministerio del Interior para reportes automáticos de avance regional.</li>
-          </ul>
-        </div>
-        <div class="card" style="padding:20px">
-          <h4 style="font-size:13px; color:var(--gold); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px">Transferencia y Sostenibilidad</h4>
-          <ul class="activity-list">
-            <li><strong style="color:#fff">Semana 22–23:</strong> Programa de certificación avanzada "Gestor IA Regional" para el equipo técnico interno (40 horas, convenio Universidad de Atacama).</li>
-            <li>Constitución formal de la Unidad de Transformación Digital e IA del GORE Atacama con 3 cargos dedicados.</li>
-            <li>Desarrollo del "Manual de Buenas Prácticas IA — GORE Atacama" replicable a otros GOREs de Chile.</li>
-            <li>Informe de impacto con métricas de ROI, horas ahorradas y nivel de satisfacción ciudadana para presentar a SUBDERE.</li>
-          </ul>
-        </div>
+      <h3 class="anim-item">Ventajas diferenciales</h3>
+      <div class="two-col anim-item">
+        <ul class="mini-list condensed">
+          <li>Normativa chilena incorporada (transparencia, lobby, SUBDERE, FNDR).</li>
+          <li>Privacidad: cloud soberano; datos regionales dentro del país.</li>
+          <li>Conectores hacia ChileCompra, SIGFE / mercado institucional y sistemas locales.</li>
+        </ul>
+        <ul class="mini-list condensed">
+          <li>Modelo regional de co-desarrollo y apropiación interna.</li>
+          <li>Capacitación continua articulada con programas públicos reconocibles.</li>
+          <li><mark class="hl">Ganancias rápidas</mark>: piloto desde semanas 3–4 (M1+M4).</li>
+        </ul>
       </div>
-      <div class="card card-accent-cyan" style="margin-top:16px; background: rgba(34,197,120,0.06); border-left-color: #22c578; padding:16px 20px">
-        <strong style="color:#fff; font-size:13px">🎯 Hito de la Fase 3:</strong>
-        <span style="font-size:13px; color:var(--muted)"> 8 módulos activos, 150 funcionarios capacitados con certificación, reducción del 50% en tiempos administrativos clave, y GORE Atacama posicionado como referente nacional de gobierno regional inteligente.</span>
+    </section>
+
+    <section class="slide slide-reveal" id="lamina4">
+      <span class="pill anim-item">Implementación</span>
+      <h2 class="anim-item">Fases 1 y 2 · diagnóstico, piloto y escala</h2>
+      <p class="lead anim-item">Lógica recomendada en el Cuadro de Estrategias CENIA/SOFOFA: arrancar con alto impacto y baja complejidad, luego proyectos más exigentes, siempre midiendo uso de tiempo antes/después.</p>
+      <div class="phase-line anim-item"><span>Fase 1</span><span class="badge-phase">Mes 1–2</span><span style="font-weight:600;color:var(--signos-navy)">Diagnóstico, piloto · ganancias rápidas</span></div>
+      <div class="two-col">
+        <ul class="mini-list anim-item">
+          <li>Mapeo de procesos y sistemas vigentes para conectores NemoClaw.</li>
+          <li>Gobierno de datos y configuración inicial en infraestructura nacional.</li>
+          <li>Curso intensivo IA para gestión pública (baseline de 30 funcionarios).</li>
+          <li>M1 y M4 en producción limitada desde semanas 3–4.</li>
+        </ul>
+        <div class="conclusion anim-item" style="font-size:.77rem;"><strong>Hito mes 2:</strong> reducción objetivo −40% en ciclo inicial de revisión concursable y primera cohorte capacitada con certificado.</div>
       </div>
-    </div>
-  </div>
-
-  <!-- Resumen visual del cronograma -->
-  <div style="margin-top:48px">
-    <h3 style="margin-bottom:20px">Cronograma de módulos</h3>
-    <div style="overflow-x:auto">
-      <table style="width:100%; border-collapse:collapse; font-size:13px; min-width:560px">
-        <thead>
-          <tr>
-            <th style="padding:10px 14px; text-align:left; color:var(--muted); font-weight:500; border-bottom:1px solid rgba(255,255,255,0.08); white-space:nowrap">Módulo</th>
-            <th style="padding:10px 8px; text-align:center; color:var(--cyan); font-size:11px; border-bottom:1px solid rgba(255,255,255,0.08)">M1</th>
-            <th style="padding:10px 8px; text-align:center; color:var(--cyan); font-size:11px; border-bottom:1px solid rgba(255,255,255,0.08)">M2</th>
-            <th style="padding:10px 8px; text-align:center; color:var(--gold); font-size:11px; border-bottom:1px solid rgba(255,255,255,0.08)">M3</th>
-            <th style="padding:10px 8px; text-align:center; color:var(--gold); font-size:11px; border-bottom:1px solid rgba(255,255,255,0.08)">M4</th>
-            <th style="padding:10px 8px; text-align:center; color:#22c578; font-size:11px; border-bottom:1px solid rgba(255,255,255,0.08)">M5</th>
-            <th style="padding:10px 8px; text-align:center; color:#22c578; font-size:11px; border-bottom:1px solid rgba(255,255,255,0.08)">M6</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td style="padding:8px 14px; color:var(--text)">M1 · Fondos Concursables</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td></tr>
-          <tr><td style="padding:8px 14px; color:var(--text)">M4 · Rendiciones Financieras</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(15,187,204,0.08)">●</td></tr>
-          <tr><td style="padding:8px 14px; color:var(--text)">M2 · Atención Ciudadana OIRS</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td></tr>
-          <tr><td style="padding:8px 14px; color:var(--text)">M3 · Transparencia / Lobby</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td></tr>
-          <tr><td style="padding:8px 14px; color:var(--text)">M7 · Seguimiento FNDR</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td></tr>
-          <tr><td style="padding:8px 14px; color:var(--text)">M8 · Auditoría y Riesgos</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td><td style="text-align:center; padding:8px; background:rgba(232,160,32,0.08)">●</td></tr>
-          <tr><td style="padding:8px 14px; color:var(--text)">M5 · Formuladora Proyectos</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(34,197,120,0.08)">●</td></tr>
-          <tr><td style="padding:8px 14px; color:var(--text)">M6 · Monitoreo Territorial</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px; color:var(--muted)">—</td><td style="text-align:center; padding:8px">⚡</td><td style="text-align:center; padding:8px; background:rgba(34,197,120,0.08)">●</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12px; color:var(--muted); margin-top:8px">⚡ Activación / ● Operativo</p>
-    </div>
-  </div>
-</section>
-
-<!-- SECCIÓN 4: PRESUPUESTO -->
-<section class="section">
-  <div class="sec-tag"><span class="sec-num">4</span> Presupuesto</div>
-  <h2>Inversión estimada <em>6 meses</em></h2>
-  <p class="lead">Presupuesto referencial para el programa completo SmartGore Atacama con NemoClaw, financiable mediante FNDR Innovación, Glosa presupuestaria SUBDERE o convenio de colaboración con CENIA y el Ministerio de Economía.</p>
-
-  <table class="budget-table">
-    <thead>
-      <tr>
-        <th>Ítem</th>
-        <th>Descripción</th>
-        <th>Fase</th>
-        <th style="text-align:right">USD (ref.)</th>
-        <th style="text-align:right">CLP (M$)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="cat">1. Plataforma NemoClaw</td>
-        <td style="font-size:13px; color:var(--muted)">Licencia de plataforma cloud soberana, infraestructura, seguridad y acceso a los 8 módulos SmartGore. Incluye SLA 99,5% y soporte técnico 24/7 durante 6 meses.</td>
-        <td><span class="badge badge-cyan">F1–F3</span></td>
-        <td style="text-align:right" class="amount">$72.000</td>
-        <td style="text-align:right" class="amount">$67.200M</td>
-      </tr>
-      <tr>
-        <td class="cat">2. Implementación y configuración</td>
-        <td style="font-size:13px; color:var(--muted)">Equipo técnico NemoClaw: 2 ingenieros de integración + 1 especialista en datos públicos para mapeo, conectores SIGFE/ChileCompra y ajuste fino de modelos a procesos del GORE.</td>
-        <td><span class="badge badge-cyan">F1–F2</span></td>
-        <td style="text-align:right" class="amount">$90.000</td>
-        <td style="text-align:right" class="amount">$84.000M</td>
-      </tr>
-      <tr>
-        <td class="cat">3. Co-desarrollo de aplicaciones</td>
-        <td style="font-size:13px; color:var(--muted)">Hackathon público + sprint de desarrollo de 3 aplicaciones específicas para Atacama (monitoreo minero, alertas hídrico-ambientales y asistente formulación FNDR). Incluye UX, testing y documentación.</td>
-        <td><span class="badge badge-gold">F2</span></td>
-        <td style="text-align:right" class="amount">$55.000</td>
-        <td style="text-align:right" class="amount">$51.300M</td>
-      </tr>
-      <tr>
-        <td class="cat">4. Programa de capacitación</td>
-        <td style="font-size:13px; color:var(--muted)">150 funcionarios: curso base IAGen (16h), taller avanzado prompt engineering (8h), certificación "Gestor IA Regional" (40h, conv. Universidad de Atacama). Incluye materiales, facilitadores y certificados SENCE.</td>
-        <td><span class="badge badge-cyan">F1–F3</span></td>
-        <td style="text-align:right" class="amount">$48.000</td>
-        <td style="text-align:right" class="amount">$44.800M</td>
-      </tr>
-      <tr>
-        <td class="cat">5. Gestión de proyecto y PMO</td>
-        <td style="font-size:13px; color:var(--muted)">Director de proyecto (0,5 FTE) + coordinador regional GORE (1 FTE dedicado) durante 6 meses. Metodología ágil con sprints quincenales, reportes de avance y gestión de riesgos.</td>
-        <td><span class="badge badge-cyan">F1–F3</span></td>
-        <td style="text-align:right" class="amount">$32.000</td>
-        <td style="text-align:right" class="amount">$29.800M</td>
-      </tr>
-      <tr>
-        <td class="cat">6. Cambio organizacional</td>
-        <td style="font-size:13px; color:var(--muted)">Consultor en gestión del cambio, comunicaciones internas, definición de la Unidad IA del GORE, elaboración del manual de buenas prácticas y talleres de adopción para equipos directivos.</td>
-        <td><span class="badge badge-gold">F2–F3</span></td>
-        <td style="text-align:right" class="amount">$22.000</td>
-        <td style="text-align:right" class="amount">$20.500M</td>
-      </tr>
-      <tr>
-        <td class="cat">7. Medición de impacto</td>
-        <td style="font-size:13px; color:var(--muted)">Diseño de indicadores, línea base, encuesta NPS ciudadana, informe final de ROI y presentación ante SUBDERE. Modelo replicable para otros GOREs de Chile.</td>
-        <td><span class="badge badge-green">F3</span></td>
-        <td style="text-align:right" class="amount">$15.000</td>
-        <td style="text-align:right" class="amount">$14.000M</td>
-      </tr>
-      <tr>
-        <td class="cat">8. Contingencias (8%)</td>
-        <td style="font-size:13px; color:var(--muted)">Reserva para imprevistos técnicos, ajustes de alcance y eventuales extensiones de plazos en fases de integración compleja.</td>
-        <td><span class="badge badge-cyan">F1–F3</span></td>
-        <td style="text-align:right" class="amount">$26.720</td>
-        <td style="text-align:right" class="amount">$24.950M</td>
-      </tr>
-      <tr class="total-row">
-        <td class="cat" colspan="3">TOTAL PROGRAMA SMARTGORE ATACAMA — 6 MESES</td>
-        <td style="text-align:right" class="amount">$360.720</td>
-        <td style="text-align:right" class="amount">$336.550M</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div style="margin-top:12px; padding:12px 16px; background:rgba(255,255,255,0.03); border-radius:8px">
-    <p style="font-size:12px; color:var(--muted); margin:0">Tipo de cambio referencial: 1 USD = 932 CLP (mayo 2026). Valores netos sin IVA. El programa puede ser co-financiado mediante FNDR Innovación (Código BIP), Glosa SUBDERE de Transformación Digital o convenio de colaboración con CENIA/CORFO. Se recomienda solicitar cotización formal a NemoClaw para ajuste a presupuesto disponible.</p>
-  </div>
-
-  <div class="grid-3" style="margin-top:40px">
-    <div class="card">
-      <div class="stat-big">$360K</div>
-      <div class="stat-label">Inversión total USD en 6 meses</div>
-    </div>
-    <div class="card">
-      <div class="stat-big" style="color:var(--gold)">~US$2M</div>
-      <div class="stat-label">Valor IA anual estimado recuperable para el GORE Atacama</div>
-    </div>
-    <div class="card">
-      <div class="stat-big" style="color:#22c578">5,5x</div>
-      <div class="stat-label">ROI estimado en el primer año de operación completa</div>
-    </div>
-  </div>
-
-  <div style="margin-top:48px">
-    <h3 style="margin-bottom:20px">Riesgos y mitigación</h3>
-    <div class="card">
-      <div class="risk-row">
-        <span class="risk-tag risk-med">MEDIO</span>
-        <div><strong style="color:#fff; font-size:13px">Resistencia cultural al cambio</strong><p style="font-size:13px; margin-top:4px">Mitigation: programa de embajadores internos, comunicación desde la Gobernación y capacitación gradual. Se prioriza mostrar "ganancias rápidas" en semana 4.</p></div>
+      <div class="phase-line anim-item" style="margin-top:.85rem"><span>Fase 2</span><span class="badge-phase">Mes 3–4</span><span style="font-weight:600;color:var(--signos-navy)">Expansión y co-desarrollo</span></div>
+      <div class="two-col">
+        <ul class="mini-list anim-item">
+          <li>Activación M2, M3, M7 y M8 más integraciones OIRS/ChileCompra.</li>
+          <li>Hackathon interno para casos de uso propios del territorio.</li>
+          <li>Taller prompt engineering para ~50 funcionarios y red «embajadores IA».</li>
+        </ul>
+        <div class="conclusion anim-item" style="font-size:.77rem;"><strong>Hito mes 4:</strong> seis módulos en operación, chat ciudadano automatizando un porcentaje relevante de ingresos OIRS y equipo de cambio institucional en marcha.</div>
       </div>
-      <div class="risk-row">
-        <span class="risk-tag risk-med">MEDIO</span>
-        <div><strong style="color:#fff; font-size:13px">Integración con sistemas legados</strong><p style="font-size:13px; margin-top:4px">Mitigation: diagnóstico técnico en mes 1, conectores específicos para SIGFE y ChileCompra, y plan B de integración vía API con transformación de datos.</p></div>
-      </div>
-      <div class="risk-row">
-        <span class="risk-tag risk-low">BAJO</span>
-        <div><strong style="color:#fff; font-size:13px">Privacidad y protección de datos</strong><p style="font-size:13px; margin-top:4px">Mitigation: infraestructura cloud soberana, auditoría de seguridad mensual, cumplimiento Ley 19.628 y Marco de Ciberseguridad de Gobierno.</p></div>
-      </div>
-      <div class="risk-row">
-        <span class="risk-tag risk-low">BAJO</span>
-        <div><strong style="color:#fff; font-size:13px">Continuidad presupuestaria</strong><p style="font-size:13px; margin-top:4px">Mitigation: estructurar el programa en hitos financieros por fase, habilitando financiamiento progresivo desde FNDR o fondos ministeriales.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div>
-    <div class="footer-logo">Smart<span>Gore</span> <span style="color:var(--gold)">Atacama</span></div>
-    <p style="margin-top:6px">Programa NemoClaw de Inteligencia Artificial Generativa</p>
-    <p>Gobierno Regional de Atacama · Región III de Chile · 2026</p>
-  </div>
-  <div style="text-align:right">
-    <p>Basado en evidencia de:</p>
-    <p style="color:var(--cyan)">CENIA · SOFOFA Capital Humano</p>
-    <p>Estudio IAGen Chile, Diciembre 2024</p>
-  </div>
-</footer>
+    <section class="slide slide-reveal" id="lamina5">
+      <span class="pill anim-item">Consolidación</span>
+      <h2 class="anim-item">Fase 3 · despliegue completo y sostenibilidad</h2>
+      <p class="lead anim-item">Últimos dos meses: activar formulación automatizada / monitoreo territorial más fino, cerrar KPIs financieros y de satisfacción, y constituir núcleo de continuidad en el propio GORE.</p>
+      <ul class="mini-list anim-item">
+        <li>M5 (formulación) + M6 (territorio) escalados tras la validación técnico–legal previa.</li>
+        <li>Certificación Gestor IA regional y manual de prácticas replicable a otros GORE.</li>
+        <li>Unidad IA / transformación digital con roles dedicados (mínimos acordados con la administración).</li>
+        <li>Informe de impacto ROI + encuesta ciudadana opcional ante SUBDERE.</li>
+      </ul>
+      <div class="conclusion anim-item" style="font-size:.77rem;"><strong>Hito mes 6:</strong> los ocho módulos activos con ~150 funcionarios tocados por formación intensiva y metas de productividad en administración central revisadas contra línea base.</div>
+      <h3>Cronograma de activación por módulo</h3>
+      <div class="scroll-x anim-item">
+        <table class="data-table tight" aria-describedby="cron-desc">
+          <thead>
+            <tr>
+              <th>Módulo</th>
+              <th class="num">M1</th>
+              <th class="num">M2</th>
+              <th class="num">M3</th>
+              <th class="num">M4</th>
+              <th class="num">M5</th>
+              <th class="num">M6</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>M1 · Concursables</td><td class="num">⚡</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td></tr>
+            <tr><td>M4 · Rendiciones</td><td class="num">⚡</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td></tr>
+            <tr><td>M2 · OIRS</td><td class="num">—</td><td class="num">⚡</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td></tr>
+            <tr><td>M3 · Transparencia</td><td class="num">—</td><td class="num">⚡</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td></tr>
+            <tr><td>M7 · FNDR</td><td class="num">—</td><td class="num">⚡</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td></tr>
+            <tr><td>M8 · Auditoría</td><td class="num">—</td><td class="num">⚡</td><td class="num">●</td><td class="num">●</td><td class="num">●</td><td class="num">●</td></tr>
+            <tr><td>M5 · Formuladora</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">⚡</td><td class="num">●</td></tr>
+            <tr><td>M6 · Territorio</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">⚡</td><td class="num">●</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="cron-desc" class="muted-note">⚡ activación inicial · ● operativo sostenido (columnas = mes proyectado en la hoja tipo de ruta).</p>
+    </section>
+
+    <section class="slide slide-reveal" id="lamina6">
+      <span class="pill anim-item">Presupuesto</span>
+      <h2 class="anim-item">Inversión estimada · seis meses</h2>
+      <p class="lead anim-item">Referencias alineadas a la cotización modelo del programa anterior; válidas para financiamiento tipo FNDR innovación / glosas SUBDERE / convenios con agencias públicas · tipo de cambio referencial mayo 2026.</p>
+      <div class="scroll-x anim-item">
+        <table class="data-table tight">
+          <thead>
+            <tr>
+              <th>Ítem</th>
+              <th>Detalle corto</th>
+              <th>Fase</th>
+              <th class="num">USD</th>
+              <th class="num">CLP (M)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Plataforma NemoClaw</td>
+              <td>Licencia cloud soberana, ocho módulos, SLA y soporte 24/7 (6 meses).</td>
+              <td>F1–F3</td>
+              <td class="num">72&nbsp;000</td>
+              <td class="num">67&nbsp;200</td>
+            </tr>
+            <tr>
+              <td>Implementación</td>
+              <td>Ingenieros de integración y especialista datos para conectores y ajustes.</td>
+              <td>F1–F2</td>
+              <td class="num">90&nbsp;000</td>
+              <td class="num">84&nbsp;000</td>
+            </tr>
+            <tr>
+              <td>Co-desarrollo</td>
+              <td>Hackathon + desarrollo rápido de tres aplicaciones regionales específicas.</td>
+              <td>F2</td>
+              <td class="num">55&nbsp;000</td>
+              <td class="num">51&nbsp;300</td>
+            </tr>
+            <tr>
+              <td>Capacitación</td>
+              <td>Trayectoria combinada hasta ~150 personas y certificación avanzada final.</td>
+              <td>F1–F3</td>
+              <td class="num">48&nbsp;000</td>
+              <td class="num">44&nbsp;800</td>
+            </tr>
+            <tr>
+              <td>PMO</td>
+              <td>Director de proyecto 0,5 FTE + coordinación dedicada lado GORE.</td>
+              <td>F1–F3</td>
+              <td class="num">32&nbsp;000</td>
+              <td class="num">29&nbsp;800</td>
+            </tr>
+            <tr>
+              <td>Cambio organizacional</td>
+              <td>Consultor cambio + comunicaciones + manual de prácticas y adopción directiva.</td>
+              <td>F2–F3</td>
+              <td class="num">22&nbsp;000</td>
+              <td class="num">20&nbsp;500</td>
+            </tr>
+            <tr>
+              <td>Medición de impacto</td>
+              <td>Indicadores, líneas base/NPS ciudadano, ROI e informes.</td>
+              <td>F3</td>
+              <td class="num">15&nbsp;000</td>
+              <td class="num">14&nbsp;000</td>
+            </tr>
+            <tr>
+              <td>Contingencias 8%</td>
+              <td>Reserva imprevistos técnicos o integraciones complejas.</td>
+              <td>F1–F3</td>
+              <td class="num">26&nbsp;720</td>
+              <td class="num">24&nbsp;950</td>
+            </tr>
+            <tr>
+              <th colspan="3">Total programa (ref.)</th>
+              <th class="num">360&nbsp;720</th>
+              <th class="num">336&nbsp;550</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted-note anim-item">Valor neto sin IVA. Moneda cotizada 932 CLP/USD para referencias de millón de peso (M).</p>
+      <div class="growth-row anim-item">
+        <div class="growth-cell"><em>US$361K</em><span>caja total modelo 6 meses</span></div>
+        <div class="growth-cell"><em>~US$2M</em><span>valor económico anual proyectable recuperable regional</span></div>
+        <div class="growth-cell"><em>~5,5×</em><span>ROI de primer año si se consolidan KPIs línea base</span></div>
+      </div>
+      <div class="risk-block anim-item">
+        <strong>Riesgos y mitigación (resumen)</strong>
+        <ul>
+          <li>Resistencia al cambio: embajadores internos + resultados rápidos visibles tras semana 4.</li>
+          <li>Sistemas legados: inventario técnico en mes 1, conectores y plan B tipo API-batch.</li>
+          <li>Privacidad: auditorías continuas Marco Ciberseguridad + Ley 19.628.</li>
+          <li>Continuidad presupuestaria: financiamiento por hitos mensuales o tramos ministeriales/FNDR.</li>
+        </ul>
+      </div>
+      <div class="conclusion anim-item">
+        <strong style="color:var(--signos-deep)">Takeaway:</strong> el activo estratégico no es sólo IA genérica sino una <mark class="hl">ruta ejecutable</mark>: normativa conocida por el modelo + integraciones reales + cultura institucional acompañada con números.
+      </div>
+    </section>
+  </main>
+
+  <footer>SmartGore Atacama · NemoClaw · Documento ejecutivo SIGNOS analytics.</footer>
+
+  <script>
+(function() {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    document.querySelectorAll('.slide-reveal').forEach(function(el) { el.classList.add('is-visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.slide-reveal').forEach(function(el) { io.observe(el); });
+})();
+  </script>
 
   <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
     <a class="deck-nav-link deck-nav-prev" href="presentacion_cooperacion_atacama_pais_vasco.html">← Anterior</a>
