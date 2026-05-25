@@ -2,24 +2,44 @@
 
 Sitio estático (HTML + CSS + JS en línea). Las animaciones (`@keyframes`, `IntersectionObserver`, transiciones) se ejecutan en el navegador; no hace falta un paso de build.
 
-La encuesta **nacional** vive sólo en `index.html` (un solo HTML; no hay copia paralela tipo “archivo”).
+La encuesta **nacional unificada** en este proyecto vive sólo en `index.html` (sin copia `presentacion_encuesta.html`; la cadena navega hacia los decks regionales y temáticos).
 
-## Repositorio
+## Dos repositorios (política de publicación)
 
-La organización canónica es **smartpredictionAI** (cuenta/org de producción).
+| Remoto | Repositorio | Rol |
+|--------|----------------|-----|
+| `origin` | [houdasaad/encuesta_signos](https://github.com/houdasaad/encuesta_signos) | **Encuesta / línea base**: conservar sin mezclar la versión unificada de presentaciones si así lo defines con tu equipo. |
+| `presentaciones` | [smartpredictionAI/presentaciones](https://github.com/smartpredictionAI/presentaciones) | **Sitio unificado** (catálogo, barra Anterior/Índice/Siguiente, todos los HTML + `assets/` + workflow de Pages). |
 
-- Opción típica: crea **`https://github.com/smartpredictionAI/encuesta_signos`** (repositorio vacío en GitHub). Luego enlaza este clon (`git remote set-url origin https://github.com/smartpredictionAI/encuesta_signos.git`) y ejecuta `git push -u origin main`.
-- Si ya publicas desde otro nombre de repo dentro de esa org (p. ej. `presentaciones`), usa esa URL como `origin` en su lugar.
+Configuración esperada en este clon:
 
-Necesitas un **personal access token** con permiso **`repo`** (y SSO aprobado si la org usa SAML) ligado a la cuenta que sea **propietaria o mantenedora** de ese repositorio; el `403`/“permission denied” casi siempre es token o SSO.
+```bash
+git remote -v
+# origin        https://github.com/houdasaad/encuesta_signos.git
+# presentaciones https://github.com/smartpredictionAI/presentaciones.git
+```
 
-## GitHub Pages
+### Publicar la versión unificada (smartprediction)
 
-1. En el repositorio: **Settings → Pages → Build and deployment**.
-2. **Source**: **GitHub Actions** (no “Deploy from branch” con Jekyll si usas este workflow).
-3. Haz push a **`main`**: el workflow [Deploy static site to Pages](.github/workflows/static-pages.yml) empaqueta los `.html` de la raíz, la carpeta `assets/` y `.nojekyll` en el artefacto publicado.
+Tras commitear en `main`:
 
-Los archivos tienen que estar **commiteados** en `main`; lo que no está en git no se despliega.
+```bash
+git push presentaciones main
+```
+
+La primera vez, si el historial de `presentaciones` no es ancestro de tu `main`, Git rechazará el push (non-fast-forward). Entonces o bien haces un merge planificado, o —solo si quieres **reemplazar** el contenido remoto de `presentaciones` con este árbol— consulta con el equipo antes de usar `git push --force-with-lease presentaciones main`.
+
+**No** uses `git push origin main` para “actualizar la encuesta unificada” si la política es dejar **`origin` (houdasaad)** tal como está para la primera encuesta; sube la unificación **sólo** a `presentaciones`.
+
+Autenticación: PAT con alcance **`repo`** (y SSO aprobado en la org si aplica) para la cuenta que tenga push en cada remoto.
+
+## GitHub Pages (repositorio `presentaciones`)
+
+1. En [smartpredictionAI/presentaciones](https://github.com/smartpredictionAI/presentaciones): **Settings → Pages → Build and deployment**.
+2. **Source**: **GitHub Actions** (workflow [`.github/workflows/static-pages.yml`](.github/workflows/static-pages.yml) de este proyecto).
+3. Cada push a **`main`** en `presentaciones` dispara el despliegue; el artefacto incluye los `.html` de la raíz, `assets/` y `.nojekyll`.
+
+Los archivos tienen que estar **commiteados** en la rama que empujes; lo que no está en git no se despliega.
 
 ## Comprobar localmente
 
