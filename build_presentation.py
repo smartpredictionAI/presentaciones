@@ -12,7 +12,6 @@ from typing import Any
 import openpyxl
 
 XLSX_PATH = Path(r"c:\Users\mz\Dropbox\toshiba 2021 F\Encuesta2.xlsx")
-OUT_HTML = Path(__file__).resolve().parent / "presentacion_encuesta.html"
 OUT_INDEX = Path(__file__).resolve().parent / "index.html"
 
 P_START = re.compile(r"^P(\d+)\.\s*(.+)$")
@@ -1058,9 +1057,8 @@ def main() -> None:
     sections = order_sections_national_first(parse_sections(rows))
     apply_display_sort_to_sections(sections)
     html = build_html(sections)
-    OUT_HTML.write_text(html, encoding="utf-8")
     OUT_INDEX.write_text(html, encoding="utf-8")
-    print(f"Wrote {OUT_HTML} and {OUT_INDEX} with {len(sections)} sections.")
+    print(f"Wrote {OUT_INDEX} with {len(sections)} sections.")
 
 
 if __name__ == "__main__":

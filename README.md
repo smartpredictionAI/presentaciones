@@ -2,6 +2,17 @@
 
 Sitio estático (HTML + CSS + JS en línea). Las animaciones (`@keyframes`, `IntersectionObserver`, transiciones) se ejecutan en el navegador; no hace falta un paso de build.
 
+La encuesta **nacional** vive sólo en `index.html` (un solo HTML; no hay copia paralela tipo “archivo”).
+
+## Repositorio
+
+La organización canónica es **smartpredictionAI** (cuenta/org de producción).
+
+- Opción típica: crea **`https://github.com/smartpredictionAI/encuesta_signos`** (repositorio vacío en GitHub). Luego enlaza este clon (`git remote set-url origin https://github.com/smartpredictionAI/encuesta_signos.git`) y ejecuta `git push -u origin main`.
+- Si ya publicas desde otro nombre de repo dentro de esa org (p. ej. `presentaciones`), usa esa URL como `origin` en su lugar.
+
+Necesitas un **personal access token** con permiso **`repo`** (y SSO aprobado si la org usa SAML) ligado a la cuenta que sea **propietaria o mantenedora** de ese repositorio; el `403`/“permission denied” casi siempre es token o SSO.
+
 ## GitHub Pages
 
 1. En el repositorio: **Settings → Pages → Build and deployment**.

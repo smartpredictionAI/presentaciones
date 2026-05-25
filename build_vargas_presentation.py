@@ -1,6 +1,6 @@
 """
 Build presentacion_vargas.html from encuesta vargas.docx (static, self-contained).
-Matches SIGNOS-style layout from presentacion_encuesta; adds scroll-in animations.
+Matches SIGNOS-style layout from the national deck (index.html); adds scroll-in animations.
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ PULSE_HREF = "presentacion_atacama_pulse_ia.html"
 ASSETS_PREFIX = "assets/"
 
 DECK_NAV_HTML = """  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
-    <a class="deck-nav-link deck-nav-prev" href="presentacion_encuesta.html">← Anterior</a>
+    <a class="deck-nav-link deck-nav-prev" href="index.html">← Anterior</a>
     <a class="deck-nav-link deck-nav-hub" href="index.html#deck-catalogo">Índice</a>
     <a class="deck-nav-link deck-nav-next" href="{pulse}">Siguiente →</a>
   </nav>
