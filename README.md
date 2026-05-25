@@ -9,7 +9,7 @@ La encuesta **nacional unificada** en este proyecto vive sólo en `index.html` (
 | Remoto | Repositorio | Rol |
 |--------|----------------|-----|
 | `origin` | [houdasaad/encuesta_signos](https://github.com/houdasaad/encuesta_signos) | **Encuesta / línea base**: conservar sin mezclar la versión unificada de presentaciones si así lo defines con tu equipo. |
-| `presentaciones` | [smartpredictionAI/presentaciones](https://github.com/smartpredictionAI/presentaciones) | **Sitio unificado** (catálogo, barra Anterior/Índice/Siguiente, todos los HTML + `assets/` + workflow de Pages). |
+| `presentaciones` | [smartpredictionAI/presentaciones](https://github.com/smartpredictionAI/presentaciones) | **Sitio unificado** (catálogo, barra Anterior/Índice/Siguiente, todos los HTML + `assets/` + `.nojekyll`). |
 
 Configuración esperada en este clon:
 
@@ -36,10 +36,10 @@ Autenticación: PAT con alcance **`repo`** (y SSO aprobado en la org si aplica) 
 ## GitHub Pages (repositorio `presentaciones`)
 
 1. En [smartpredictionAI/presentaciones](https://github.com/smartpredictionAI/presentaciones): **Settings → Pages → Build and deployment**.
-2. **Source**: **GitHub Actions** (workflow [`.github/workflows/static-pages.yml`](.github/workflows/static-pages.yml) de este proyecto).
-3. Cada push a **`main`** en `presentaciones` dispara el despliegue; el artefacto incluye los `.html` de la raíz, `assets/` y `.nojekyll`.
+2. **Source**: **Deploy from branch** → **main** → **/(root)**. El sitio es estático (`*.html`, `assets/`, `.nojekyll`).
+3. Opcional más adelante: si quieres **GitHub Actions** en lugar de publicar desde la rama, necesitas un PAT con alcances **`repo`** **y `workflow`** (para poder actualizar YAML bajo `.github/workflows/`), volver a añadir un workflow tipo `deploy-pages`.
 
-Los archivos tienen que estar **commiteados** en la rama que empujes; lo que no está en git no se despliega.
+Los archivos tienen que estar **commiteados** en **`main`**; lo que no está en git no se despliega.
 
 ## Comprobar localmente
 
