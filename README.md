@@ -2,7 +2,7 @@
 
 Sitio estático (HTML + CSS + JS en línea). Las animaciones (`@keyframes`, `IntersectionObserver`, transiciones) se ejecutan en el navegador; no hace falta un paso de build.
 
-La encuesta **nacional unificada** en este proyecto vive sólo en `index.html` (sin copia `presentacion_encuesta.html`; la cadena navega hacia los decks regionales y temáticos).
+La encuesta **nacional unificada** en este proyecto vive sólo en `index.html` (sin copia `presentacion_encuesta.html`; la cadena navega hacia los decks regionales y temáticos). La **última lámina de la serie** es `presentacion_smartgore_atacama_nemoclaw.html` (Programa NemoClaw · GORE Atacama); en `references/` hay un prototipo JSX con pestañas para la misma línea editorial.
 
 ## Dos repositorios (política de publicación)
 
