@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Encuesta SIGNOS analytics</title>
+  <title>Programa Copiapó — SIGNOS analytics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -23,6 +23,7 @@
       --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
       --radius: 10px;
       --maxw: 920px;
+      --deck-chrome-top: 4.55rem;
     }
     * { box-sizing: border-box; }
     body {
@@ -39,25 +40,8 @@
       position: sticky;
       top: 0;
       z-index: 80;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 74, 153, 0.12);
-      box-shadow: 0 2px 14px rgba(0, 54, 113, 0.07);
-    }
-    .brand-bar {
-      text-align: center;
-      padding: 0.35rem 1rem 0.4rem;
-      border-bottom: 1px solid rgba(0, 74, 153, 0.08);
-    }
-    .brand-bar a {
-      display: inline-block;
-      line-height: 0;
-    }
-    .brand-bar .logo-site {
-      height: clamp(26px, 4vw, 34px);
-      width: auto;
-      max-width: min(220px, 42vw);
-      object-fit: contain;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
     }
     .cover-hero {
       position: relative;
@@ -131,7 +115,7 @@
     nav.toc .inner {
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: 0.55rem 1rem;
+      padding: 0.38rem 0.75rem;
       display: flex;
       flex-wrap: wrap;
       gap: 0.35rem 0.5rem;
@@ -146,14 +130,14 @@
       font-weight: 600;
     }
     nav.toc a:hover { background: rgba(41, 227, 241, 0.22); text-decoration: none; }
-    main { max-width: var(--maxw); margin: 0 auto; padding: 0.85rem 0.75rem 2.5rem; }
+    main { max-width: 100%; margin: 0 auto; padding: max(4px, var(--deck-main-pad-y, 0px)) 0.45rem max(2px, env(safe-area-inset-bottom, 0px)); }
     .slide {
       background: var(--surface);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 0.75rem 0.85rem 0.85rem;
-      margin-bottom: 1rem;
-      scroll-margin-top: 6.5rem;
+      margin-bottom: 0.35rem;
+      scroll-margin-top: 4rem;
       max-width: 100%;
       overflow-x: hidden;
     }
@@ -300,29 +284,100 @@
     .slide-block-intro .lead { margin: 0.35rem 0 0; font-size: 0.78rem; }
     footer {
       text-align: center;
-      padding: 1.25rem 0.75rem;
+      padding: 0.45rem 0.5rem 0.65rem;
       color: #6b7284;
       font-size: 0.78rem;
     }
+
+    /* Hub Programa Copiapo — tall laminas, logo inside each */
+    .slide.lamina-cover.deck-fill-slide {
+      justify-content: center;
+      padding-top: 1.25rem;
+    }
+    .slide.lamina-cover {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.25rem;
+      overflow: hidden;
+      background: linear-gradient(
+        155deg,
+        var(--signos-navy-deep) 0%,
+        var(--signos-navy) 42%,
+        #1e5aab 72%,
+        #4d2f8f 115%
+      );
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .slide.lamina-cover .lamina-glow {
+      position: absolute;
+      width: 120%;
+      height: 55%;
+      top: -12%;
+      left: -10%;
+      background: radial-gradient(ellipse, rgba(41,227,241,.28) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .slide.lamina-cover .lamina-inner { position: relative; z-index: 1; max-width: 28rem; width: 100%; }
+    .slide.lamina-cover .lamina-brand {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 0.75rem;
+    }
+    .slide.lamina-cover h1 {
+      font-family: Montserrat, system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 5vw, 2.05rem);
+      line-height: 1.18;
+      margin: 0 0 0.65rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,.2);
+    }
+    .slide.lamina-cover .lamina-tagline {
+      font-size: 0.92rem;
+      line-height: 1.48;
+      color: rgba(255,255,255,.9);
+      margin: 0;
+    }
+    .slide-cta.deck-fill-slide {
+      justify-content: center;
+    }
+    .slide-cta .deck-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.85rem;
+      padding: 0.55rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff !important;
+      background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan));
+      text-decoration: none !important;
+      box-shadow: 0 4px 14px rgba(138,86,195,.35);
+    }
+    .slide-cta .deck-link:hover { filter: brightness(1.05); text-decoration: none !important; }
+
   </style>
 </head>
 <body class="has-deck-nav">
-  <div class="sticky-head">
-    <div class="brand-bar">
-      <a href="#portada" aria-label="SIGNOS analytics — inicio">
-        <img src="assets/logo-signos.png" alt="SIGNOS analytics" class="logo-site" width="200" height="45" decoding="async" />
-      </a>
-    </div>
-    <nav class="toc" aria-label="Índice de preguntas">
+  <div class="sticky-head sticky-head--compact">
+    <nav class="toc" aria-label="Índice de laminas">
       <div class="inner">
         <span style="font-weight:700;margin-right:0.35rem;color:var(--dk)">Ir a:</span>
-        <a href="#portada">Portada</a><a href="#metodologia">Metodología</a><a href="#p1">P1</a><a href="#p2">P2</a><a href="#p3">P3</a><a href="#p4">P4</a><a href="#p5">P5</a><a href="#p6">P6</a><a href="#p7">P7</a><a href="#p8">P8</a><a href="#p9">P9</a><a href="#p15">P15</a><a href="#p16">P16</a><a href="#p17">P17</a>
+        <a href="#portada">Programa Copiapó</a><a href="#atacama-vargas">Atacama · Vargas</a><a href="#deck-catalogo">Presentaciones</a>
       </div>
     </nav>
     <nav id="deck-catalogo" class="deck-catalog" aria-label="Todas las presentaciones SIGNOS">
       <div class="deck-catalog-inner">
         <span class="deck-catalog-title">Presentaciones:</span>
-        <a href="index.html" aria-current="page">Encuesta nacional</a>
+        <a href="index.html" aria-current="page">Programa Copiapó</a>
         <a href="presentacion_vargas.html">Atacama · Vargas</a>
         <a href="presentacion_atacama_pulse_ia.html">Atacama Pulse AI</a>
         <a href="presentacion_smartagro_mosca.html">SMARTAGRO</a>
@@ -331,986 +386,31 @@
       </div>
     </nav>
   </div>
-  <header class="cover-hero" id="portada" aria-label="Portada">
-    <div class="cover-bg" role="img" aria-label="SIGNOS analytics — portada institucional"></div>
-  </header>
   <main>
-    
-<section class="slide slide-metodologia" id="metodologia" aria-labelledby="metodologia-title">
-  <header class="slide-head">
-    <span class="pill">Metodología</span>
-    <h2 id="metodologia-title">Ficha técnica</h2>
-    <p class="lead">Caracterización del levantamiento de datos.</p>
-  </header>
-  <dl class="ficha-list ficha-list--sheet">
-    <div class="ficha-item">
-      <dt>Tipo de Encuesta</dt>
-      <dd>Encuesta telefónica con selección aleatoria de números.</dd>
-    </div>
-    <div class="ficha-item">
-      <dt>Fecha de Aplicación</dt>
-      <dd>Entre el 24 de abril y 2 de mayo de 2026</dd>
-    </div>
-    <div class="ficha-item">
-      <dt>Cantidad de Encuestas</dt>
-      <dd>1,809 entrevistas completas (muestra nacional exclusiva en esta versión ejecutiva).</dd>
-    </div>
-    <div class="ficha-item">
-      <dt>Error para muestra total</dt>
-      <dd>2,5 puntos porcentuales (muestra nacional)</dd>
-    </div>
-  </dl>
-</section>
-
-    
-<section class="slide" id="p1" aria-labelledby="t1">
-  <header class="slide-head">
-    <span class="pill">P1</span>
-    <h2 id="t1">P1. Conocimiento de autoridades</h2>
-    <p class="lead">Por favor, indique si usted conoce o ha oído hablar de las siguientes autoridades.</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="hbar-block"><div class="hbar-row"><span class="hbar-label">José Antonio Kast</span><div class="hbar-track duo"><span class="hbar-fill" style="width:98.6%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:1.4%;background:#29e3f1"></span></div><span class="hbar-pct">98.6% / 1.4%</span></div><div class="hbar-row"><span class="hbar-label">Rodrigo Mundaca</span><div class="hbar-track duo"><span class="hbar-fill" style="width:92.2%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:7.8%;background:#29e3f1"></span></div><span class="hbar-pct">92.2% / 7.8%</span></div><div class="hbar-row"><span class="hbar-label">Mara Sedini</span><div class="hbar-track duo"><span class="hbar-fill" style="width:86.5%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:13.5%;background:#29e3f1"></span></div><span class="hbar-pct">86.5% / 13.5%</span></div><div class="hbar-row"><span class="hbar-label">Iván Poduje</span><div class="hbar-track duo"><span class="hbar-fill" style="width:72.2%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:27.8%;background:#29e3f1"></span></div><span class="hbar-pct">72.2% / 27.8%</span></div><div class="hbar-row"><span class="hbar-label">Jorge Quiroz</span><div class="hbar-track duo"><span class="hbar-fill" style="width:71.4%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:28.6%;background:#29e3f1"></span></div><span class="hbar-pct">71.4% / 28.6%</span></div><div class="hbar-row"><span class="hbar-label">Manuel Millones</span><div class="hbar-track duo"><span class="hbar-fill" style="width:69.3%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:30.7%;background:#29e3f1"></span></div><span class="hbar-pct">69.3% / 30.7%</span></div><div class="hbar-row"><span class="hbar-label">Trinidad Steinert</span><div class="hbar-track duo"><span class="hbar-fill" style="width:68.6%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:31.4%;background:#29e3f1"></span></div><span class="hbar-pct">68.6% / 31.4%</span></div><div class="hbar-row"><span class="hbar-label">Claudio Alvarado</span><div class="hbar-track duo"><span class="hbar-fill" style="width:50.4%;background:#8a56c3"></span><span class="hbar-fill secondary" style="width:49.6%;background:#29e3f1"></span></div><span class="hbar-pct">50.4% / 49.6%</span></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Autoridad</th><th>Conoce</th><th>No conoce</th></tr></thead><tbody><tr><td>José Antonio Kast</td><td class="num">98.6%</td><td class="num">1.4%</td></tr><tr><td>Rodrigo Mundaca</td><td class="num">92.2%</td><td class="num">7.8%</td></tr><tr><td>Mara Sedini</td><td class="num">86.5%</td><td class="num">13.5%</td></tr><tr><td>Iván Poduje</td><td class="num">72.2%</td><td class="num">27.8%</td></tr><tr><td>Jorge Quiroz</td><td class="num">71.4%</td><td class="num">28.6%</td></tr><tr><td>Manuel Millones</td><td class="num">69.3%</td><td class="num">30.7%</td></tr><tr><td>Trinidad Steinert</td><td class="num">68.6%</td><td class="num">31.4%</td></tr><tr><td>Claudio Alvarado</td><td class="num">50.4%</td><td class="num">49.6%</td></tr></tbody></table></div>
+<section class="slide lamina-cover deck-fill-slide" id="portada" aria-labelledby="titulo-programa">
+  <div class="lamina-glow" aria-hidden="true"></div>
+  <div class="lamina-inner">
+    <p class="slide-brand slide-brand--dark"><a href="#portada" aria-label="SIGNOS analytics"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+    <h1 id="titulo-programa">Programa Copiapó</h1>
+    <p class="lamina-tagline">Presentaciones y evidencia regional desde Atacama. Esta portada sirve como inicio del recorrido: la siguiente lámina enlaza directamente el deck regional <strong style="font-weight:700;color:#b8f6ff">Atacama · Vargas</strong>.</p>
   </div>
 </section>
 
-<section class="slide" id="p2" aria-labelledby="t2">
+<section class="slide slide-cta deck-fill-slide" id="atacama-vargas" aria-labelledby="titulo-vargas">
+  <p class="slide-brand"><a href="#portada" aria-label="SIGNOS analytics"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+  <span class="pill">Encuesta regional</span>
   <header class="slide-head">
-    <span class="pill">P2</span>
-    <h2 id="t2">P2. Confianza general en el Gobierno de Kast</h2>
-    <p class="lead">En relación con el Gobierno de Kast, ¿cuál es el grado de confianza que tiene usted hacia este Gobierno?</p>
+    <h2 id="titulo-vargas">Atacama · Vargas</h2>
+    <p class="lead">Continúe con los resultados de la encuesta regional Atacama: percepción ciudadana y foco en la gestión del GORE Atacama y del gobernador regional.</p>
   </header>
-  <div class="slide-body">
-    <div class="panel"><div class="hbar-block"><div class="hbar-row"><span class="hbar-label">Nada o casi nada</span><div class="hbar-track"><span class="hbar-fill" style="width:29.2%"></span></div><span class="hbar-pct">29.2%</span></div><div class="hbar-row"><span class="hbar-label">Algo</span><div class="hbar-track"><span class="hbar-fill" style="width:21.1%"></span></div><span class="hbar-pct">21.1%</span></div><div class="hbar-row"><span class="hbar-label">Muy poca</span><div class="hbar-track"><span class="hbar-fill" style="width:17.4%"></span></div><span class="hbar-pct">17.4%</span></div><div class="hbar-row"><span class="hbar-label">Poca</span><div class="hbar-track"><span class="hbar-fill" style="width:13.5%"></span></div><span class="hbar-pct">13.5%</span></div><div class="hbar-row"><span class="hbar-label">Mucha</span><div class="hbar-track"><span class="hbar-fill" style="width:11.9%"></span></div><span class="hbar-pct">11.9%</span></div><div class="hbar-row"><span class="hbar-label">No sabe / No responde</span><div class="hbar-track"><span class="hbar-fill" style="width:6.9%"></span></div><span class="hbar-pct">6.9%</span></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Opción</th><th>%</th></tr></thead><tbody><tr><td>Nada o casi nada</td><td class="num">29.2%</td></tr><tr><td>Algo</td><td class="num">21.1%</td></tr><tr><td>Muy poca</td><td class="num">17.4%</td></tr><tr><td>Poca</td><td class="num">13.5%</td></tr><tr><td>Mucha</td><td class="num">11.9%</td></tr><tr><td>No sabe / No responde</td><td class="num">6.9%</td></tr></tbody></table></div>
-  </div>
+  <p><a class="deck-link" href="presentacion_vargas.html">Abrir presentación Atacama · Vargas →</a></p>
 </section>
-
-<section class="slide" id="p3" aria-labelledby="t3">
-  <header class="slide-head">
-    <span class="pill">P3</span>
-    <h2 id="t3">P3. Cumplimiento del programa</h2>
-    <p class="lead">En relación con el Gobierno de Kast, usted diría que:</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="hbar-block"><div class="hbar-row"><span class="hbar-label">No está cumpliendo su programa</span><div class="hbar-track"><span class="hbar-fill" style="width:51.4%"></span></div><span class="hbar-pct">51.4%</span></div><div class="hbar-row"><span class="hbar-label">Está cumpliendo su programa</span><div class="hbar-track"><span class="hbar-fill" style="width:37.4%"></span></div><span class="hbar-pct">37.4%</span></div><div class="hbar-row"><span class="hbar-label">No sabe / No responde</span><div class="hbar-track"><span class="hbar-fill" style="width:11.2%"></span></div><span class="hbar-pct">11.2%</span></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Opción</th><th>%</th></tr></thead><tbody><tr><td>No está cumpliendo su programa</td><td class="num">51.4%</td></tr><tr><td>Está cumpliendo su programa</td><td class="num">37.4%</td></tr><tr><td>No sabe / No responde</td><td class="num">11.2%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p4" aria-labelledby="t4">
-  <header class="slide-head">
-    <span class="pill">P4</span>
-    <h2 id="t4">P4. Cumplimiento de políticas públicas</h2>
-    <p class="lead">Para cada una de las siguientes áreas, indique si usted cree que el Gobierno de Kast está cumpliendo o no está cumpliendo.</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Área</th><th>Cumple</th><th>No cumple</th><th>No sabe / No responde</th></tr></thead><tbody><tr><td>Control de la migración</td><td class="num">40.8%</td><td class="num">48.5%</td><td class="num">10.7%</td></tr><tr><td>Orden público</td><td class="num">36.8%</td><td class="num">52.9%</td><td class="num">10.3%</td></tr><tr><td>Seguridad</td><td class="num">33.3%</td><td class="num">56.1%</td><td class="num">10.6%</td></tr><tr><td>Crecimiento económico</td><td class="num">33.1%</td><td class="num">57.3%</td><td class="num">9.6%</td></tr><tr><td>Política exterior autónoma</td><td class="num">28.3%</td><td class="num">46.4%</td><td class="num">25.3%</td></tr><tr><td>Control de los abusos</td><td class="num">26.3%</td><td class="num">52.5%</td><td class="num">21.2%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p5" aria-labelledby="t5">
-  <header class="slide-head">
-    <span class="pill">P5</span>
-    <h2 id="t5">P5. Percepción sobre calidad de vida</h2>
-    <p class="lead">Desde que asumió el Gobierno de Kast, usted siente que su vida:</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="hbar-block"><div class="hbar-row"><span class="hbar-label">Está igual</span><div class="hbar-track"><span class="hbar-fill" style="width:50.3%"></span></div><span class="hbar-pct">50.3%</span></div><div class="hbar-row"><span class="hbar-label">Ha empeorado</span><div class="hbar-track"><span class="hbar-fill" style="width:27.6%"></span></div><span class="hbar-pct">27.6%</span></div><div class="hbar-row"><span class="hbar-label">Ha mejorado</span><div class="hbar-track"><span class="hbar-fill" style="width:17.4%"></span></div><span class="hbar-pct">17.4%</span></div><div class="hbar-row"><span class="hbar-label">No sabe / No responde</span><div class="hbar-track"><span class="hbar-fill" style="width:4.7%"></span></div><span class="hbar-pct">4.7%</span></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Opción</th><th>%</th></tr></thead><tbody><tr><td>Está igual</td><td class="num">50.3%</td></tr><tr><td>Ha empeorado</td><td class="num">27.6%</td></tr><tr><td>Ha mejorado</td><td class="num">17.4%</td></tr><tr><td>No sabe / No responde</td><td class="num">4.7%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p6" aria-labelledby="t6">
-  <header class="slide-head">
-    <span class="pill">P6</span>
-    <h2 id="t6">P6. Evaluación de desempeño de autoridades por tramos de nota</h2>
-    <p class="lead">Evalúe el desempeño de las siguientes autoridades con una nota de 1 a 7, donde 1 significa “pésimo” y 7 significa “excelente”.</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="stack-list"><div class="stack-item"><div class="stack-title">Rodrigo Mundaca</div><div class="stack-bar"><span class="stack-seg" style="width:36.73%;background:#8a56c3" title="b1 36.7%"></span><span class="stack-seg" style="width:38.05%;background:#29e3f1" title="b2 38.0%"></span><span class="stack-seg" style="width:25.22%;background:#e8a317" title="b3 25.2%"></span></div></div><div class="stack-item"><div class="stack-title">José Antonio Kast</div><div class="stack-bar"><span class="stack-seg" style="width:41.56%;background:#8a56c3" title="b1 41.6%"></span><span class="stack-seg" style="width:34.59%;background:#29e3f1" title="b2 34.6%"></span><span class="stack-seg" style="width:23.86%;background:#e8a317" title="b3 23.9%"></span></div></div><div class="stack-item"><div class="stack-title">Iván Poduje</div><div class="stack-bar"><span class="stack-seg" style="width:32.45%;background:#8a56c3" title="b1 32.4%"></span><span class="stack-seg" style="width:46.52%;background:#29e3f1" title="b2 46.5%"></span><span class="stack-seg" style="width:21.04%;background:#e8a317" title="b3 21.0%"></span></div></div><div class="stack-item"><div class="stack-title">Claudio Alvarado</div><div class="stack-bar"><span class="stack-seg" style="width:33.50%;background:#8a56c3" title="b1 33.5%"></span><span class="stack-seg" style="width:47.67%;background:#29e3f1" title="b2 47.7%"></span><span class="stack-seg" style="width:18.83%;background:#e8a317" title="b3 18.8%"></span></div></div><div class="stack-item"><div class="stack-title">Trinidad Steinert</div><div class="stack-bar"><span class="stack-seg" style="width:48.63%;background:#8a56c3" title="b1 48.6%"></span><span class="stack-seg" style="width:37.12%;background:#29e3f1" title="b2 37.1%"></span><span class="stack-seg" style="width:14.24%;background:#e8a317" title="b3 14.2%"></span></div></div><div class="stack-item"><div class="stack-title">Jorge Quiroz</div><div class="stack-bar"><span class="stack-seg" style="width:45.22%;background:#8a56c3" title="b1 45.2%"></span><span class="stack-seg" style="width:41.76%;background:#29e3f1" title="b2 41.8%"></span><span class="stack-seg" style="width:13.02%;background:#e8a317" title="b3 13.0%"></span></div></div><div class="stack-item"><div class="stack-title">Manuel Millones</div><div class="stack-bar"><span class="stack-seg" style="width:52.17%;background:#8a56c3" title="b1 52.2%"></span><span class="stack-seg" style="width:36.41%;background:#29e3f1" title="b2 36.4%"></span><span class="stack-seg" style="width:11.41%;background:#e8a317" title="b3 11.4%"></span></div></div><div class="stack-item"><div class="stack-title">Mara Sedini</div><div class="stack-bar"><span class="stack-seg" style="width:58.39%;background:#8a56c3" title="b1 58.4%"></span><span class="stack-seg" style="width:32.93%;background:#29e3f1" title="b2 32.9%"></span><span class="stack-seg" style="width:8.68%;background:#e8a317" title="b3 8.7%"></span></div></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Autoridad</th><th>Nota 1-3</th><th>Nota 4-5</th><th>Nota 6-7</th><th>Total</th></tr></thead><tbody><tr><td>Rodrigo Mundaca</td><td class="num">36.7%</td><td class="num">38.0%</td><td class="num">25.2%</td><td class="num">100.0%</td></tr><tr><td>José Antonio Kast</td><td class="num">41.6%</td><td class="num">34.6%</td><td class="num">23.9%</td><td class="num">100.0%</td></tr><tr><td>Iván Poduje</td><td class="num">32.4%</td><td class="num">46.5%</td><td class="num">21.0%</td><td class="num">100.0%</td></tr><tr><td>Claudio Alvarado</td><td class="num">33.5%</td><td class="num">47.7%</td><td class="num">18.8%</td><td class="num">100.0%</td></tr><tr><td>Trinidad Steinert</td><td class="num">48.6%</td><td class="num">37.1%</td><td class="num">14.2%</td><td class="num">100.0%</td></tr><tr><td>Jorge Quiroz</td><td class="num">45.2%</td><td class="num">41.8%</td><td class="num">13.0%</td><td class="num">100.0%</td></tr><tr><td>Manuel Millones</td><td class="num">52.2%</td><td class="num">36.4%</td><td class="num">11.4%</td><td class="num">100.0%</td></tr><tr><td>Mara Sedini</td><td class="num">58.4%</td><td class="num">32.9%</td><td class="num">8.7%</td><td class="num">100.0%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p7" aria-labelledby="t7">
-  <header class="slide-head">
-    <span class="pill">P7</span>
-    <h2 id="t7">P7. Evolución por áreas</h2>
-    <p class="lead">Seleccione la opción que mejor representa su opinión sobre el desempeño del gobierno en las siguientes áreas.</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="stack-list"><div class="stack-item"><div class="stack-title">Gestión de la migración</div><div class="stack-bar"><span class="stack-seg" style="width:9.50%;background:#8a56c3" title="v1 9.5%"></span><span class="stack-seg" style="width:22.60%;background:#29e3f1" title="v2 22.6%"></span><span class="stack-seg" style="width:28.30%;background:#e8a317" title="v3 28.3%"></span><span class="stack-seg" style="width:32.70%;background:#3d9df0" title="v4 32.7%"></span><span class="stack-seg" style="width:6.90%;background:#43aa8b" title="v5 6.9%"></span></div></div><div class="stack-item"><div class="stack-title">Seguridad pública</div><div class="stack-bar"><span class="stack-seg" style="width:7.50%;background:#8a56c3" title="v1 7.5%"></span><span class="stack-seg" style="width:17.70%;background:#29e3f1" title="v2 17.7%"></span><span class="stack-seg" style="width:29.10%;background:#e8a317" title="v3 29.1%"></span><span class="stack-seg" style="width:39.80%;background:#3d9df0" title="v4 39.8%"></span><span class="stack-seg" style="width:5.90%;background:#43aa8b" title="v5 5.9%"></span></div></div><div class="stack-item"><div class="stack-title">Inversión y economía</div><div class="stack-bar"><span class="stack-seg" style="width:7.90%;background:#8a56c3" title="v1 7.9%"></span><span class="stack-seg" style="width:16.20%;background:#29e3f1" title="v2 16.2%"></span><span class="stack-seg" style="width:31.20%;background:#e8a317" title="v3 31.2%"></span><span class="stack-seg" style="width:38.30%;background:#3d9df0" title="v4 38.3%"></span><span class="stack-seg" style="width:6.40%;background:#43aa8b" title="v5 6.4%"></span></div></div><div class="stack-item"><div class="stack-title">Educación</div><div class="stack-bar"><span class="stack-seg" style="width:5.60%;background:#8a56c3" title="v1 5.6%"></span><span class="stack-seg" style="width:14.60%;background:#29e3f1" title="v2 14.6%"></span><span class="stack-seg" style="width:30.60%;background:#e8a317" title="v3 30.6%"></span><span class="stack-seg" style="width:34.40%;background:#3d9df0" title="v4 34.4%"></span><span class="stack-seg" style="width:14.80%;background:#43aa8b" title="v5 14.8%"></span></div></div><div class="stack-item"><div class="stack-title">Salud pública</div><div class="stack-bar"><span class="stack-seg" style="width:4.30%;background:#8a56c3" title="v1 4.3%"></span><span class="stack-seg" style="width:14.50%;background:#29e3f1" title="v2 14.5%"></span><span class="stack-seg" style="width:38.10%;background:#e8a317" title="v3 38.1%"></span><span class="stack-seg" style="width:30.30%;background:#3d9df0" title="v4 30.3%"></span><span class="stack-seg" style="width:12.80%;background:#43aa8b" title="v5 12.8%"></span></div></div><div class="stack-item"><div class="stack-title">Programas sociales</div><div class="stack-bar"><span class="stack-seg" style="width:4.90%;background:#8a56c3" title="v1 4.9%"></span><span class="stack-seg" style="width:12.50%;background:#29e3f1" title="v2 12.5%"></span><span class="stack-seg" style="width:32.10%;background:#e8a317" title="v3 32.1%"></span><span class="stack-seg" style="width:41.40%;background:#3d9df0" title="v4 41.4%"></span><span class="stack-seg" style="width:9.10%;background:#43aa8b" title="v5 9.1%"></span></div></div><div class="stack-item"><div class="stack-title">Justicia</div><div class="stack-bar"><span class="stack-seg" style="width:4.10%;background:#8a56c3" title="v1 4.1%"></span><span class="stack-seg" style="width:10.80%;background:#29e3f1" title="v2 10.8%"></span><span class="stack-seg" style="width:31.60%;background:#e8a317" title="v3 31.6%"></span><span class="stack-seg" style="width:44.80%;background:#3d9df0" title="v4 44.8%"></span><span class="stack-seg" style="width:8.70%;background:#43aa8b" title="v5 8.7%"></span></div></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Área</th><th>Ha mejorado significativamente</th><th>Ha mejorado levemente</th><th>Se mantiene igual</th><th>Ha empeorado</th><th>NS/NR</th></tr></thead><tbody><tr><td>Gestión de la migración</td><td class="num">9.5%</td><td class="num">22.6%</td><td class="num">28.3%</td><td class="num">32.7%</td><td class="num">6.9%</td></tr><tr><td>Seguridad pública</td><td class="num">7.5%</td><td class="num">17.7%</td><td class="num">29.1%</td><td class="num">39.8%</td><td class="num">5.9%</td></tr><tr><td>Inversión y economía</td><td class="num">7.9%</td><td class="num">16.2%</td><td class="num">31.2%</td><td class="num">38.3%</td><td class="num">6.4%</td></tr><tr><td>Educación</td><td class="num">5.6%</td><td class="num">14.6%</td><td class="num">30.6%</td><td class="num">34.4%</td><td class="num">14.8%</td></tr><tr><td>Salud pública</td><td class="num">4.3%</td><td class="num">14.5%</td><td class="num">38.1%</td><td class="num">30.3%</td><td class="num">12.8%</td></tr><tr><td>Programas sociales</td><td class="num">4.9%</td><td class="num">12.5%</td><td class="num">32.1%</td><td class="num">41.4%</td><td class="num">9.1%</td></tr><tr><td>Justicia</td><td class="num">4.1%</td><td class="num">10.8%</td><td class="num">31.6%</td><td class="num">44.8%</td><td class="num">8.7%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p8" aria-labelledby="t8">
-  <header class="slide-head">
-    <span class="pill">P8</span>
-    <h2 id="t8">P8. Credibilidad de ministros y autoridades nacionales</h2>
-    <p class="lead">¿Cuál es el grado de credibilidad hacia las siguentes autoridades?</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="stack-list"><div class="stack-item"><div class="stack-title">Iván Poduje</div><div class="stack-bar"><span class="stack-seg" style="width:17.06%;background:#8a56c3" title="Mucha 17.1%"></span><span class="stack-seg" style="width:31.91%;background:#29e3f1" title="Algo 31.9%"></span><span class="stack-seg" style="width:16.32%;background:#e8a317" title="Poca 16.3%"></span><span class="stack-seg" style="width:22.79%;background:#3d9df0" title="Muy poca 22.8%"></span><span class="stack-seg" style="width:11.91%;background:#43aa8b" title="Nada o casi nada 11.9%"></span></div></div><div class="stack-item"><div class="stack-title">Claudio Alvarado</div><div class="stack-bar"><span class="stack-seg" style="width:18.16%;background:#8a56c3" title="Mucha 18.2%"></span><span class="stack-seg" style="width:29.96%;background:#29e3f1" title="Algo 30.0%"></span><span class="stack-seg" style="width:18.59%;background:#e8a317" title="Poca 18.6%"></span><span class="stack-seg" style="width:21.75%;background:#3d9df0" title="Muy poca 21.8%"></span><span class="stack-seg" style="width:11.54%;background:#43aa8b" title="Nada o casi nada 11.5%"></span></div></div><div class="stack-item"><div class="stack-title">Jorge Quiroz</div><div class="stack-bar"><span class="stack-seg" style="width:9.95%;background:#8a56c3" title="Mucha 10.0%"></span><span class="stack-seg" style="width:23.59%;background:#29e3f1" title="Algo 23.6%"></span><span class="stack-seg" style="width:24.11%;background:#e8a317" title="Poca 24.1%"></span><span class="stack-seg" style="width:26.17%;background:#3d9df0" title="Muy poca 26.2%"></span><span class="stack-seg" style="width:16.17%;background:#43aa8b" title="Nada o casi nada 16.2%"></span></div></div><div class="stack-item"><div class="stack-title">Trinidad Steinert</div><div class="stack-bar"><span class="stack-seg" style="width:10.47%;background:#8a56c3" title="Mucha 10.5%"></span><span class="stack-seg" style="width:18.44%;background:#29e3f1" title="Algo 18.4%"></span><span class="stack-seg" style="width:24.84%;background:#e8a317" title="Poca 24.8%"></span><span class="stack-seg" style="width:27.66%;background:#3d9df0" title="Muy poca 27.7%"></span><span class="stack-seg" style="width:18.59%;background:#43aa8b" title="Nada o casi nada 18.6%"></span></div></div><div class="stack-item"><div class="stack-title">Mara Sedini</div><div class="stack-bar"><span class="stack-seg" style="width:6.82%;background:#8a56c3" title="Mucha 6.8%"></span><span class="stack-seg" style="width:9.73%;background:#29e3f1" title="Algo 9.7%"></span><span class="stack-seg" style="width:21.96%;background:#e8a317" title="Poca 22.0%"></span><span class="stack-seg" style="width:30.97%;background:#3d9df0" title="Muy poca 31.0%"></span><span class="stack-seg" style="width:30.52%;background:#43aa8b" title="Nada o casi nada 30.5%"></span></div></div></div></div>
-    <div class="panel scroll-x"><table class="data-table tight"><thead><tr><th>Autoridad</th><th>Mucha</th><th>Algo</th><th>Poca</th><th>Muy poca</th><th>Nada o casi nada</th></tr></thead><tbody><tr><td>Iván Poduje</td><td class="num">17.1%</td><td class="num">31.9%</td><td class="num">16.3%</td><td class="num">22.8%</td><td class="num">11.9%</td></tr><tr><td>Claudio Alvarado</td><td class="num">18.2%</td><td class="num">30.0%</td><td class="num">18.6%</td><td class="num">21.8%</td><td class="num">11.5%</td></tr><tr><td>Jorge Quiroz</td><td class="num">10.0%</td><td class="num">23.6%</td><td class="num">24.1%</td><td class="num">26.2%</td><td class="num">16.2%</td></tr><tr><td>Trinidad Steinert</td><td class="num">10.5%</td><td class="num">18.4%</td><td class="num">24.8%</td><td class="num">27.7%</td><td class="num">18.6%</td></tr><tr><td>Mara Sedini</td><td class="num">6.8%</td><td class="num">9.7%</td><td class="num">22.0%</td><td class="num">31.0%</td><td class="num">30.5%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p9" aria-labelledby="t9">
-  <header class="slide-head">
-    <span class="pill">P9</span>
-    <h2 id="t9">P9. ¿A cuál le cree más?</h2>
-    <p class="lead">¿A cuál de los siguientes ministros o figuras públicas le cree más?</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="hbar-block"><div class="hbar-row"><span class="hbar-label">Iván Poduje</span><div class="hbar-track"><span class="hbar-fill" style="width:28.5%"></span></div><span class="hbar-pct">28.5%</span></div><div class="hbar-row"><span class="hbar-label">Claudio Alvarado</span><div class="hbar-track"><span class="hbar-fill" style="width:19.4%"></span></div><span class="hbar-pct">19.4%</span></div><div class="hbar-row"><span class="hbar-label">Jorge Quiroz</span><div class="hbar-track"><span class="hbar-fill" style="width:14.5%"></span></div><span class="hbar-pct">14.5%</span></div><div class="hbar-row"><span class="hbar-label">Trinidad Steinert</span><div class="hbar-track"><span class="hbar-fill" style="width:13.6%"></span></div><span class="hbar-pct">13.6%</span></div><div class="hbar-row"><span class="hbar-label">Mara Sedini</span><div class="hbar-track"><span class="hbar-fill" style="width:7.2%"></span></div><span class="hbar-pct">7.2%</span></div><div class="hbar-row"><span class="hbar-label">Ninguno</span><div class="hbar-track"><span class="hbar-fill" style="width:11.1%"></span></div><span class="hbar-pct">11.1%</span></div><div class="hbar-row"><span class="hbar-label">No sabe / No responde</span><div class="hbar-track"><span class="hbar-fill" style="width:5.7%"></span></div><span class="hbar-pct">5.7%</span></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Opción</th><th>%</th></tr></thead><tbody><tr><td>Iván Poduje</td><td class="num">28.5%</td></tr><tr><td>Claudio Alvarado</td><td class="num">19.4%</td></tr><tr><td>Jorge Quiroz</td><td class="num">14.5%</td></tr><tr><td>Trinidad Steinert</td><td class="num">13.6%</td></tr><tr><td>Mara Sedini</td><td class="num">7.2%</td></tr><tr><td>Ninguno</td><td class="num">11.1%</td></tr><tr><td>No sabe / No responde</td><td class="num">5.7%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p15" aria-labelledby="t15">
-  <header class="slide-head">
-    <span class="pill">P15</span>
-    <h2 id="t15">P15. Situación económica del país durante el Gobierno de Kast</h2>
-    <p class="lead">En relación con la situación económica del país, usted considera que durante el Gobierno de Kast esta:</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="hbar-block"><div class="hbar-row"><span class="hbar-label">Va a empeorar</span><div class="hbar-track"><span class="hbar-fill" style="width:36.7%"></span></div><span class="hbar-pct">36.7%</span></div><div class="hbar-row"><span class="hbar-label">Se va a mantener igual</span><div class="hbar-track"><span class="hbar-fill" style="width:30.3%"></span></div><span class="hbar-pct">30.3%</span></div><div class="hbar-row"><span class="hbar-label">Va a mejorar</span><div class="hbar-track"><span class="hbar-fill" style="width:26.7%"></span></div><span class="hbar-pct">26.7%</span></div><div class="hbar-row"><span class="hbar-label">No sabe / No responde</span><div class="hbar-track"><span class="hbar-fill" style="width:6.3%"></span></div><span class="hbar-pct">6.3%</span></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Opción</th><th>%</th></tr></thead><tbody><tr><td>Va a empeorar</td><td class="num">36.7%</td></tr><tr><td>Se va a mantener igual</td><td class="num">30.3%</td></tr><tr><td>Va a mejorar</td><td class="num">26.7%</td></tr><tr><td>No sabe / No responde</td><td class="num">6.3%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p16" aria-labelledby="t16">
-  <header class="slide-head">
-    <span class="pill">P16</span>
-    <h2 id="t16">P16. Confianza en instituciones</h2>
-    <p class="lead">¿Cuál es su grado de confianza hacia las siguientes instituciones?</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="stack-list"><div class="stack-item"><div class="stack-title">PDI</div><div class="stack-bar"><span class="stack-seg" style="width:20.80%;background:#8a56c3" title="Mucha 20.8%"></span><span class="stack-seg" style="width:42.30%;background:#29e3f1" title="Algo 42.3%"></span><span class="stack-seg" style="width:13.10%;background:#e8a317" title="Poca 13.1%"></span><span class="stack-seg" style="width:7.40%;background:#3d9df0" title="Muy poca 7.4%"></span><span class="stack-seg" style="width:9.70%;background:#43aa8b" title="Nada o casi nada 9.7%"></span><span class="stack-seg" style="width:6.70%;background:#7c8aad" title="NS/NR 6.7%"></span></div></div><div class="stack-item"><div class="stack-title">Carabineros</div><div class="stack-bar"><span class="stack-seg" style="width:17.30%;background:#8a56c3" title="Mucha 17.3%"></span><span class="stack-seg" style="width:40.10%;background:#29e3f1" title="Algo 40.1%"></span><span class="stack-seg" style="width:16.20%;background:#e8a317" title="Poca 16.2%"></span><span class="stack-seg" style="width:8.60%;background:#3d9df0" title="Muy poca 8.6%"></span><span class="stack-seg" style="width:11.70%;background:#43aa8b" title="Nada o casi nada 11.7%"></span><span class="stack-seg" style="width:6.10%;background:#7c8aad" title="NS/NR 6.1%"></span></div></div><div class="stack-item"><div class="stack-title">Fuerzas Armadas</div><div class="stack-bar"><span class="stack-seg" style="width:16.60%;background:#8a56c3" title="Mucha 16.6%"></span><span class="stack-seg" style="width:37.40%;background:#29e3f1" title="Algo 37.4%"></span><span class="stack-seg" style="width:16.30%;background:#e8a317" title="Poca 16.3%"></span><span class="stack-seg" style="width:10.50%;background:#3d9df0" title="Muy poca 10.5%"></span><span class="stack-seg" style="width:12.90%;background:#43aa8b" title="Nada o casi nada 12.9%"></span><span class="stack-seg" style="width:6.30%;background:#7c8aad" title="NS/NR 6.3%"></span></div></div><div class="stack-item"><div class="stack-title">Fiscales del Ministerio Público</div><div class="stack-bar"><span class="stack-seg" style="width:2.30%;background:#8a56c3" title="Mucha 2.3%"></span><span class="stack-seg" style="width:15.60%;background:#29e3f1" title="Algo 15.6%"></span><span class="stack-seg" style="width:22.90%;background:#e8a317" title="Poca 22.9%"></span><span class="stack-seg" style="width:19.30%;background:#3d9df0" title="Muy poca 19.3%"></span><span class="stack-seg" style="width:33.20%;background:#43aa8b" title="Nada o casi nada 33.2%"></span><span class="stack-seg" style="width:6.70%;background:#7c8aad" title="NS/NR 6.7%"></span></div></div><div class="stack-item"><div class="stack-title">Jueces</div><div class="stack-bar"><span class="stack-seg" style="width:2.40%;background:#8a56c3" title="Mucha 2.4%"></span><span class="stack-seg" style="width:13.20%;background:#29e3f1" title="Algo 13.2%"></span><span class="stack-seg" style="width:16.40%;background:#e8a317" title="Poca 16.4%"></span><span class="stack-seg" style="width:24.10%;background:#3d9df0" title="Muy poca 24.1%"></span><span class="stack-seg" style="width:37.50%;background:#43aa8b" title="Nada o casi nada 37.5%"></span><span class="stack-seg" style="width:6.40%;background:#7c8aad" title="NS/NR 6.4%"></span></div></div><div class="stack-item"><div class="stack-title">Parlamento</div><div class="stack-bar"><span class="stack-seg" style="width:1.80%;background:#8a56c3" title="Mucha 1.8%"></span><span class="stack-seg" style="width:6.80%;background:#29e3f1" title="Algo 6.8%"></span><span class="stack-seg" style="width:19.60%;background:#e8a317" title="Poca 19.6%"></span><span class="stack-seg" style="width:21.80%;background:#3d9df0" title="Muy poca 21.8%"></span><span class="stack-seg" style="width:43.90%;background:#43aa8b" title="Nada o casi nada 43.9%"></span><span class="stack-seg" style="width:6.10%;background:#7c8aad" title="NS/NR 6.1%"></span></div></div></div></div>
-    <div class="panel scroll-x"><table class="data-table tight"><thead><tr><th>Institución</th><th>Mucha</th><th>Algo</th><th>Poca</th><th>Muy poca</th><th>Nada o casi nada</th><th>NS/NR</th></tr></thead><tbody><tr><td>PDI</td><td class="num">20.8%</td><td class="num">42.3%</td><td class="num">13.1%</td><td class="num">7.4%</td><td class="num">9.7%</td><td class="num">6.7%</td></tr><tr><td>Carabineros</td><td class="num">17.3%</td><td class="num">40.1%</td><td class="num">16.2%</td><td class="num">8.6%</td><td class="num">11.7%</td><td class="num">6.1%</td></tr><tr><td>Fuerzas Armadas</td><td class="num">16.6%</td><td class="num">37.4%</td><td class="num">16.3%</td><td class="num">10.5%</td><td class="num">12.9%</td><td class="num">6.3%</td></tr><tr><td>Fiscales del Ministerio Público</td><td class="num">2.3%</td><td class="num">15.6%</td><td class="num">22.9%</td><td class="num">19.3%</td><td class="num">33.2%</td><td class="num">6.7%</td></tr><tr><td>Jueces</td><td class="num">2.4%</td><td class="num">13.2%</td><td class="num">16.4%</td><td class="num">24.1%</td><td class="num">37.5%</td><td class="num">6.4%</td></tr><tr><td>Parlamento</td><td class="num">1.8%</td><td class="num">6.8%</td><td class="num">19.6%</td><td class="num">21.8%</td><td class="num">43.9%</td><td class="num">6.1%</td></tr></tbody></table></div>
-  </div>
-</section>
-
-<section class="slide" id="p17" aria-labelledby="t17">
-  <header class="slide-head">
-    <span class="pill">P17</span>
-    <h2 id="t17">P17. Comparación con el Gobierno de Boric</h2>
-    <p class="lead">En relación con el Gobierno de Boric, usted cree que el Gobierno de Kast es:</p>
-  </header>
-  <div class="slide-body">
-    <div class="panel"><div class="hbar-block"><div class="hbar-row"><span class="hbar-label">Algo mejor</span><div class="hbar-track"><span class="hbar-fill" style="width:22.8%"></span></div><span class="hbar-pct">22.8%</span></div><div class="hbar-row"><span class="hbar-label">Mucho mejor</span><div class="hbar-track"><span class="hbar-fill" style="width:20.3%"></span></div><span class="hbar-pct">20.3%</span></div><div class="hbar-row"><span class="hbar-label">Igual</span><div class="hbar-track"><span class="hbar-fill" style="width:19.9%"></span></div><span class="hbar-pct">19.9%</span></div><div class="hbar-row"><span class="hbar-label">Algo peor</span><div class="hbar-track"><span class="hbar-fill" style="width:16.6%"></span></div><span class="hbar-pct">16.6%</span></div><div class="hbar-row"><span class="hbar-label">Mucho peor</span><div class="hbar-track"><span class="hbar-fill" style="width:14.6%"></span></div><span class="hbar-pct">14.6%</span></div><div class="hbar-row"><span class="hbar-label">No sabe / No responde</span><div class="hbar-track"><span class="hbar-fill" style="width:5.8%"></span></div><span class="hbar-pct">5.8%</span></div></div></div>
-    <div class="panel scroll-x"><table class="data-table"><thead><tr><th>Opción</th><th>%</th></tr></thead><tbody><tr><td>Algo mejor</td><td class="num">22.8%</td></tr><tr><td>Mucho mejor</td><td class="num">20.3%</td></tr><tr><td>Igual</td><td class="num">19.9%</td></tr><tr><td>Algo peor</td><td class="num">16.6%</td></tr><tr><td>Mucho peor</td><td class="num">14.6%</td></tr><tr><td>No sabe / No responde</td><td class="num">5.8%</td></tr></tbody></table></div>
-  </div>
-</section>
-
   </main>
+
   <footer>
-    Datos embebidos en JSON. Portada: SIGNOS analytics.
+    Programa Copiapó · SIGNOS analytics · Catálogo de presentaciones.
   </footer>
-<script type="application/json" id="survey-data">[
-  {
-    "id": 1,
-    "title": "P1. Conocimiento de autoridades",
-    "short_title": "Conocimiento de autoridades",
-    "question": "Por favor, indique si usted conoce o ha oído hablar de las siguientes autoridades.",
-    "table_type": "two_pct",
-    "columns": [
-      "Autoridad",
-      "Conoce",
-      "No conoce"
-    ],
-    "rows": [
-      {
-        "label": "José Antonio Kast",
-        "a": 0.986,
-        "b": 0.014
-      },
-      {
-        "label": "Rodrigo Mundaca",
-        "a": 0.922,
-        "b": 0.07799999999999996
-      },
-      {
-        "label": "Mara Sedini",
-        "a": 0.865,
-        "b": 0.135
-      },
-      {
-        "label": "Iván Poduje",
-        "a": 0.722,
-        "b": 0.278
-      },
-      {
-        "label": "Jorge Quiroz",
-        "a": 0.714,
-        "b": 0.286
-      },
-      {
-        "label": "Manuel Millones",
-        "a": 0.693,
-        "b": 0.30700000000000005
-      },
-      {
-        "label": "Trinidad Steinert",
-        "a": 0.686,
-        "b": 0.314
-      },
-      {
-        "label": "Claudio Alvarado",
-        "a": 0.504,
-        "b": 0.496
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "title": "P2. Confianza general en el Gobierno de Kast",
-    "short_title": "Confianza general en el Gobierno de Kast",
-    "question": "En relación con el Gobierno de Kast, ¿cuál es el grado de confianza que tiene usted hacia este Gobierno?",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Nada o casi nada",
-        "pct": 0.292
-      },
-      {
-        "label": "Algo",
-        "pct": 0.211
-      },
-      {
-        "label": "Muy poca",
-        "pct": 0.174
-      },
-      {
-        "label": "Poca",
-        "pct": 0.135
-      },
-      {
-        "label": "Mucha",
-        "pct": 0.119
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.069
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "title": "P3. Cumplimiento del programa",
-    "short_title": "Cumplimiento del programa",
-    "question": "En relación con el Gobierno de Kast, usted diría que:",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "No está cumpliendo su programa",
-        "pct": 0.514
-      },
-      {
-        "label": "Está cumpliendo su programa",
-        "pct": 0.374
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.112
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "title": "P4. Cumplimiento de políticas públicas",
-    "short_title": "Cumplimiento de políticas públicas",
-    "question": "Para cada una de las siguientes áreas, indique si usted cree que el Gobierno de Kast está cumpliendo o no está cumpliendo.",
-    "table_type": "three_pct",
-    "columns": [
-      "Área",
-      "Cumple",
-      "No cumple",
-      "No sabe / No responde"
-    ],
-    "rows": [
-      {
-        "label": "Control de la migración",
-        "c1": 0.408,
-        "c2": 0.485,
-        "c3": 0.107
-      },
-      {
-        "label": "Orden público",
-        "c1": 0.368,
-        "c2": 0.529,
-        "c3": 0.103
-      },
-      {
-        "label": "Seguridad",
-        "c1": 0.333,
-        "c2": 0.561,
-        "c3": 0.106
-      },
-      {
-        "label": "Crecimiento económico",
-        "c1": 0.331,
-        "c2": 0.573,
-        "c3": 0.096
-      },
-      {
-        "label": "Política exterior autónoma",
-        "c1": 0.283,
-        "c2": 0.464,
-        "c3": 0.253
-      },
-      {
-        "label": "Control de los abusos",
-        "c1": 0.263,
-        "c2": 0.525,
-        "c3": 0.212
-      }
-    ]
-  },
-  {
-    "id": 5,
-    "title": "P5. Percepción sobre calidad de vida",
-    "short_title": "Percepción sobre calidad de vida",
-    "question": "Desde que asumió el Gobierno de Kast, usted siente que su vida:",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Está igual",
-        "pct": 0.503
-      },
-      {
-        "label": "Ha empeorado",
-        "pct": 0.276
-      },
-      {
-        "label": "Ha mejorado",
-        "pct": 0.174
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.047
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "title": "P6. Evaluación de desempeño de autoridades por tramos de nota",
-    "short_title": "Evaluación de desempeño de autoridades por tramos de nota",
-    "question": "Evalúe el desempeño de las siguientes autoridades con una nota de 1 a 7, donde 1 significa “pésimo” y 7 significa “excelente”.",
-    "table_type": "grade_bands",
-    "columns": [
-      "Autoridad",
-      "Nota 1-3",
-      "Nota 4-5",
-      "Nota 6-7"
-    ],
-    "rows": [
-      {
-        "label": "Rodrigo Mundaca",
-        "b1": 0.3673245614035088,
-        "b2": 0.3804824561403509,
-        "b3": 0.25219298245614036,
-        "total": 1
-      },
-      {
-        "label": "José Antonio Kast",
-        "b1": 0.415574650912997,
-        "b2": 0.3458646616541353,
-        "b3": 0.238560687432868,
-        "total": 1.0000000000000004
-      },
-      {
-        "label": "Iván Poduje",
-        "b1": 0.32445355191256825,
-        "b2": 0.4651639344262295,
-        "b3": 0.21038251366120217,
-        "total": 0.9999999999999999
-      },
-      {
-        "label": "Claudio Alvarado",
-        "b1": 0.3349514563106796,
-        "b2": 0.4766990291262136,
-        "b3": 0.1883495145631068,
-        "total": 0.9999999999999999
-      },
-      {
-        "label": "Trinidad Steinert",
-        "b1": 0.48633093525179855,
-        "b2": 0.37122302158273385,
-        "b3": 0.14244604316546763,
-        "total": 1
-      },
-      {
-        "label": "Jorge Quiroz",
-        "b1": 0.45221606648199447,
-        "b2": 0.41759002770083103,
-        "b3": 0.13019390581717452,
-        "total": 1
-      },
-      {
-        "label": "Manuel Millones",
-        "b1": 0.5217391304347826,
-        "b2": 0.3641304347826087,
-        "b3": 0.1141304347826087,
-        "total": 1
-      },
-      {
-        "label": "Mara Sedini",
-        "b1": 0.5839120370370371,
-        "b2": 0.32928240740740744,
-        "b3": 0.08680555555555557,
-        "total": 1
-      }
-    ]
-  },
-  {
-    "id": 7,
-    "title": "P7. Evolución por áreas",
-    "short_title": "Evolución por áreas",
-    "question": "Seleccione la opción que mejor representa su opinión sobre el desempeño del gobierno en las siguientes áreas.",
-    "table_type": "evolution",
-    "columns": [
-      "Área",
-      "Ha mejorado significativamente",
-      "Ha mejorado levemente",
-      "Se mantiene igual",
-      "Ha empeorado",
-      "NS/NR"
-    ],
-    "rows": [
-      {
-        "label": "Gestión de la migración",
-        "v1": 0.095,
-        "v2": 0.226,
-        "v3": 0.283,
-        "v4": 0.327,
-        "v5": 0.069
-      },
-      {
-        "label": "Seguridad pública",
-        "v1": 0.075,
-        "v2": 0.177,
-        "v3": 0.291,
-        "v4": 0.398,
-        "v5": 0.059
-      },
-      {
-        "label": "Inversión y economía",
-        "v1": 0.079,
-        "v2": 0.162,
-        "v3": 0.312,
-        "v4": 0.383,
-        "v5": 0.064
-      },
-      {
-        "label": "Educación",
-        "v1": 0.056,
-        "v2": 0.146,
-        "v3": 0.306,
-        "v4": 0.344,
-        "v5": 0.148
-      },
-      {
-        "label": "Salud pública",
-        "v1": 0.043,
-        "v2": 0.145,
-        "v3": 0.381,
-        "v4": 0.303,
-        "v5": 0.128
-      },
-      {
-        "label": "Programas sociales",
-        "v1": 0.049,
-        "v2": 0.125,
-        "v3": 0.321,
-        "v4": 0.414,
-        "v5": 0.091
-      },
-      {
-        "label": "Justicia",
-        "v1": 0.041,
-        "v2": 0.108,
-        "v3": 0.316,
-        "v4": 0.448,
-        "v5": 0.087
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "title": "P8. Credibilidad de ministros y autoridades nacionales",
-    "short_title": "Credibilidad de ministros y autoridades nacionales",
-    "question": "¿Cuál es el grado de credibilidad hacia las siguentes autoridades?",
-    "table_type": "credibility",
-    "columns": [
-      "Autoridad",
-      "Mucha",
-      "Algo",
-      "Poca",
-      "Muy poca",
-      "Nada o casi nada"
-    ],
-    "rows": [
-      {
-        "label": "Iván Poduje",
-        "Mucha": 0.17058823529411768,
-        "Algo": 0.3191176470588235,
-        "Poca": 0.1632352941176471,
-        "Muy poca": 0.22794117647058823,
-        "Nada o casi nada": 0.11911764705882355
-      },
-      {
-        "label": "Claudio Alvarado",
-        "Mucha": 0.18162393162393164,
-        "Algo": 0.2995726495726496,
-        "Poca": 0.1858974358974359,
-        "Muy poca": 0.21752136752136753,
-        "Nada o casi nada": 0.11538461538461539
-      },
-      {
-        "label": "Jorge Quiroz",
-        "Mucha": 0.09953343701399689,
-        "Algo": 0.23592534992223949,
-        "Poca": 0.2410575427682737,
-        "Muy poca": 0.26174183514774496,
-        "Nada o casi nada": 0.16174183514774493
-      },
-      {
-        "label": "Trinidad Steinert",
-        "Mucha": 0.1046875,
-        "Algo": 0.18437499999999998,
-        "Poca": 0.2484375,
-        "Muy poca": 0.27656250000000004,
-        "Nada o casi nada": 0.18593749999999998
-      },
-      {
-        "label": "Mara Sedini",
-        "Mucha": 0.06823821339950371,
-        "Algo": 0.09727047146401985,
-        "Poca": 0.21960297766749376,
-        "Muy poca": 0.3096774193548387,
-        "Nada o casi nada": 0.3052109181141439
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "title": "P9. ¿A cuál le cree más?",
-    "short_title": "¿A cuál le cree más?",
-    "question": "¿A cuál de los siguientes ministros o figuras públicas le cree más?",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Iván Poduje",
-        "pct": 0.285
-      },
-      {
-        "label": "Claudio Alvarado",
-        "pct": 0.194
-      },
-      {
-        "label": "Jorge Quiroz",
-        "pct": 0.145
-      },
-      {
-        "label": "Trinidad Steinert",
-        "pct": 0.136
-      },
-      {
-        "label": "Mara Sedini",
-        "pct": 0.072
-      },
-      {
-        "label": "Ninguno",
-        "pct": 0.111
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.057
-      }
-    ]
-  },
-  {
-    "id": 15,
-    "title": "P15. Situación económica del país durante el Gobierno de Kast",
-    "short_title": "Situación económica del país durante el Gobierno de Kast",
-    "question": "En relación con la situación económica del país, usted considera que durante el Gobierno de Kast esta:",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Va a empeorar",
-        "pct": 0.367
-      },
-      {
-        "label": "Se va a mantener igual",
-        "pct": 0.303
-      },
-      {
-        "label": "Va a mejorar",
-        "pct": 0.267
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.063
-      }
-    ]
-  },
-  {
-    "id": 16,
-    "title": "P16. Confianza en instituciones",
-    "short_title": "Confianza en instituciones",
-    "question": "¿Cuál es su grado de confianza hacia las siguientes instituciones?",
-    "table_type": "credibility",
-    "columns": [
-      "Institución",
-      "Mucha",
-      "Algo",
-      "Poca",
-      "Muy poca",
-      "Nada o casi nada",
-      "NS/NR"
-    ],
-    "rows": [
-      {
-        "label": "PDI",
-        "Mucha": 0.208,
-        "Algo": 0.423,
-        "Poca": 0.131,
-        "Muy poca": 0.074,
-        "Nada o casi nada": 0.097,
-        "NS/NR": 0.067
-      },
-      {
-        "label": "Carabineros",
-        "Mucha": 0.173,
-        "Algo": 0.401,
-        "Poca": 0.162,
-        "Muy poca": 0.086,
-        "Nada o casi nada": 0.117,
-        "NS/NR": 0.061
-      },
-      {
-        "label": "Fuerzas Armadas",
-        "Mucha": 0.166,
-        "Algo": 0.374,
-        "Poca": 0.163,
-        "Muy poca": 0.105,
-        "Nada o casi nada": 0.129,
-        "NS/NR": 0.063
-      },
-      {
-        "label": "Fiscales del Ministerio Público",
-        "Mucha": 0.023,
-        "Algo": 0.156,
-        "Poca": 0.229,
-        "Muy poca": 0.193,
-        "Nada o casi nada": 0.332,
-        "NS/NR": 0.067
-      },
-      {
-        "label": "Jueces",
-        "Mucha": 0.024,
-        "Algo": 0.132,
-        "Poca": 0.164,
-        "Muy poca": 0.241,
-        "Nada o casi nada": 0.375,
-        "NS/NR": 0.064
-      },
-      {
-        "label": "Parlamento",
-        "Mucha": 0.018,
-        "Algo": 0.068,
-        "Poca": 0.196,
-        "Muy poca": 0.218,
-        "Nada o casi nada": 0.439,
-        "NS/NR": 0.061
-      }
-    ]
-  },
-  {
-    "id": 17,
-    "title": "P17. Comparación con el Gobierno de Boric",
-    "short_title": "Comparación con el Gobierno de Boric",
-    "question": "En relación con el Gobierno de Boric, usted cree que el Gobierno de Kast es:",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Algo mejor",
-        "pct": 0.228
-      },
-      {
-        "label": "Mucho mejor",
-        "pct": 0.203
-      },
-      {
-        "label": "Igual",
-        "pct": 0.199
-      },
-      {
-        "label": "Algo peor",
-        "pct": 0.166
-      },
-      {
-        "label": "Mucho peor",
-        "pct": 0.146
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.058
-      }
-    ]
-  },
-  {
-    "id": 10,
-    "title": "P10. Confianza en figuras políticas de Valparaíso",
-    "short_title": "Confianza en figuras políticas de Valparaíso",
-    "question": "¿Cuál es el grado de credibilidad hacia las siguentes autoridades?",
-    "table_type": "credibility",
-    "columns": [
-      "Figura política",
-      "Mucha",
-      "Algo",
-      "Poca",
-      "Muy poca",
-      "Nada o casi nada"
-    ],
-    "rows": [
-      {
-        "label": "Rodrigo Mundaca",
-        "Mucha": 0.17245240761478162,
-        "Algo": 0.2777155655095185,
-        "Poca": 0.19372900335946247,
-        "Muy poca": 0.1623740201567749,
-        "Nada o casi nada": 0.19372900335946247
-      },
-      {
-        "label": "Andrés Longton",
-        "Mucha": 0.1303225806451613,
-        "Algo": 0.27225806451612905,
-        "Poca": 0.19483870967741937,
-        "Muy poca": 0.1470967741935484,
-        "Nada o casi nada": 0.255483870967742
-      },
-      {
-        "label": "Arturo Squella",
-        "Mucha": 0.1070063694267516,
-        "Algo": 0.23694267515923564,
-        "Poca": 0.19617834394904457,
-        "Muy poca": 0.15796178343949044,
-        "Nada o casi nada": 0.3019108280254777
-      },
-      {
-        "label": "Karol Cariola",
-        "Mucha": 0.1119311193111931,
-        "Algo": 0.2164821648216482,
-        "Poca": 0.17835178351783515,
-        "Muy poca": 0.16974169741697417,
-        "Nada o casi nada": 0.3234932349323493
-      },
-      {
-        "label": "Camila Flores",
-        "Mucha": 0.0900243309002433,
-        "Algo": 0.20802919708029197,
-        "Poca": 0.148029197080292,
-        "Muy poca": 0.1630170316301703,
-        "Nada o casi nada": 0.390900243309002
-      },
-      {
-        "label": "Manuel Millones",
-        "Mucha": 0.06442577030812326,
-        "Algo": 0.1722689075630252,
-        "Poca": 0.2535014005602241,
-        "Muy poca": 0.242296918767507,
-        "Nada o casi nada": 0.26750700280112044
-      }
-    ]
-  },
-  {
-    "id": 11,
-    "title": "P11. Figura política de Valparaíso en la que más confía",
-    "short_title": "Figura política de Valparaíso en la que más confía",
-    "question": "¿En cuál de las siguientes figuras de Valparaíso tiene usted más confianza?",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Rodrigo Mundaca",
-        "pct": 0.239
-      },
-      {
-        "label": "Andrés Longton",
-        "pct": 0.198
-      },
-      {
-        "label": "Karol Cariola",
-        "pct": 0.176
-      },
-      {
-        "label": "Arturo Squella",
-        "pct": 0.118
-      },
-      {
-        "label": "Manuel Millones",
-        "pct": 0.076
-      },
-      {
-        "label": "Camila Flores",
-        "pct": 0.071
-      },
-      {
-        "label": "Ninguno",
-        "pct": 0.076
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.046
-      }
-    ]
-  },
-  {
-    "id": 12,
-    "title": "P12. Proyecto de “Reconstrucción Nacional” tras los incendios",
-    "short_title": "Proyecto de “Reconstrucción Nacional” tras los incendios",
-    "question": "Respecto al proyecto de “Reconstrucción Nacional” tras los incendios, usted cree que:",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Los recursos llegan, pero con mucha burocracia",
-        "pct": 0.366
-      },
-      {
-        "label": "La ayuda es casi inexistente en mi zona",
-        "pct": 0.276
-      },
-      {
-        "label": "Solo se está ayudando a ciertos sectores",
-        "pct": 0.135
-      },
-      {
-        "label": "Los recursos están llegando con rapidez",
-        "pct": 0.105
-      },
-      {
-        "label": "No conoce el proyecto",
-        "pct": 0.066
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.052
-      }
-    ]
-  },
-  {
-    "id": 13,
-    "title": "P13. Relación entre Mundaca y Millones",
-    "short_title": "Relación entre Mundaca y Millones",
-    "question": "Sobre la relación entre el Gobernador Regional Rodrigo Mundaca y el Delegado Presidencial Regional Manuel Millones, usted diría que",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Es una relación de competencia que frena proyectos",
-        "pct": 0.293
-      },
-      {
-        "label": "Hay un conflicto político que perjudica a los ciudadanos",
-        "pct": 0.267
-      },
-      {
-        "label": "No existe comunicación entre ellos",
-        "pct": 0.213
-      },
-      {
-        "label": "Es una colaboración productiva para la región",
-        "pct": 0.151
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.076
-      }
-    ]
-  },
-  {
-    "id": 14,
-    "title": "P14. Foco principal del presupuesto regional",
-    "short_title": "Foco principal del presupuesto regional",
-    "question": "Pensando en la Región de Valparaíso, ¿cuál cree usted que debe ser el foco principal del presupuesto regional?",
-    "table_type": "simple_pct",
-    "columns": [
-      "Opción",
-      "Porcentaje"
-    ],
-    "rows": [
-      {
-        "label": "Seguridad y combate al narcotráfico",
-        "pct": 0.366
-      },
-      {
-        "label": "Vivienda y erradicación de campamentos",
-        "pct": 0.233
-      },
-      {
-        "label": "Crisis hídrica y acceso al agua",
-        "pct": 0.144
-      },
-      {
-        "label": "Reactivación del turismo y puertos",
-        "pct": 0.107
-      },
-      {
-        "label": "Salud e infraestructura hospitalaria",
-        "pct": 0.105
-      },
-      {
-        "label": "Otro",
-        "pct": 0.016
-      },
-      {
-        "label": "No sabe / No responde",
-        "pct": 0.029
-      }
-    ]
-  }
-]</script>
-  <nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
+<nav class="deck-nav-fixed" aria-label="Navegación entre presentaciones">
     <a class="deck-nav-link deck-nav-prev" href="presentacion_smartgore_atacama_nemoclaw.html">← Anterior</a>
     <a class="deck-nav-link deck-nav-hub" href="#deck-catalogo">Índice</a>
     <a class="deck-nav-link deck-nav-next" href="presentacion_vargas.html">Siguiente →</a>

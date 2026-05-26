@@ -21,15 +21,14 @@
       --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
       --radius: 10px;
       --maxw: 920px;
+      --deck-chrome-top: 3.35rem;
     }
     @media (prefers-reduced-motion: reduce) {
       .slide-reveal, .anim-item, .cover-glow, .quote-highlight { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.52; }
-    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
-    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
-    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.98); backdrop-filter: blur(8px); }
     nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .76rem; }
     nav.toc a { padding: .2rem .5rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
     nav.toc a:hover { background: rgba(41,227,241,.28); }
@@ -319,14 +318,16 @@
       font-size: .74rem;
     }
     mark.hl { background: linear-gradient(120deg, rgba(138,86,195,.35), rgba(41,227,241,.28)); font-weight: 600; padding: .06em .12em; border-radius: 3px; }
+
+
+    body.has-deck-nav main {
+      padding: max(4px, var(--deck-main-pad-y, 0px)) 0.45rem max(2px, env(safe-area-inset-bottom, 0px)) !important;
+    }
+
   </style>
 </head>
 <body class="has-deck-nav">
-  <div class="sticky-head">
-    <div class="brand-bar">
-      <a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
-    </div>
-    <nav class="toc" aria-label="Índice">
+  <div class="sticky-head sticky-head--compact"><nav class="toc" aria-label="Índice">
       <div class="inner">
         <strong style="margin-right:.32rem;color:var(--dk)">Láminas:</strong>
         <a href="#smartagro1">Título</a>
@@ -341,7 +342,8 @@
   </div>
 
   <main>
-    <header class="cover-lamina slide-reveal" id="smartagro1">
+    <header class="cover-lamina slide-reveal deck-fill-slide" id="smartagro1">
+            <p class="slide-brand slide-brand--dark"><a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
       <div class="cover-glow" aria-hidden="true"></div>
       <div class="cover-chip">Fitosanidad · Edge AI · IoT regional</div>
       <div class="cover-content">
@@ -357,7 +359,9 @@
       </div>
     </header>
 
-    <section class="slide slide-reveal" id="smartagro2" style="border-left-color:rgba(30,107,71,.65)">
+    <section class="slide deck-fill-slide slide-reveal" id="smartagro2" style="border-left-color:rgba(30,107,71,.65)">
+  <p class="slide-brand"><a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Territorio</span>
       <h2 class="anim-item">Contexto territorial · Región de Atacama</h2>
       <p class="lead anim-item">Zona agrícola estratégica para exportación y producción intensiva del norte — condiciones muy favorables para despliegue <mark class="hl">IoT/LPWAN</mark> tipo LoRaWAN.</p>
@@ -374,7 +378,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="smartagro3">
+    <section class="slide deck-fill-slide slide-reveal" id="smartagro3">
+  <p class="slide-brand"><a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Problemática</span>
       <h2 class="anim-item">Mosca de la fruta y limitaciones actuales</h2>
       <div class="cols-2">
@@ -398,7 +404,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="smartagro4">
+    <section class="slide deck-fill-slide slide-reveal" id="smartagro4">
+  <p class="slide-brand"><a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Propuesta</span>
       <h2 class="anim-item">Red inteligente de vigilancia fitosanitaria</h2>
       <p class="lead anim-item">Infraestructura regional escalable para detección y conteo <strong>automático</strong>, con comunicación eficiente hacia una plataforma central.</p>
@@ -417,7 +425,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="smartagro5">
+    <section class="slide deck-fill-slide slide-reveal" id="smartagro5">
+  <p class="slide-brand"><a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Operación</span>
       <h2 class="anim-item">Funcionamiento integrado · Borde vs central</h2>
       <div class="flow-split">
@@ -442,7 +452,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="smartagro6" style="border-left-color:rgba(138,86,195,.85)">
+    <section class="slide deck-fill-slide slide-reveal" id="smartagro6" style="border-left-color:rgba(138,86,195,.85)">
+  <p class="slide-brand"><a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Valor</span>
       <h2 class="anim-item">Beneficios y resultado esperado</h2>
       <div class="benefit-grid">
@@ -485,7 +497,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal infographic-slide" id="smartagro-diagram">
+    <section class="slide deck-fill-slide slide-reveal infographic-slide" id="smartagro-diagram">
+  <p class="slide-brand"><a href="#smartagro1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Esquema general</span>
       <h2 class="anim-item">Sistema de trampas Jackson inteligentes · IA Edge + LoRaWAN</h2>
       <p class="lead anim-item">Diagrama técnico de referencia: nodo en campo, red LoRaWAN, plataforma cloud y visualización regional.</p>

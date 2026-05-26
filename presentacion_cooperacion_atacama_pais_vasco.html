@@ -21,15 +21,14 @@
       --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
       --radius: 10px;
       --maxw: 920px;
+      --deck-chrome-top: 3.35rem;
     }
     @media (prefers-reduced-motion: reduce) {
       .slide-reveal, .anim-item, .cover-glow { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.52; }
-    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
-    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
-    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(14px, 1.5vw, 16px); line-height: 1.55; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.98); backdrop-filter: blur(8px); }
     nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .74rem; }
     nav.toc a { padding: .2rem .48rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
     nav.toc a:hover { background: rgba(41,227,241,.26); }
@@ -156,9 +155,9 @@
       padding: .11rem .42rem;
       border-radius: 999px;
     }
-    h2 { margin: .18rem 0 0; font-size: clamp(.96rem, 2.45vw, 1.12rem); line-height: 1.28; color: var(--signos-deep); }
-    h3 { font-size: .86rem; color: var(--basque-green); margin: .55rem 0 .35rem; }
-    .lead { color: #4b5569; font-size: .82rem; margin: .42rem 0 0; }
+    h2 { margin: .18rem 0 0; font-size: clamp(1.02rem, 2.35vw, 1.26rem); line-height: 1.26; color: var(--signos-deep); }
+    h3 { font-size: .92rem; color: var(--basque-green); margin: .55rem 0 .35rem; }
+    .lead { color: #4b5569; font-size: .88rem; margin: .42rem 0 0; }
     mark.hl {
       background: linear-gradient(120deg, rgba(138,86,195,.34), rgba(41,227,241,.3));
       font-weight: 600;
@@ -169,7 +168,7 @@
     .bp-list {
       margin: .5rem 0 0;
       padding-left: 1.15rem;
-      font-size: .8rem;
+      font-size: .86rem;
       color: #3d475c;
     }
     .bp-list li { margin: .3rem 0; }
@@ -195,7 +194,7 @@
       padding: .5rem .58rem;
       border: 1px solid rgba(0,74,153,.13);
       background: linear-gradient(155deg, rgba(138,86,195,.07), rgba(13,92,63,.06));
-      font-size: .74rem;
+      font-size: .8rem;
     }
     .slide-reveal.is-visible .area-card {
       animation: fadeInUp .48s ease backwards;
@@ -222,7 +221,7 @@
       border-radius: 8px;
       border-left: 4px solid var(--signos-cyan);
       background: rgba(0,74,153,.045);
-      font-size: .77rem;
+      font-size: .84rem;
     }
     .slide-reveal.is-visible .stage-card {
       animation: fadeInUp .48s ease backwards;
@@ -248,20 +247,241 @@
     }
     .resultado-list { margin: .45rem 0 0; padding-left: 1.1rem; font-size: .79rem; font-weight: 400; color: #3d475c; }
     .resultado-list li { margin: .28rem 0; }
+    .fund-prose { font-size: .82rem; line-height: 1.46; color: #3d475c; margin: 0; }
+    .fund-prose p { margin: .28rem 0; }
+    .fund-h3 {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-size: .92rem;
+      color: var(--signos-deep);
+      margin: .4rem 0 .18rem;
+      line-height: 1.22;
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .71rem;
+      margin-top: 0.32rem;
+      line-height: 1.34;
+    }
+    .comp-table th,
+    .comp-table td {
+      border: 1px solid rgba(0, 74, 153, 0.16);
+      padding: 0.2rem 0.28rem;
+      vertical-align: top;
+    }
+    .comp-table th {
+      background: rgba(13, 92, 63, 0.12);
+      font-weight: 700;
+      color: var(--signos-deep);
+      text-align: left;
+    }
+    .comp-table td:first-child {
+      font-weight: 600;
+      color: var(--signos-deep);
+      max-width: 5.8rem;
+    }
+
+    /* Financing flow diagrams (replaces monospace ASCII art) */
+    .blend-merge {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.42rem;
+      margin-top: 0.42rem;
+      align-items: stretch;
+    }
+    @media (max-width: 760px) {
+      .blend-merge { grid-template-columns: 1fr; }
+    }
+    .blend-pillar {
+      padding: 0.48rem 0.55rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 74, 153, 0.18);
+      box-shadow: 0 4px 14px rgba(0, 54, 113, 0.08);
+      background: #fff;
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+    .blend-pillar--eu {
+      background: linear-gradient(155deg, rgba(138, 86, 195, 0.1) 0%, #fff 52%);
+      border-color: rgba(138, 86, 195, 0.42);
+    }
+    .blend-pillar--cl {
+      background: linear-gradient(155deg, rgba(41, 227, 241, 0.1) 0%, #fff 52%);
+      border-color: rgba(13, 92, 63, 0.42);
+    }
+    .blend-pillar strong {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--signos-deep);
+      margin-bottom: 0.2rem;
+      font-family: "Montserrat", system-ui, sans-serif;
+    }
+    .blend-merge-join {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 0.52rem 0.6rem;
+      border-radius: 12px;
+      background: linear-gradient(92deg, rgba(138, 86, 195, 0.16), rgba(41, 227, 241, 0.14));
+      border: 2px solid rgba(0, 74, 153, 0.28);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--signos-deep);
+      line-height: 1.35;
+    }
+
+    .flow-kicker {
+      font-size: 0.64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--signos-purple);
+      display: block;
+      margin-bottom: 0.22rem;
+    }
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0.32rem;
+      margin-top: 0.4rem;
+    }
+    .flow-step {
+      flex: 1 1 130px;
+      min-width: 0;
+      max-width: 240px;
+      padding: 0.48rem 0.52rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 74, 153, 0.16);
+      background: linear-gradient(180deg, #fff 0%, rgba(41, 227, 241, 0.06) 100%);
+      box-shadow: 0 4px 14px rgba(0, 54, 113, 0.07);
+      font-size: 0.76rem;
+      line-height: 1.38;
+    }
+    .flow-step strong {
+      font-family: "Montserrat", system-ui, sans-serif;
+      color: var(--signos-deep);
+      font-size: 0.8rem;
+    }
+    .flow-step-meta {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.72rem;
+      color: #4b5569;
+    }
+    .flow-conn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--signos-navy);
+      line-height: 1;
+      min-width: 1.75rem;
+      align-self: center;
+    }
+    @media (max-width: 660px) {
+      .flow-steps { flex-direction: column; align-items: stretch; }
+      .flow-conn {
+        transform: rotate(90deg);
+        min-height: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    .flow-outcome {
+      margin-top: 0.45rem;
+      padding: 0.52rem 0.6rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--signos-deep);
+      border: 2px solid rgba(138, 86, 195, 0.32);
+      background: linear-gradient(95deg, rgba(138, 86, 195, 0.12), rgba(41, 227, 241, 0.1));
+      line-height: 1.4;
+    }
+
+    .flow-chain {
+      margin-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      max-width: 28rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .flow-chain .flow-step {
+      max-width: none;
+    }
+
+    .tramite-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.42rem;
+      margin-top: 0.4rem;
+    }
+    @media (max-width: 760px) {
+      .tramite-grid { grid-template-columns: 1fr; }
+    }
+    .tramite-lane {
+      padding: 0.45rem 0.52rem;
+      border-radius: 12px;
+      border: 1px dashed rgba(0, 74, 153, 0.35);
+      background: rgba(0, 74, 153, 0.035);
+      font-size: 0.76rem;
+      line-height: 1.42;
+    }
+    .tramite-lane strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--signos-deep);
+    }
+    .tramite-converge {
+      margin-top: 0.42rem;
+      padding: 0.45rem;
+      border-radius: 999px;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(138, 86, 195, 0.12);
+      border: 1px solid rgba(138, 86, 195, 0.28);
+    }
+    .tramite-channels {
+      margin-top: 0.42rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.32rem;
+    }
+    .tramite-chip {
+      font-size: 0.73rem;
+      padding: 0.35rem 0.42rem;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(13, 92, 63, 0.1), rgba(41, 227, 241, 0.08));
+      border: 1px solid rgba(13, 92, 63, 0.2);
+      text-align: center;
+      font-weight: 600;
+      color: var(--signos-deep);
+    }
+
     footer {
       text-align: center;
-      padding: .9rem .75rem 1.35rem;
+      padding: 0.35rem 0.5rem max(0.35rem, env(safe-area-inset-bottom, 0px));
       color: #6b7284;
-      font-size: .73rem;
+      font-size: 0.78rem;
     }
+
+
+    body.has-deck-nav main {
+      padding: max(4px, var(--deck-main-pad-y, 0px)) 0.45rem max(2px, env(safe-area-inset-bottom, 0px)) !important;
+    }
+
   </style>
 </head>
 <body class="has-deck-nav">
-  <div class="sticky-head">
-    <div class="brand-bar">
-      <a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
-    </div>
-    <nav class="toc" aria-label="Índice">
+  <div class="sticky-head sticky-head--compact"><nav class="toc" aria-label="Índice">
       <div class="inner">
         <strong style="margin-right:.3rem;color:var(--dk)">Láminas:</strong>
         <a href="#lam1">Título</a>
@@ -269,13 +489,20 @@
         <a href="#lam3">País Vasco</a>
         <a href="#lam4">Áreas</a>
         <a href="#lam5">Estrategia</a>
+        <a href="#lam-blend">Financiamiento</a>
+        <a href="#lam-tub1">Tubería I</a>
+        <a href="#lam-tub2">Tubería II</a>
+        <a href="#lam-tub3">Tubería III</a>
+        <a href="#lam-matriz">Matriz fondos</a>
+        <a href="#lam-tramite">Tramitación</a>
         <a href="#lam6">Resultado</a>
       </div>
     </nav>
   </div>
 
   <main>
-    <header class="cover-lamina slide-reveal" id="lam1">
+    <header class="cover-lamina slide-reveal deck-fill-slide" id="lam1">
+            <p class="slide-brand slide-brand--dark"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
       <div class="cover-glow" aria-hidden="true"></div>
       <div class="cover-content">
         <span class="cover-line">Cooperación internacional · Innovación regional</span>
@@ -289,7 +516,9 @@
       </div>
     </header>
 
-    <section class="slide slide-reveal" id="lam2" style="border-left-color:rgba(0,74,153,.7)">
+    <section class="slide deck-fill-slide slide-reveal" id="lam2" style="border-left-color:rgba(0,74,153,.7)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Antecedentes</span>
       <h2 class="anim-item">1. Experiencia de cooperación Chile – España</h2>
       <p class="lead anim-item">Marco de <mark class="hl">transferencia tecnológica</mark> entre regiones europeas y territorios productivos chilenos, con foco en innovación, digitalización y desarrollo regional.</p>
@@ -308,7 +537,9 @@
       <p class="lead anim-item" style="margin-top:.65rem;"><mark class="hl">Integración de Chile</mark> en redes europeas de innovación y cooperación internacional.</p>
     </section>
 
-    <section class="slide slide-reveal" id="lam3" style="border-left-color:rgba(13,92,63,.85)">
+    <section class="slide deck-fill-slide slide-reveal" id="lam3" style="border-left-color:rgba(13,92,63,.85)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Aliado estratégico</span>
       <h2 class="anim-item">2. Ventajas de la cooperación con el País Vasco</h2>
       <p class="lead anim-item">Fortalezas del <mark class="hl">modelo vasco</mark> trasladables a un territorio abierto como Atacama: ecosistema industrial-tecnológico maduro y cultura de asociación público-privada-universidades.</p>
@@ -340,7 +571,9 @@
       </ul>
     </section>
 
-    <section class="slide slide-reveal" id="lam4">
+    <section class="slide deck-fill-slide slide-reveal" id="lam4">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Priorización</span>
       <h2 class="anim-item">3. Áreas de cooperación prioritarias para Atacama</h2>
       <p class="lead anim-item">Seis vectores donde la oferta vasco-europea se alinea con brechas típicas del norte grande chileno.</p>
@@ -391,7 +624,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="lam5" style="border-left-color:rgba(138,86,195,.85)">
+    <section class="slide deck-fill-slide slide-reveal" id="lam5" style="border-left-color:rgba(138,86,195,.85)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Ruta de trabajo</span>
       <h2 class="anim-item">4. Estrategia de cooperación para Atacama</h2>
       <p class="lead anim-item">Secuencia progresiva: conocimiento del territorio → gobernanza binacional → <mark class="hl">financiamiento internacional</mark> → pilotos → escalamiento e integración a redes UE.</p>
@@ -449,7 +684,208 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="lam6" style="border-left-color:rgba(41,227,241,.85)">
+    <section class="slide deck-fill-slide slide-reveal" id="lam-blend" style="border-left-color:rgba(0,74,153,.65)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+      <span class="pill anim-item">Innovación financiada</span>
+      <h2 class="anim-item">Captación internacional y blending presupuestario</h2>
+      <div class="fund-prose anim-item">
+        <p>Atacama combina un <strong>estrangulamiento fiscal subnacional</strong> (FRPD y FIC-R &lt; ~3&nbsp;% inversión regional, <strong>topes del orden de CLP&nbsp;500&nbsp;M</strong> por iniciativa) con <strong>brechas</strong> urgentes en agua, minería y sostenibilidad.</p>
+        <p>El <mark class="hl">GORE</mark> coordina <strong>blending</strong>: cofinancia europea/vasca para I+D + <strong>FRPD como habilitador territorial</strong>, no como única fuente.</p>
+      </div>
+      <h3 class="fund-h3 anim-item">Dos entradas monetarias → un impacto regional amplificado</h3>
+      <div class="blend-merge anim-item">
+        <article class="blend-pillar blend-pillar--eu">
+          <span class="flow-kicker">Capital hemisferio norte</span>
+          <strong>Fondos UE · País Vasco (€)</strong>
+          <p style="margin:.2rem 0 0;font-size:.76rem;">Expertos, planes, transferencia tecnológica y horas de investigación aplicada financiadas desde Bruselas/Vitoria-Madrid según instrumento.</p>
+        </article>
+        <article class="blend-pillar blend-pillar--cl">
+          <span class="flow-kicker">Habilitación local</span>
+          <strong>FRPD · FIC-R (CLP)</strong>
+          <p style="margin:.2rem 0 0;font-size:.76rem;">Cofinancia obras físicas, equipamiento apto y gasto no elegible UE — desbloquea implementación en territorio.</p>
+        </article>
+        <div class="blend-merge-join">Impacto: multiplicación de capacidad · soluciones tecnológicas aplicadas al desierto (orden de magnitud ×5 como referencia conceptual).</div>
+      </div>
+    </section>
+
+    <section class="slide deck-fill-slide slide-reveal" id="lam-tub1" style="border-left-color:rgba(41,227,241,.85)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+      <span class="pill anim-item">Tubería I</span>
+      <h2 class="anim-item">ADELANTE II · Unión Europea</h2>
+      <div class="fund-prose anim-item">
+        <p><strong>Foco:</strong> seguridad hídrica, <mark class="hl">economía circular del agua</mark> y gobernanza de cuencas bajo estrés.</p>
+        <p><strong>Cartografía Atacama:</strong> déficit cuenca Copiapó · demanda industrial/minería de primer orden en literatura pública.</p>
+        <p><strong>Instrumento:</strong> pool global <strong>≈ €15&nbsp;M (2021–2027)</strong> triangular — puede cubrir <strong>hasta 100&nbsp;%</strong> de intercambio de expertos y diseño de políticas públicas.</p>
+      </div>
+      <h3 class="fund-h3 anim-item">Secuencia administrativa</h3>
+      <div class="flow-steps anim-item" role="group" aria-label="Pasos ADELANTE II">
+        <div class="flow-step">
+          <span class="flow-kicker">Origen</span>
+          <strong>GORE Atacama + AGCID</strong>
+          <span class="flow-step-meta">Prioriza brecha técnica · valida demanda regional</span>
+        </div>
+        <div class="flow-conn" aria-hidden="true">→</div>
+        <div class="flow-step">
+          <span class="flow-kicker">Co-titular UE</span>
+          <strong>eLankidetza / URA</strong>
+          <span class="flow-step-meta">Arma expediente triangular con soporte España/UE</span>
+        </div>
+        <div class="flow-conn" aria-hidden="true">→</div>
+        <div class="flow-step">
+          <span class="flow-kicker">Formalidad</span>
+          <strong>Ventanilla única UE</strong>
+          <span class="flow-step-meta">Portal Comisión Europea · control de fondos PAC</span>
+        </div>
+      </div>
+      <div class="flow-outcome anim-item">Salida esperada · consultorías técnicas, diagnósticos y planes de política pública hídrica cofinanciados desde Europa.</div>
+    </section>
+
+    <section class="slide deck-fill-slide slide-reveal" id="lam-tub2" style="border-left-color:rgba(138,86,195,.82)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+      <span class="pill anim-item">Tubería II</span>
+      <h2 class="anim-item">PRO-K2 · eLankidetza</h2>
+      <div class="fund-prose anim-item">
+        <p><strong>Foco:</strong> formación técnica de punta · <strong>talento verde</strong> Litio/minería baja emisión.</p>
+        <p><strong>Gap regional:</strong> laboratorios de pilotaje cercanos vs. velocidad tecnológica requerida por la faena.</p>
+        <p><strong>Subvención:</strong> hasta <strong>€500&nbsp;000</strong> · plazo <strong>24 meses</strong> (prorrogable) · postulación ingresada por <strong>entidad vasca</strong> ligada al GORE/UDA.</p>
+      </div>
+      <h3 class="fund-h3 anim-item">Cadena BRTA ↔ territorio</h3>
+      <div class="flow-chain anim-item" role="group" aria-label="Pasos PRO-K2">
+        <div class="flow-step">
+          <span class="flow-kicker">Paso A</span>
+          <strong>GORE / Universidad de Atacama</strong>
+          <span class="flow-step-meta">Define brecha técnica y carta mandato institucional</span>
+        </div>
+        <div class="flow-conn" aria-hidden="true" style="align-self:center">↓</div>
+        <div class="flow-step">
+          <span class="flow-kicker">Paso B</span>
+          <strong>Centro BRTA socio</strong>
+          <span class="flow-step-meta">Ej. Tecnalia o Tknika · co-diseña plan de trabajo</span>
+        </div>
+        <div class="flow-conn" aria-hidden="true" style="align-self:center">↓</div>
+        <div class="flow-step">
+          <span class="flow-kicker">Paso C</span>
+          <strong>eLankidetza · sede electrónica</strong>
+          <span class="flow-step-meta">Formaliza expediente ante la comunidad autónoma</span>
+        </div>
+        <div class="flow-conn" aria-hidden="true" style="align-self:center">↓</div>
+        <div class="flow-step">
+          <span class="flow-kicker">Paso D</span>
+          <strong>Transferencia ejecutada</strong>
+          <span class="flow-step-meta">Laboratorios locales + pasantías / viajes técnicos coordinados</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide deck-fill-slide slide-reveal" id="lam-tub3" style="border-left-color:rgba(13,92,63,.82)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+      <span class="pill anim-item">Tubería III</span>
+      <h2 class="anim-item">Eureka / Iberoeka · CORFO + CDTI</h2>
+      <div class="fund-prose anim-item">
+        <p><strong>Foco:</strong> valorización de <mark class="hl">pasivos mineros</mark> y economía circular industrial.</p>
+        <p><strong>Financiamiento dual:</strong> CORFO apoya pyme chilena (p.ej. <strong>Crea y Valida ~CLP&nbsp;220&nbsp;M</strong> referencial) + CDTI instrumenta ingeniería española con tramos blandos.</p>
+      </div>
+      <h3 class="fund-h3 anim-item">Match binacional → planta piloto</h3>
+      <div class="flow-steps anim-item" role="group" aria-label="Pasos Eureka">
+        <div class="flow-step">
+          <span class="flow-kicker">Oferta</span>
+          <strong>Pyme · región</strong>
+          <span class="flow-step-meta">Perfil en EEN / Eurochile · describe residuo o producto</span>
+        </div>
+        <div class="flow-conn" aria-hidden="true">+</div>
+        <div class="flow-step">
+          <span class="flow-kicker">Contraparte</span>
+          <strong>Ingeniería vasca</strong>
+          <span class="flow-step-meta">Match vía Innobasque / clúster Aclima</span>
+        </div>
+        <div class="flow-conn" aria-hidden="true">→</div>
+        <div class="flow-step">
+          <span class="flow-kicker">Postulación</span>
+          <strong>CORFO + CDTI</strong>
+          <span class="flow-step-meta">Eureka / Iberoeka coordinado Santiago–Madrid</span>
+        </div>
+      </div>
+      <div class="flow-outcome anim-item">Resultado tipo · planta piloto de eco-materiales o circuito industrial que Valoriza relaves en el desierto.</div>
+    </section>
+
+    <section class="slide deck-fill-slide slide-reveal" id="lam-matriz" style="border-left-color:rgba(0,74,153,.72)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+      <span class="pill anim-item">Sinergias</span>
+      <h2 class="anim-item">Matriz comparativa de fondos</h2>
+      <table class="comp-table anim-item">
+        <thead>
+          <tr>
+            <th>Vector</th>
+            <th>ADELANTE II</th>
+            <th>PRO-K2</th>
+            <th>Eureka / Iberoeka</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Origen</td>
+            <td>Unión Europea</td>
+            <td>eLankidetza · Vasco</td>
+            <td>CDTI (ES) + CORFO</td>
+          </tr>
+          <tr>
+            <td>Monto típico</td>
+            <td>≈ Pool €15&nbsp;M programa</td>
+            <td>≤ €500&nbsp;k / proyecto</td>
+            <td>CLP lado CL + créditos ES</td>
+          </tr>
+          <tr>
+            <td>Socio UE requerido</td>
+            <td>URA / agua + actores UE</td>
+            <td>Centros BRTA (Tecnalia, Tknika…)</td>
+            <td>Ingenierías vasca + pymes</td>
+          </tr>
+          <tr>
+            <td>Rol Atacama</td>
+            <td>GORE + AGCID</td>
+            <td>UDA + GORE articulamos</td>
+            <td>Proveedor minero regional</td>
+          </tr>
+          <tr>
+            <td>Uso FRPD local</td>
+            <td>≤10&nbsp;% infra hídrica eligible</td>
+            <td>Equipamiento laboratorio físico local</td>
+            <td>Maquinaria complementaria no elegible UE</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="lead anim-item" style="margin-top:.45rem;"><mark class="hl">Lectura política:</mark> combinar instrumentos según etapa del proyecto (diagnóstico UE → talento vasco → pilotos binacionales).</p>
+    </section>
+
+    <section class="slide deck-fill-slide slide-reveal" id="lam-tramite" style="border-left-color:rgba(41,227,241,.72)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+      <span class="pill anim-item">Gestión mixta</span>
+      <h2 class="anim-item">Ruta de tramitación sin mover equipos antes de tiempo</h2>
+      <div class="fund-prose anim-item">
+        <p>Fases iniciales en <strong>Santiago</strong> (delegación vasca + Eurochile + CORFO) para fijar demanda; co-diseño remoto con <strong>Innobasque</strong> y red <strong>EEN</strong>.</p>
+      </div>
+      <div class="tramite-grid anim-item">
+        <div class="tramite-lane">
+          <strong>Canal político-institucional</strong>
+          Delegación de Euskadi (Las Condes) · AGCID · CORFO — formaliza brechas y cartas de intención.
+        </div>
+        <div class="tramite-lane">
+          <strong>Canal técnico-empresarial</strong>
+          Innobasque ↔ Eurochile — matchmaking con BRTA y clústeres productivos.
+        </div>
+      </div>
+      <div class="tramite-converge anim-item">Convergencia → expediente listo para ingreso formal en Europa</div>
+      <div class="tramite-channels anim-item" role="list">
+        <div class="tramite-chip" role="listitem">ADELANTE II · portal UE</div>
+        <div class="tramite-chip" role="listitem">PRO-K2 · sede electrónica eLankidetza</div>
+        <div class="tramite-chip" role="listitem">Eureka · CORFO + CDTI</div>
+      </div>
+      <p class="lead anim-item" style="margin-top:.5rem;"><strong>Regla de oro:</strong> el presupuesto del norte paga <mark class="hl">horas de I+D</mark>; el FRPD materializa <strong>obra y equipamiento</strong> en Atacama.</p>
+    </section>
+
+    <section class="slide deck-fill-slide slide-reveal" id="lam6" style="border-left-color:rgba(41,227,241,.85)">
+  <p class="slide-brand"><a href="#lam1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Visión</span>
       <h2 class="anim-item">Resultado esperado para Atacama</h2>
       <div class="resultado-box anim-item">

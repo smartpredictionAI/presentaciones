@@ -1,13 +1,133 @@
 /* Shared navigation between static presentation HTML files */
 :root {
-  --deck-nav-height: 3.25rem;
+  --deck-nav-height: 2rem;
   --deck-nav-bg: rgba(255, 255, 255, 0.97);
   --deck-nav-border: rgba(0, 74, 153, 0.14);
   --deck-nav-accent: #004a99;
+  /* Vertical space consumed above main (sticky TOC/catalog); override per page if needed */
+  --deck-chrome-top: 3.6rem;
+  /* Minimal vertical gutter so slides sit closer to the fixed bottom deck nav */
+  --deck-main-pad-y: 0px;
+  --deck-slide-extra-gap: 2px;
+  --slide-fill-vh: calc(
+    100svh - var(--deck-chrome-top) - var(--deck-nav-height) - var(--deck-slide-extra-gap)
+  );
+  /* Laptop-style widescreen column + 16:9 slide frames */
+  --deck-content-max-w: min(1320px, calc(100vw - 28px));
 }
 
 body.has-deck-nav {
-  padding-bottom: calc(var(--deck-nav-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: var(--deck-nav-height);
+  /* Larger readable base type across all deck pages */
+  font-size: clamp(15px, 1.65vw, 18px);
+  line-height: 1.58;
+}
+
+/* Compact sticky header: no logo strip — logo lives inside each slide */
+.sticky-head--compact {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 74, 153, 0.1);
+}
+.sticky-head--compact nav.toc .inner {
+  max-width: var(--deck-content-max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.18rem 0.45rem;
+  gap: 0.22rem 0.38rem;
+  font-size: 0.74rem;
+}
+.sticky-head--compact nav.toc a {
+  padding: 0.08rem 0.38rem;
+  font-size: 0.73rem;
+  font-weight: 600;
+}
+
+/* Logo block inside slides (paired with sticky-head--compact) */
+.slide-brand {
+  margin: 0 0 0.35rem;
+  text-align: center;
+  line-height: 0;
+}
+.slide-brand a {
+  display: inline-block;
+  line-height: 0;
+  text-decoration: none !important;
+}
+.slide-brand img {
+  height: clamp(22px, 3.2vw, 32px);
+  width: auto;
+  max-width: min(172px, 48vw);
+  object-fit: contain;
+  vertical-align: middle;
+}
+.slide-brand--dark a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.12rem 0.4rem 0.1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Widescreen content column aligned with slides */
+body.has-deck-nav main {
+  max-width: var(--deck-content-max-w) !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.has-deck-nav nav.toc .inner {
+  max-width: var(--deck-content-max-w) !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Laptop-style laminas: 16:9 frame that fits viewport width/height minus chrome */
+.deck-fill-slide {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(
+    100%,
+    var(--deck-content-max-w),
+    calc(var(--slide-fill-vh) * 16 / 9)
+  );
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 16 / 9;
+  max-height: var(--slide-fill-vh);
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  justify-content: flex-start;
+  scroll-margin-top: clamp(3rem, 8vw, 4.25rem);
+  margin-bottom: 0;
+}
+
+.cover-lamina.deck-fill-slide,
+header.cover-lamina.deck-fill-slide {
+  justify-content: center;
+  min-height: 0 !important;
+}
+
+header.cover-hero.deck-fill-slide,
+.cover-hero.deck-fill-slide {
+  justify-content: center;
+  min-height: 0 !important;
+  max-width: none;
+}
+
+/* Portrait-ish viewports: slightly taller slide for readability */
+@media (max-aspect-ratio: 3 / 4) {
+  .deck-fill-slide {
+    aspect-ratio: 4 / 3;
+    width: min(
+      100%,
+      var(--deck-content-max-w),
+      calc(var(--slide-fill-vh) * 4 / 3)
+    );
+  }
 }
 
 .deck-nav-fixed {
@@ -24,7 +144,7 @@ body.has-deck-nav {
   background: var(--deck-nav-bg);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--deck-nav-border);
-  box-shadow: 0 -4px 18px rgba(0, 54, 113, 0.08);
+  box-shadow: 0 -2px 10px rgba(0, 54, 113, 0.06);
 }
 
 .deck-nav-fixed .deck-nav-link {
@@ -32,14 +152,14 @@ body.has-deck-nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.55rem 0.5rem max(0.55rem, env(safe-area-inset-bottom));
+  padding: 0.22rem 0.35rem max(0.12rem, env(safe-area-inset-bottom));
   font-family: inherit;
-  font-size: clamp(0.72rem, 2.4vw, 0.82rem);
+  font-size: clamp(0.7rem, 2.1vw, 0.84rem);
   font-weight: 600;
   text-decoration: none;
   color: var(--deck-nav-accent);
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.18;
   border-right: 1px solid var(--deck-nav-border);
   transition: background 0.15s ease, color 0.15s ease;
 }
@@ -59,32 +179,32 @@ body.has-deck-nav {
   font-weight: 700;
 }
 
-/* Hub strip (catalog on index.html) */
+/* Hub strip (catalog on index.html) — compact row */
 .deck-catalog {
-  border-top: 1px solid rgba(0, 74, 153, 0.08);
-  background: rgba(0, 74, 153, 0.03);
+  border-top: 1px solid rgba(0, 74, 153, 0.07);
+  background: rgba(0, 74, 153, 0.028);
 }
 
 .deck-catalog-inner {
-  max-width: 920px;
+  max-width: var(--deck-content-max-w);
   margin: 0 auto;
-  padding: 0.4rem 0.75rem 0.5rem;
+  padding: 0.14rem 0.45rem 0.18rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.35rem 0.5rem;
-  font-size: 0.78rem;
-  line-height: 1.35;
+  gap: 0.2rem 0.35rem;
+  font-size: 0.66rem;
+  line-height: 1.28;
 }
 
 .deck-catalog-title {
   font-weight: 700;
   color: #1e2d44;
-  margin-right: 0.15rem;
+  margin-right: 0.1rem;
 }
 
 .deck-catalog-inner a {
-  padding: 0.15rem 0.5rem;
+  padding: 0.06rem 0.42rem;
   border-radius: 999px;
   background: rgba(138, 86, 195, 0.14);
   color: #1e2d44;

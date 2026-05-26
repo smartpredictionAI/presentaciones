@@ -20,15 +20,14 @@
       --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
       --radius: 10px;
       --maxw: 920px;
+      --deck-chrome-top: 3.35rem;
     }
     @media (prefers-reduced-motion: reduce) {
       .slide-reveal, .anim-item, .cover-glow { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.5; }
-    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
-    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
-    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(14px, 1.5vw, 16px); line-height: 1.55; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.98); backdrop-filter: blur(8px); }
     nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .78rem; }
     nav.toc a { padding: .2rem .55rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
     nav.toc a:hover { background: rgba(41,227,241,.22); }
@@ -139,8 +138,9 @@
     }
 
     .pill { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan)); padding: .12rem .45rem; border-radius: 999px; }
-    h2 { margin: .2rem 0 0; font-size: clamp(1rem, 2.5vw, 1.15rem); line-height: 1.28; color: var(--signos-deep); }
-    .lead { color: #4b5569; font-size: .83rem; margin: .45rem 0 0; }
+    h2 { margin: .2rem 0 0; font-size: clamp(1.05rem, 2.3vw, 1.28rem); line-height: 1.26; color: var(--signos-deep); }
+    h3.slide-h3 { margin: .65rem 0 .25rem; font-size: .92rem; color: var(--signos-deep); }
+    .lead { color: #4b5569; font-size: .88rem; margin: .45rem 0 0; }
     .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin: .6rem 0 0; }
     .chip {
       font-size: .72rem;
@@ -152,7 +152,7 @@
     }
     .two-col { display: grid; gap: .75rem; margin-top: .65rem; }
     @media (min-width: 720px) { .two-col { grid-template-columns: 1fr 1fr; } }
-    .mini-list { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .8rem; color: #3d475c; }
+    .mini-list { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .84rem; color: #3d475c; }
     .mini-list li { margin: .28rem 0; }
     .val-grid { display: grid; gap: .45rem; margin-top: .55rem; }
     @media (min-width: 640px) { .val-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -184,40 +184,64 @@
       background: rgba(0,74,153,.07);
       border: 1px solid rgba(0,74,153,.1);
     }
-    .growth-cell em { display: block; font-style: normal; font-weight: 700; color: var(--signos-purple); font-size: .85rem; }
-    .risk-block { font-size: .77rem; margin-top: .5rem; padding: .5rem; border-radius: 8px; background: rgba(180,80,80,.06); border: 1px solid rgba(180,80,80,.15); }
+    .growth-cell em { display: block; font-style: normal; font-weight: 700; color: var(--signos-purple); font-size: .88rem; }
+    .org-chart-wrap { margin: .45rem 0 0; padding: .45rem; border-radius: 10px; background: rgba(0,74,153,.045); border: 1px solid rgba(0,74,153,.1); }
+    .org-chart-wrap svg { width: 100%; height: auto; max-height: 200px; display: block; }
+    .sat-table-wrap { overflow-x: auto; margin-top: .4rem; -webkit-overflow-scrolling: touch; }
+    table.sat-table { width: 100%; border-collapse: collapse; font-size: .72rem; }
+    table.sat-table th, table.sat-table td { border: 1px solid rgba(0,74,153,.14); padding: .28rem .35rem; text-align: left; vertical-align: top; }
+    table.sat-table th { background: rgba(138,86,195,.14); font-weight: 700; color: var(--signos-deep); }
+    .hub-list { margin: .35rem 0 0; padding-left: 1.05rem; font-size: .82rem; color: #3d475c; }
+    .hub-list li { margin: .22rem 0; }
+    .abc-block { margin-top: .45rem; display: grid; gap: .35rem; }
+    @media (min-width: 720px) { .abc-block { grid-template-columns: repeat(3, 1fr); } }
+    .abc-card { font-size: .76rem; padding: .4rem .45rem; border-radius: 8px; border: 1px solid rgba(138,86,195,.22); background: linear-gradient(135deg, rgba(138,86,195,.07), rgba(41,227,241,.06)); }
+    .abc-card strong { display: block; color: var(--signos-purple); font-size: .72rem; margin-bottom: .2rem; letter-spacing: .05em; }
+    .ia-pair { margin-top: .32rem; padding: .42rem .48rem; border-radius: 8px; border: 1px solid rgba(0,74,153,.11); background: rgba(255,255,255,.94); font-size: .76rem; }
+    .ia-neg { color: #7a2929; margin: 0 0 .28rem; padding: .22rem .32rem .22rem .45rem; border-left: 3px solid #c75c5c; background: rgba(199,92,92,.06); border-radius: 4px 0 0 4px; }
+    .ia-neg span { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #8b3a3a; display: block; margin-bottom: .12rem; }
+    .ia-soft { color: #2a4d42; margin: 0; padding: .22rem .32rem .22rem .45rem; border-left: 3px solid var(--signos-cyan); background: rgba(41,227,241,.08); border-radius: 4px 0 0 4px; font-style: italic; }
+    .ia-soft span { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--signos-deep); display: block; margin-bottom: .12rem; font-style: normal; }
+    .reach-note { font-size: .72rem; color: #5a6578; margin: .35rem 0 0; }
+    .risk-block { font-size: .8rem; margin-top: .5rem; padding: .5rem; border-radius: 8px; background: rgba(180,80,80,.06); border: 1px solid rgba(180,80,80,.15); }
     .risk-block strong { color: #8b2c2c; }
     .conclusion {
       margin-top: .55rem;
       padding: .55rem .65rem;
       border-radius: 8px;
-      font-size: .8rem;
+      font-size: .84rem;
       background: linear-gradient(90deg, rgba(138,86,195,.1), rgba(41,227,241,.12));
       border: 1px solid rgba(138,86,195,.25);
     }
     footer { text-align: center; padding: 1rem; color: #6b7284; font-size: .75rem; }
     mark.hl { background: linear-gradient(120deg, rgba(138,86,195,.3), rgba(41,227,241,.28)); font-weight: 600; padding: .06em .12em; border-radius: 3px; }
+
+
+    body.has-deck-nav main {
+      padding: max(4px, var(--deck-main-pad-y, 0px)) 0.45rem max(2px, env(safe-area-inset-bottom, 0px)) !important;
+    }
+
   </style>
 </head>
 <body class="has-deck-nav">
-  <div class="sticky-head">
-    <div class="brand-bar">
-      <a href="#lamina1" style="display:inline-block;line-height:0"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
-    </div>
-    <nav class="toc" aria-label="Índice">
+  <div class="sticky-head sticky-head--compact"><nav class="toc" aria-label="Índice">
       <div class="inner">
         <strong style="margin-right:.35rem;color:var(--dk)">Láminas:</strong>
         <a href="#lamina1">1 · Título</a>
         <a href="#lamina2">2 · Plataforma</a>
         <a href="#lamina3">3 · Lógica y módulos</a>
-        <a href="#lamina4">4 · Proyección y cierre</a>
+        <a href="#lamina4">4 · Cómo funcionaría</a>
+        <a href="#lamina5">5 · Ejemplos IA</a>
+        <a href="#lamina6">6 · Alcance y curva</a>
+        <a href="#lamina7">7 · Cierre</a>
       </div>
     </nav>
   </div>
 
   <main>
     <!-- Lámina 1 -->
-    <header class="cover-lamina slide-reveal" id="lamina1" aria-label="Portada">
+    <header class="cover-lamina slide-reveal deck-fill-slide" id="lamina1" aria-label="Portada">
+            <p class="slide-brand slide-brand--dark"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
       <div class="cover-glow" aria-hidden="true"></div>
       <div class="cover-content">
         <p class="cover-product">Atacama Pulse AI</p>
@@ -233,7 +257,9 @@
     </header>
 
     <!-- Lámina 2 -->
-    <section class="slide slide-reveal" id="lamina2">
+    <section class="slide deck-fill-slide slide-reveal" id="lamina2">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Descripción</span>
       <h2 class="anim-item">Atacama Pulse AI — qué hace la plataforma</h2>
       <p class="lead anim-item">Consolida <mark class="hl">investigación de audiencias</mark>, detección de grupos y líderes, interacción asistida y <mark class="hl">reutilización multi-red</mark> en un solo flujo para generar alcance masivo con control de riesgo.</p>
@@ -241,8 +267,7 @@
         <span class="chip">TikTok</span>
         <span class="chip">Instagram</span>
         <span class="chip">Facebook</span>
-        <span class="chip">WhatsApp Communities</span>
-        <span class="chip">Telegram</span>
+        <span class="chip">X</span>
       </div>
       <div class="two-col">
         <div class="anim-item">
@@ -260,13 +285,15 @@
     </section>
 
     <!-- Lámina 3 -->
-    <section class="slide slide-reveal" id="lamina3">
+    <section class="slide deck-fill-slide slide-reveal" id="lamina3">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Viabilidad y arquitectura</span>
       <h2 class="anim-item">Por qué encaja con los algoritmos · Cómo opera el sistema</h2>
       <p class="lead anim-item">La lógica replica <mark class="hl">comportamientos que las redes ya premian</mark>: velocidad en hilos virales, grupos Facebook, distribución por interés en TikTok, reciclaje de formato y hueco competitivo regional.</p>
       <div class="val-grid">
         <div class="val-card anim-item"><strong>1 · Interacción temprana</strong>Oportunidades en contenido regional acelerando; sugerencias de comentarios, duetos, stitches y réplicas tácticas.</div>
-        <div class="val-card anim-item"><strong>2 · Comunidades</strong>Los grupos superan páginas en alcance orgánico; secuencia: aportar valor → recién después posicionar.</div>
+        <div class="val-card anim-item"><strong>2 · Conversación pública</strong>Comentarios, hilos y espacios de comunidad abiertos en redes suelen mover más alcance orgánico que la página sola; secuencia: aportar valor → recién después posicionar.</div>
         <div class="val-card anim-item"><strong>3 · TikTok por interés</strong>Cuentas pequeñas pueden explotar formato; dueto, stitch, hooks y tendencias tempranas.</div>
         <div class="val-card anim-item"><strong>4 · Contenido reutilizado</strong>Un mismo eje adaptado a Reel, Story, TikTok, clip Facebook y Shorts sin duplicar producción.</div>
         <div class="val-card anim-item" style="grid-column:1/-1;"><strong>5 · Hiperlocal</strong>Menos contenido profesional optimizado en Atacama → más fácil dominar hashtags, conversaciones y posicionamiento rápido.</div>
@@ -283,21 +310,114 @@
     </section>
 
     <!-- Lámina 4 -->
-    <section class="slide slide-reveal" id="lamina4">
-      <span class="pill anim-item">Proyección y gobernanza</span>
-      <h2 class="anim-item">Crecimiento esperado · Ventaja · Riesgos · Conclusión</h2>
-      <p class="lead anim-item">Escenario moderado bien ejecutado para una región como <mark class="hl">Atacama</mark> (uso disciplinado de la plataforma).</p>
-      <div class="growth-row anim-item">
-        <div class="growth-cell"><em>Mes 3</em><span>≈ 5K–15K<br />alcance mensual</span></div>
-        <div class="growth-cell"><em>Mes 6</em><span>≈ 25K–60K<br />alcance mensual</span></div>
-        <div class="growth-cell"><em>Mes 12</em><span>≈ 80K–180K<br />alcance regional acumulado</span></div>
+    <section class="slide deck-fill-slide slide-reveal" id="lamina4">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
+      <span class="pill anim-item">Arquitectura operativa</span>
+      <h2 class="anim-item">Cómo funcionaría realmente</h2>
+      <p class="lead anim-item">Una aplicación tipo <mark class="hl">Atacama Pulse AI</mark> trabajaría con una <strong>cuenta principal (hub central)</strong> más una <strong>red de 5–15 cuentas satélite</strong> coordinadas por la plataforma (identidad propia, nichos locales, comportamiento estable y humano).</p>
+      <h3 class="slide-h3 anim-item">Cuenta principal (“hub central”)</h3>
+      <p class="lead anim-item" style="margin-top:.28rem;">Concentra la marca pública que se quiere crecer:</p>
+      <ul class="hub-list anim-item">
+        <li>Ej.: <strong>Pulso Atacama</strong>, <strong>Atacama Hoy</strong>, <strong>Atacama Futuro</strong>, <strong>Conecta Copiapó</strong></li>
+        <li><mark class="hl">Publica contenido fuerte</mark>, hace lives, centraliza la conversación territorial y construye autoridad temática.</li>
+      </ul>
+      <div class="sat-table-wrap anim-item">
+        <table class="sat-table">
+          <thead><tr><th>Cuenta ejemplo</th><th>Rol</th></tr></thead>
+          <tbody>
+            <tr><td>Noticias Copiapó</td><td>Noticias rápidas hiperlocales</td></tr>
+            <tr><td>Vida Atacama</td><td>Lifestyle / día a día</td></tr>
+            <tr><td>Emprende Norte</td><td>Negocios y trabajo</td></tr>
+            <tr><td>Jóvenes Atacama</td><td>Universitarios / cultura</td></tr>
+            <tr><td>Ruta Atacama</td><td>Turismo</td></tr>
+            <tr><td>Minería y Región</td><td>Industria y empleo</td></tr>
+            <tr><td>Transporte Copiapó</td><td>Movilidad</td></tr>
+            <tr><td>Deportes Atacama</td><td>Fútbol / eventos</td></tr>
+          </tbody>
+        </table>
       </div>
-      <p class="anim-item" style="font-size:.79rem;color:#3d475c;margin:0 0 .45rem;"><strong>Ventaja real:</strong> no es solo “publicar más”, sino <mark class="hl">escalar relaciones comunitarias con IA</mark> — entrar, conversar, detectar líderes y convertir interacción en distribución orgánica.</p>
+      <div class="abc-block anim-item">
+        <div class="abc-card"><strong>A · Reputación</strong>Interacción diaria: comentarios, Reels/Lives donde aplique y respuesta en hilos locales. Objetivo: cuentas <em>familiares</em>, reconocibles y cercanas.</div>
+        <div class="abc-card"><strong>B · Radar de tendencias</strong>Cada cuenta monitorea hashtags, debates y formatos locales; la IA ordena tema en alza, emoción dominante y narrativa creciente.</div>
+        <div class="abc-card"><strong>C · Amplificación del hub</strong>Cuando el hub central publica, las satélites reaccionan, comentan y abren conversación temprana — más retención, engagement inicial y señales al algoritmo.</div>
+      </div>
+    </section>
+
+    <!-- Lámina 5 -->
+    <section class="slide deck-fill-slide slide-reveal" id="lamina5">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
+      <span class="pill anim-item">Tono público</span>
+      <h2 class="anim-item">Interacciones de la IA · posteo sensible y respuesta “soft”</h2>
+      <p class="lead anim-item">Ejemplos ilustrativos (no verbatim): contenido molesto dirigido al hub ↔ respuesta firme pero empática para bajar tensión sin pelear públicamente.</p>
+      <article class="ia-pair anim-item">
+        <p class="ia-neg"><span>Comentario adverso</span>“Todos hablan pero en la región no pasa nada concreto, pura foto.”</p>
+        <p class="ia-soft"><span>Respuesta suave</span>“Entiendo la frustración. Estamos tratando que las conversaciones lleguen también con proyectos ejecutables — si tienes un caso puntual por comuna lo podemos llevar como prioridad territorial.”</p>
+      </article>
+      <article class="ia-pair anim-item">
+        <p class="ia-neg"><span>Comentario adverso</span>“¿Quién financió esto? No dan la cara.”</p>
+        <p class="ia-soft"><span>Respuesta suave</span>“Acá están los antecedentes de la marca y cómo pueden contactarnos por mensaje si necesitan aclaraciones. La idea es responder con información, no con polémica.”</p>
+      </article>
+      <article class="ia-pair anim-item">
+        <p class="ia-neg"><span>Comentario adverso</span>“En Copiapó lo único que importa es la gran minería.”</p>
+        <p class="ia-soft"><span>Respuesta suave</span>“La minería es motor, pero también suman la pyme, el turismo local y los servicios. Si quieres, te leo: ¿qué te gustaría ver priorizado desde el día a día?”</p>
+      </article>
+      <article class="ia-pair anim-item">
+        <p class="ia-neg"><span>Comentario adverso</span>“Sus videos son muy ‘bonitos’ pero no resuelven nada.”</p>
+        <p class="ia-soft"><span>Respuesta suave</span>“Gracias por el candor. ¿Qué tipo de problema concreto te gustaría ver abordado? Si lo compartes, lo usamos como insumo para un próximo live con datos.”</p>
+      </article>
+      <article class="ia-pair anim-item">
+        <p class="ia-neg"><span>Comentario adverso</span>“Propaganda electoral disfrazada.”</p>
+        <p class="ia-soft"><span>Respuesta suave</span>“Acá tratamos datos y gestión ciudadana sobre el territorio. Si encuentras contenido político-partidista puntual lo revisamos por las vías formales para mantener este espacio enfocado.”</p>
+      </article>
+    </section>
+
+    <!-- Lámina 6 -->
+    <section class="slide deck-fill-slide slide-reveal" id="lamina6">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
+      <span class="pill anim-item">Trayectoria</span>
+      <h2 class="anim-item">Crecimiento orgánico · lanzamiento hub + satélites</h2>
+      <p class="lead anim-item">Proyección de <mark class="hl">alcance mensual estimado</mark> cuando el programa se ejecuta bien (región mediana como Atacama, ritmo estable, contenido territorial real).</p>
+      <div class="org-chart-wrap anim-item">
+        <svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="org-title org-desc">
+          <title id="org-title">Alcance mensual estimado: meses 1, 6 y 12</title>
+          <desc id="org-desc">La curva sube tras la creación del hub y activación paulatina de la red satélite.</desc>
+          <line x1="56" y1="28" x2="56" y2="164" stroke="rgba(30,45,68,0.2)" stroke-width="1"/>
+          <line x1="56" y1="164" x2="400" y2="164" stroke="rgba(30,45,68,0.2)" stroke-width="1"/>
+          <path d="M 56 150 L 120 146 L 220 118 L 360 54" stroke="none" fill="rgba(41,227,241,0.12)"/>
+          <path d="M 56 150 Q 140 148 220 118 T 360 54" fill="none" stroke="#004a99" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="120" cy="146" r="5" fill="#8a56c3"/>
+          <circle cx="220" cy="118" r="5" fill="#8a56c3"/>
+          <circle cx="360" cy="54" r="5" fill="#29e3f1"/>
+          <text x="108" y="184" fill="#3d475c" font-size="11" font-family="DM Sans,system-ui,sans-serif">Mes 1</text>
+          <text x="200" y="184" fill="#3d475c" font-size="11" font-family="DM Sans,system-ui,sans-serif">Mes 6</text>
+          <text x="332" y="184" fill="#3d475c" font-size="11" font-family="DM Sans,system-ui,sans-serif">Mes 12</text>
+          <text x="64" y="22" fill="#003671" font-size="11" font-weight="700" font-family="Montserrat,system-ui,sans-serif">↑ Alcance mensual (orden de magnitud)</text>
+        </svg>
+      </div>
+      <div class="growth-row anim-item">
+        <div class="growth-cell"><em>Mes 1</em><span>≈ 1K–5K<br />alcance mensual</span></div>
+        <div class="growth-cell"><em>Mes 6</em><span>≈ 10K–15K<br />alcance mensual</span></div>
+        <div class="growth-cell"><em>Mes 12</em><span>≈ 25K–30K<br />alcance mensual</span></div>
+      </div>
+      <p class="reach-note anim-item">Los ejes del gráfico son ilustrativos; los rangos cuantitativos se anclan en la fila anterior. Mes 0 coincide con configuración técnica y calibración editorial del hub antes de saturar volumen.</p>
+    </section>
+
+    <!-- Lámina 7 -->
+    <section class="slide deck-fill-slide slide-reveal" id="lamina7">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
+      <span class="pill anim-item">Proyección y gobernanza</span>
+      <h2 class="anim-item">Ventaja competitiva · Riesgos · Conclusión</h2>
+      <p class="lead anim-item">Escenario ejecutado de forma conservadora y territorial (sin “spray” de contenidos genéricos).</p>
+      <p class="anim-item" style="font-size:.86rem;color:#3d475c;margin:.5rem 0 .45rem;"><strong>Ventaja real:</strong> no es solo publicar más, sino <mark class="hl">combinar IA + red satélite + hub territorial</mark> para acelerar señales de relevancia: conversación inicial, reciprocidad entre cuentas y foco hiperlocal.</p>
       <div class="risk-block anim-item">
-        <strong>Riesgos controlados:</strong> shadowban (ritmo humano, límites, variación); percepción artificial (tono imperfecto, datos reales); dependencia de plataformas (priorizar analítica, recomendación y asistencia sobre automatización agresiva).
+        <strong>Riesgos controlados:</strong> shadowban (cuotas humanas, límites y variedad real de redacción); percepción “bot” (tono imperfecto, respuestas acotadas, supervisión muestral); dependencia del algoritmo del canal (priorizar analítica, playbooks anti-crisis y intervención humana).
       </div>
       <div class="conclusion anim-item">
-        <strong style="color:var(--signos-deep)">Conclusión:</strong> la propuesta combina crecimiento comunitario, automatización inteligente y foco hiperregional. El activo más valioso es <mark class="hl">detectar conversaciones, insertarse con criterio y escalar vínculos reales</mark> — vía capaz de acelerar presencia en regiones medianas sin inversión publicitaria directa.
+        <strong style="color:var(--signos-deep)">Conclusión:</strong> el modelo concentra crecimiento en el hub, usando satélites para descubrir temas y amplificar lanzamientos. El diferencial competitivo regional es <mark class="hl">resolver conversación pública rápido, con evidencia local y volumen distribuido</mark> más que aumentar sólo posts en una sola cuenta.
       </div>
     </section>
   </main>

@@ -20,15 +20,14 @@
       --shadow: 0 6px 18px rgba(0, 54, 113, 0.12);
       --radius: 10px;
       --maxw: 920px;
+      --deck-chrome-top: 3.35rem;
     }
     @media (prefers-reduced-motion: reduce) {
       .slide-reveal, .anim-item, .cover-glow { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; color: var(--dk); background: var(--bg); font-size: clamp(13px, 2.2vw, 15px); line-height: 1.5; }
-    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,74,153,.12); }
-    .brand-bar { text-align: center; padding: .35rem 1rem; border-bottom: 1px solid rgba(0,74,153,.08); }
-    .brand-bar img { height: clamp(26px,4vw,34px); width: auto; max-width: min(220px,42vw); object-fit: contain; }
+    .sticky-head { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.98); backdrop-filter: blur(8px); }
     nav.toc .inner { max-width: var(--maxw); margin: 0 auto; padding: .45rem 1rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; font-size: .78rem; }
     nav.toc a { padding: .2rem .55rem; border-radius: 999px; background: rgba(138,86,195,.12); color: var(--dk); font-weight: 600; text-decoration: none; }
     nav.toc a:hover { background: rgba(41,227,241,.22); }
@@ -240,14 +239,16 @@
     .badge-phase { font-size: .58rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: .1rem .4rem; border-radius: 999px; background: rgba(138,86,195,.15); color: var(--signos-purple); }
 
     footer { text-align: center; padding: 1rem; color: #6b7284; font-size: .75rem; }
+
+
+    body.has-deck-nav main {
+      padding: max(4px, var(--deck-main-pad-y, 0px)) 0.45rem max(2px, env(safe-area-inset-bottom, 0px)) !important;
+    }
+
   </style>
 </head>
 <body class="has-deck-nav">
-  <div class="sticky-head">
-    <div class="brand-bar">
-      <a href="#lamina1" style="display:inline-block;line-height:0"><img src="assets/logo-signos.png" alt="SIGNOS analytics" decoding="async" /></a>
-    </div>
-    <nav class="toc" aria-label="Índice">
+  <div class="sticky-head sticky-head--compact"><nav class="toc" aria-label="Índice">
       <div class="inner">
         <strong style="margin-right:.35rem;color:var(--dk)">Láminas:</strong>
         <a href="#lamina1">1 · Portada</a>
@@ -261,7 +262,8 @@
   </div>
 
   <main>
-    <header class="cover-lamina slide-reveal" id="lamina1" aria-label="Portada">
+    <header class="cover-lamina slide-reveal deck-fill-slide" id="lamina1" aria-label="Portada">
+            <p class="slide-brand slide-brand--dark"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
       <div class="cover-glow" aria-hidden="true"></div>
       <div class="cover-content">
         <p class="cover-product">SmartGore · NemoClaw IAGen</p>
@@ -276,7 +278,9 @@
       </div>
     </header>
 
-    <section class="slide slide-reveal" id="lamina2">
+    <section class="slide deck-fill-slide slide-reveal" id="lamina2">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Diagnóstico</span>
       <h2 class="anim-item">El desafío: gestión regional bajo tensión temporal y de capacidades</h2>
       <p class="lead anim-item">Los mismos cuellos de botella administrativos del Estado se amplían en territorios extendidos como Atacama, con alta demanda de fondos públicos y poca disponibilidad de talento especializado.</p>
@@ -302,7 +306,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="lamina3">
+    <section class="slide deck-fill-slide slide-reveal" id="lamina3">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Solución</span>
       <h2 class="anim-item">NemoClaw sobre SmartGore 4.0</h2>
       <p class="lead anim-item">Plataforma de IA generativa orientada a la gestión pública regional: entrenada en marco legal chileno, integrada a flujos FNDR y compra pública, con <mark class="hl">co-diseño</mark> con equipos del GORE.</p>
@@ -331,7 +337,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="lamina4">
+    <section class="slide deck-fill-slide slide-reveal" id="lamina4">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Implementación</span>
       <h2 class="anim-item">Fases 1 y 2 · diagnóstico, piloto y escala</h2>
       <p class="lead anim-item">Lógica recomendada en el Cuadro de Estrategias CENIA/SOFOFA: arrancar con alto impacto y baja complejidad, luego proyectos más exigentes, siempre midiendo uso de tiempo antes/después.</p>
@@ -356,7 +364,9 @@
       </div>
     </section>
 
-    <section class="slide slide-reveal" id="lamina5">
+    <section class="slide deck-fill-slide slide-reveal" id="lamina5">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Consolidación</span>
       <h2 class="anim-item">Fase 3 · despliegue completo y sostenibilidad</h2>
       <p class="lead anim-item">Últimos dos meses: activar formulación automatizada / monitoreo territorial más fino, cerrar KPIs financieros y de satisfacción, y constituir núcleo de continuidad en el propio GORE.</p>
@@ -396,7 +406,9 @@
       <p id="cron-desc" class="muted-note">⚡ activación inicial · ● operativo sostenido (columnas = mes proyectado en la hoja tipo de ruta).</p>
     </section>
 
-    <section class="slide slide-reveal" id="lamina6">
+    <section class="slide deck-fill-slide slide-reveal" id="lamina6">
+  <p class="slide-brand"><a href="#lamina1"><img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" /></a></p>
+
       <span class="pill anim-item">Presupuesto</span>
       <h2 class="anim-item">Inversión estimada · seis meses</h2>
       <p class="lead anim-item">Referencias alineadas a la cotización modelo del programa anterior; válidas para financiamiento tipo FNDR innovación / glosas SUBDERE / convenios con agencias públicas · tipo de cambio referencial mayo 2026.</p>
