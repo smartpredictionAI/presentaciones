@@ -2,7 +2,7 @@
 
 Sitio estático (HTML + CSS + JS en línea). Las animaciones (`@keyframes`, `IntersectionObserver`, transiciones) se ejecutan en el navegador; no hace falta un paso de build.
 
-La portada del sitio (`index.html`) es el hub **Programa Copiapó**: dos láminas (intro + enlace a **Atacama · Vargas** en `presentacion_vargas.html`); el catálogo inferior enlaza el resto de decks. La **última lámina de la serie** es `presentacion_smartgore_atacama_nemoclaw.html` (Programa NemoClaw · GORE Atacama); en `references/` hay un prototipo JSX con pestañas para la misma línea editorial.
+La portada del sitio (`index.html`) es el hub **Programa Copiapó**: dos láminas (intro + enlace a **Atacama · Vargas** en `presentacion_vargas.html`); el catálogo inferior enlaza el resto de decks. El hub pide **contraseña** al abrir (`assets/hub-gate.js`); la sesión dura hasta cerrar la pestaña. Contraseña por defecto: `SignosCopiapo2026` (cambiar regenerando el hash SHA-256 en ese archivo). Es un candado ligero en el navegador, no seguridad de servidor. La **última lámina de la serie** es `presentacion_smartgore_atacama_nemoclaw.html` (Programa NemoClaw · GORE Atacama); en `references/` hay un prototipo JSX con pestañas para la misma línea editorial.
 
 ## Dos repositorios (política de publicación)
 

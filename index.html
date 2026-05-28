@@ -364,9 +364,113 @@
     }
     .slide-cta .deck-link:hover { filter: brightness(1.05); text-decoration: none !important; }
 
+    /* Hub password gate (index only) */
+    .hub-auth-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: linear-gradient(155deg, var(--signos-navy-deep) 0%, var(--signos-navy) 45%, #1e5aab 100%);
+    }
+    .hub-auth-screen--done {
+      display: none;
+    }
+    .hub-auth-card {
+      width: min(100%, 22rem);
+      padding: 1.35rem 1.25rem 1.2rem;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 12px 36px rgba(0, 36, 80, 0.28);
+      text-align: center;
+    }
+    .hub-auth-card img {
+      height: clamp(28px, 5vw, 40px);
+      width: auto;
+      margin-bottom: 0.65rem;
+    }
+    .hub-auth-card h1 {
+      margin: 0 0 0.35rem;
+      font-family: Montserrat, system-ui, sans-serif;
+      font-size: 1.05rem;
+      color: var(--signos-deep);
+    }
+    .hub-auth-card p {
+      margin: 0 0 0.85rem;
+      font-size: 0.84rem;
+      color: #4b5569;
+      line-height: 1.45;
+    }
+    .hub-auth-card label {
+      display: block;
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--signos-purple);
+      margin-bottom: 0.28rem;
+    }
+    .hub-auth-card input[type="password"] {
+      width: 100%;
+      padding: 0.55rem 0.65rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 74, 153, 0.22);
+      font: inherit;
+      font-size: 0.95rem;
+    }
+    .hub-auth-card input[type="password"]:focus {
+      outline: 2px solid rgba(41, 227, 241, 0.55);
+      outline-offset: 2px;
+    }
+    .hub-auth-card button {
+      margin-top: 0.65rem;
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border: none;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #fff;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--signos-purple), var(--signos-cyan));
+      box-shadow: 0 4px 14px rgba(138, 86, 195, 0.32);
+    }
+    .hub-auth-card button:hover {
+      filter: brightness(1.04);
+    }
+    #hub-auth-error {
+      margin-top: 0.45rem;
+      font-size: 0.78rem;
+      color: #8b2c2c;
+      text-align: left;
+    }
+    #hub-app:not(.hub-app--ready) {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body class="has-deck-nav">
+  <div id="hub-auth-screen" class="hub-auth-screen" role="dialog" aria-modal="true" aria-labelledby="hub-auth-title">
+    <div class="hub-auth-card">
+      <img src="assets/logo-signos.png" alt="SIGNOS analytics" width="160" height="36" decoding="async" />
+      <h1 id="hub-auth-title">Acceso al programa</h1>
+      <p>Introduzca la contraseña para ver el catálogo de presentaciones.</p>
+      <form id="hub-auth-form" autocomplete="off">
+        <label for="hub-auth-pass">Contraseña</label>
+        <input id="hub-auth-pass" name="pass" type="password" required autocomplete="current-password" />
+        <button type="submit">Entrar</button>
+        <p id="hub-auth-error" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="hub-app" hidden>
   <div class="sticky-head sticky-head--compact">
     <nav class="toc" aria-label="Índice de laminas">
       <div class="inner">
@@ -415,5 +519,8 @@
     <a class="deck-nav-link deck-nav-hub" href="#deck-catalogo">Índice</a>
     <a class="deck-nav-link deck-nav-next" href="presentacion_vargas.html">Siguiente →</a>
   </nav>
+  </div>
+
+  <script src="assets/hub-gate.js" defer></script>
 </body>
 </html>
